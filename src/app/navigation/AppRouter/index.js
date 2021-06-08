@@ -1,0 +1,11 @@
+export const AppRouter = {
+  LOGIN: 'LOGIN',
+  REGISTER: 'REGISTER',
+  HOME: 'HOME',
+  HOMENAVIGATION: 'HOMENAVIGATION',
+  TAB: 'TAB',
+  MESSAGE: 'MESSAGE',
+  NEWS: 'NEWS',
+  HISTORY: 'HISTORY',
+  USER: 'USER',
+};
