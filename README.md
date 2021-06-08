@@ -1,3 +1,16 @@
+## Đồ án tốt nghiệp - Ứng dụng làm bài kiểm tra online
+
+##### Giáo viên hướng dẫn
+
+- Thầy: Lê Viết Hoàng Nguyên
+
+##### Thành viên
+
+- Nguyễn Phúc Bảo Châu - 0306181207
+- Hồ Văn Hậu - 0306181223
+
+---
+
 ## Hướng dẫn
 
 ### Clone source
