@@ -6,7 +6,7 @@
 
 ### Hướng dẫn cài đặt
 
-Sau khi cài clone về mở cmd lên, gõ cd và kéo thư mục chứa source vào.
+Sau khi clone về mở cmd lên, gõ cd và kéo thư mục chứa source vào.
 
 Sau đó chạy lệnh `npm install` để cài đặt thư viện.
 
