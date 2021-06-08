@@ -42,3 +42,7 @@ Khi code thì không code trên main hoặc develop.
 ##### Liên hệ ANH CHÂU để được hướng dẫn cụ thể sài git siêu dễ
 
 #### Have a bad day!!
+
+---
+
+Copyright © 2021 - Bảo Châu & Văn Hậu
