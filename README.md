@@ -12,13 +12,15 @@ Sau đó chạy lệnh `npm install` để cài đặt thư viện.
 
 ### Hướng dẫn chạy suorce
 
-Sau khi npm chạy xong thì ghim cáp để kết nối điện thoại (nhớ bật "gỡ lỗi USB).
+Sau khi `npm install` chạy xong thì ghim cáp để kết nối điện thoại (nhớ bật "gỡ lỗi USB").
 
 Sau khi ghim cáp thì gõ `adb devices` để kiểm tra xem nhận thiết bị hay chưa (nếu chưa thì cài drive adb).
 
 Lưu ý: setup máy ảo mệt hơn chạy máy thật.
 
 Nếu đã nhận thiết bị rồi thì chạy lệnh `npx react-native run-android` nếu nó chạy thì nó sẽ chạy còn nếu nó không chạy thì nó sẽ không chạy.
+
+---
 
 ### Lưu ý
 
