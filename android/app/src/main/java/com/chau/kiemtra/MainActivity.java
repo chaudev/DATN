@@ -1,4 +1,4 @@
-package com.supermoney;
+package com.chau.kiemtra;
 
 import com.facebook.react.ReactActivity;
 

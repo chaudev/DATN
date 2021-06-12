@@ -40,10 +40,11 @@ export const Login = ({navigation, route}) => {
   }, []);
 
   useEffect(() => {
-    if (user !== '' && user !== undefined) {
+    console.log(user);
+    if (user !== '' && user !== null) {
       console.log(user);
-      setPhone(user[0].phone);
-      setPassWord(user[0].password);
+      setPhone(user[0]?.phone);
+      setPassWord(user[0]?.password);
       setLoading(true);
       navigation.navigate(AppRouter.TAB);
       setLoading(false);

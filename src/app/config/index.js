@@ -9,7 +9,12 @@ export const settings = {
     colorYouTube: '#cd201f',
     colorWeChat: '#09b83e',
     colorWhatsApp: '#25D366',
-    colorMain: '#8BC34A',
+    colorThumblr: '#34465d',
+    colorPinteres: '#bd081c',
+    colorMain: '#FF7043',
+    colorGreen: '#4CAF50',
+    colorBlue: '#03A9F4',
+    colorRed: '#e53935',
   },
   text: {
     AppName: 'Viet Social',

@@ -1,4 +1,5 @@
 import React from 'react';
+import {View, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -19,15 +20,45 @@ const TabNavigator = props => {
           let iconName;
           if (route.name === 'HOME') {
             iconName = 'home';
-            return <Entypo name={iconName} size={22} color={color} />;
+            return (
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                <Entypo
+                  name={iconName}
+                  size={22}
+                  color={color}
+                  style={{marginBottom: -2}}
+                />
+                <Text style={{color: color, fontSize: 12}}>Home</Text>
+              </View>
+            );
           }
           if (route.name === 'HISTORY') {
             iconName = 'history';
-            return <Fontisto name={iconName} size={18} color={color} />;
+            return (
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                <Fontisto
+                  name={iconName}
+                  size={18}
+                  color={color}
+                  style={{marginBottom: -2}}
+                />
+                <Text style={{color: color, fontSize: 12}}>Home 2</Text>
+              </View>
+            );
           }
           if (route.name === 'USER') {
             iconName = 'settings-outline';
-            return <Ionicons name={iconName} size={22} color={color} />;
+            return (
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                <Ionicons
+                  name={iconName}
+                  size={22}
+                  color={color}
+                  style={{marginBottom: -2}}
+                />
+                <Text style={{color: color, fontSize: 12}}>Home 2</Text>
+              </View>
+            );
           }
         },
       })}
