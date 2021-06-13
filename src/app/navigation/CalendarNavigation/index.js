@@ -1,24 +1,20 @@
-import * as React from 'react';
-import {View, Text} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-
 import {AppRouter} from '../AppRouter';
-
-import {HistoryScreen} from '../../view/history';
+import {CalendarScreen} from '../../view/calendar';
 
 const Stack = createStackNavigator();
 
-const HistoryNavigator = props => {
+const CalendarNavigation = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name={AppRouter.HISTORY}
-        component={HistoryScreen}
+        component={CalendarScreen}
         options={{title: AppRouter.HISTORY, headerShown: false}}
       />
     </Stack.Navigator>
   );
 };
 
-export default HistoryNavigator;
+export default CalendarNavigation;

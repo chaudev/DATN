@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, View, Text, Animated, TouchableOpacity} from 'react-native';
-
 import {Icon} from 'native-base';
 import {settings} from '../../../config';
 

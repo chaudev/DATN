@@ -1,20 +1,19 @@
 import React, {useRef, useState} from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
   View,
   Text,
   Animated,
   StatusBar,
   RefreshControl,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {settings} from '../../../config';
 import {HeaderMenu} from './headerMenu';
-
-import {Icon, Picker, Form} from 'native-base';
-
+import {Icon, Picker} from 'native-base';
 import ModalSelector from 'react-native-modal-selector';
+import {mainStyles, QLMH, styleTK} from './styles';
 
 // import {Picker} from '@react-native-picker/picker';
 
@@ -32,15 +31,9 @@ const data = [
   {key: '06', label: 'Lập trình hướng đối tượng'},
 ];
 
-export const HomeScreen = ({navigation, route}) => {
+export const HomeScreen = ({navigation}) => {
   const [refreshing, setRefreshing] = useState(false);
   const scrollY = useRef(new Animated.Value(0)).current;
-
-  const [thongKe, setThongKe] = useState('Chọn bài kiểm tra');
-
-  const [showPicker, setShowPicker] = useState(true);
-  const [pickerValue, setPickerValue] = useState('');
-  const [pickerNewValue, setPickerNewValue] = useState('');
 
   const [soHocSinhGioi, setHocSinhGioi] = useState(15);
   const [soHocSinhKha, setHocSinhKha] = useState(35);
@@ -79,34 +72,38 @@ export const HomeScreen = ({navigation, route}) => {
 
   const handleQLMonHoc = () => {
     console.log('quan ly mon hoc');
+    Alert.alert('Qua màn hình', 'Quản lý môn học');
   };
 
   const handleQLBaiKT = () => {
     console.log('quan ly bai kiem tra');
+    Alert.alert('Qua màn hình', 'Quản lý bài kiểm tra');
   };
 
   const handleHSG = () => {
     console.log('Hoc sinh gioi');
+    Alert.alert('Qua màn hình', 'Danh sách học sinh giỏi');
   };
 
   const handleHSK = () => {
     console.log('Hoc sinh kha');
+    Alert.alert('Qua màn hình', 'Danh sách học sinh khá');
   };
 
   const handleHSTB = () => {
     console.log('Hoc sinh trung binh');
+
+    Alert.alert('Qua màn hình', 'Danh sách học sinh trung bình');
   };
 
   const handleHSY = () => {
     console.log('Hoc sinh trung yeu');
+    Alert.alert('Qua màn hình', 'Danh sách học sinh yếu');
   };
 
   return (
-    <SafeAreaView
-      style={styles.saveArea}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }>
+    <SafeAreaView style={mainStyles.saveArea}>
+      {/* Thay đổi màu, màu chứ cửa thanh trạng thái */}
       <StatusBar
         barStyle={'light-content'}
         backgroundColor="#000"
@@ -115,6 +112,9 @@ export const HomeScreen = ({navigation, route}) => {
 
       {/* Bắt đầu screen */}
       <Animated.ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingTop: MAX_HEIGHT - 32,
@@ -199,38 +199,13 @@ export const HomeScreen = ({navigation, route}) => {
             }}>
             THỐNG KÊ
           </Text>
-          <View
-            style={{
-              height: 40,
-              marginHorizontal: 10,
-              backgroundColor: '#fff',
-              borderRadius: 8,
-              borderWidth: 1,
-              borderColor: mainColor,
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingHorizontal: 10,
-            }}>
+          <View style={styleTK.pickerContainer}>
             <ModalSelector
               data={data}
               style={{flex: 1}}
-              cancelStyle={{
-                marginTop: -8,
-                borderRadius: 0,
-                backgroundColor: '#fff',
-                borderTopWidth: 1,
-                borderColor: '#CFD8DC',
-              }}
-              selectStyle={{
-                borderWidth: 0,
-                borderColor: '#fff',
-                alignItems: 'flex-start',
-              }}
-              optionContainerStyle={{
-                marginTop: -8,
-                borderRadius: 0,
-                backgroundColor: '#fff',
-              }}
+              cancelStyle={styleTK.pickerCancel}
+              selectStyle={styleTK.pickerSelect}
+              optionContainerStyle={styleTK.pickerOption}
               cancelText="CANCLE"
               initValue="Select object"
               onChange={option => {
@@ -240,11 +215,7 @@ export const HomeScreen = ({navigation, route}) => {
             <Icon
               type="MaterialIcons"
               name="keyboard-arrow-down"
-              style={{
-                fontSize: 26,
-                color: '#90A4AE',
-                marginRight: 0,
-              }}
+              style={styleTK.iconPicker}
             />
           </View>
 
@@ -400,7 +371,7 @@ export const HomeScreen = ({navigation, route}) => {
 
       <Animated.View
         style={[
-          styles.topBar,
+          mainStyles.topBar,
           {
             backgroundColor: mainColor,
           },
@@ -423,7 +394,7 @@ export const HomeScreen = ({navigation, route}) => {
 
       <Animated.View
         style={[
-          styles.topBar,
+          mainStyles.topBar,
           {
             paddingLeft: 15,
             flexDirection: 'row',
@@ -431,10 +402,10 @@ export const HomeScreen = ({navigation, route}) => {
           },
         ]}>
         <View style={{flex: 1, height: 60, justifyContent: 'center'}}>
-          <Text style={[styles.title, {fontWeight: 'bold', fontSize: 10}]}>
+          <Text style={[mainStyles.title, {fontWeight: 'bold', fontSize: 10}]}>
             Giáo viên
           </Text>
-          <Text style={[styles.title, {marginTop: 2, fontSize: 14}]}>
+          <Text style={[mainStyles.title, {marginTop: 2, fontSize: 14}]}>
             Nguyễn Phúc Bảo Châu
           </Text>
         </View>
@@ -461,122 +432,3 @@ export const HomeScreen = ({navigation, route}) => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  saveArea: {
-    flex: 1,
-    backgroundColor: '#eff3fb',
-  },
-  headerBackground: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    width: null,
-    height: MAX_HEIGHT,
-    resizeMode: 'cover',
-  },
-  topBar: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-  },
-  title: {
-    color: 'white',
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
-});
-
-const QLMH = StyleSheet.create({
-  container: {
-    width: '94%',
-    marginHorizontal: '3%',
-    marginTop: '5%',
-    backgroundColor: mainColor,
-    height: 60,
-    borderRadius: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-  },
-  viewIcon: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 35,
-    height: 35,
-    borderWidth: 1,
-    borderColor: '#fff',
-    borderRadius: 12,
-    marginLeft: -5,
-  },
-  iconBook: {
-    fontSize: 20,
-    color: '#fff',
-    marginRight: -1,
-  },
-  textTitle: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: 'bold',
-    marginLeft: 10,
-  },
-  textSubTitle: {
-    color: '#fff',
-    fontSize: 10,
-    marginLeft: 10,
-  },
-  iconArrow: {
-    fontSize: 30,
-    color: '#fff',
-    marginRight: -10,
-  },
-});
-
-const styleTK = StyleSheet.create({
-  container: {
-    flex: 1,
-    height: '100%',
-    borderRadius: 12,
-  },
-  textTitle: {
-    fontSize: 16,
-    color: '#fff',
-    marginTop: 10,
-    marginLeft: 10,
-  },
-  fakeView: {
-    flex: 1,
-  },
-  number: {
-    fontSize: 38,
-    color: '#fff',
-    marginLeft: 10,
-  },
-  textDetail: {
-    fontSize: 14,
-    color: '#fff',
-    marginLeft: 10,
-    marginTop: 5,
-    marginBottom: -10,
-  },
-  button: {
-    width: 50,
-    height: 50,
-    borderWidth: 1,
-    borderColor: '#ECEFF1',
-    borderRadius: 500,
-    marginRight: 10,
-    marginBottom: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  btnIcon: {
-    fontSize: 30,
-    color: '#fff',
-  },
-});

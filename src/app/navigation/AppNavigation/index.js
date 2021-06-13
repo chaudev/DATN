@@ -1,12 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-
-import {AppRouter} from '../AppRouter';
-
 import HomeNavigation from '../TabNavigation/index';
 import {Login} from '../../view/home/login';
 import {Register} from '../../view/home/register';
+import {AppRouter} from '../AppRouter';
 
 const Stack = createStackNavigator();
 

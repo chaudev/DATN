@@ -8,4 +8,5 @@ export const AppRouter = {
   NEWS: 'NEWS',
   HISTORY: 'HISTORY',
   USER: 'USER',
+  UPDATE: 'UPDATE',
 };

@@ -1,15 +1,11 @@
-import * as React from 'react';
-import {View, Text} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-
 import {AppRouter} from '../AppRouter';
-
 import {HomeScreen} from '../../view/home/homeScreen';
 
 const Stack = createStackNavigator();
 
-const HomeNavigator = props => {
+const HomeNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen

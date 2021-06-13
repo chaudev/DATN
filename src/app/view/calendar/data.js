@@ -1,0 +1,81 @@
+// Data này fake để sài tạm, mốt thay bằng api
+
+export const dataFake = [
+  {
+    id: '01',
+    monHoc: 'Javascript',
+    ngay: '2021-06-20',
+    gio: '19:00',
+    ten: 'Kiểm tra 90 phút',
+  },
+  {
+    id: '02',
+    monHoc: 'Lập trình web',
+    ngay: '2021-06-20',
+    gio: '13:30',
+    ten: 'Kiểm tra 1 tiết',
+  },
+  {
+    id: '03',
+    monHoc: 'Lập trình nhúng',
+    ngay: '2021-06-15',
+    gio: '19:00',
+    ten: 'Kiểm tra 1 tiết',
+  },
+  {
+    id: '04',
+    monHoc: 'Javascript',
+    ngay: '2021-06-15',
+    gio: '19:00',
+    ten: 'Kiểm tra hệ số 2',
+  },
+  {
+    id: '05',
+    monHoc: 'Database',
+    ngay: '2021-06-16',
+    gio: '19:00',
+    ten: 'Kiểm tra lần 1',
+  },
+  {
+    id: '06',
+    monHoc: 'Database nâng cao',
+    ngay: '2021-06-13',
+    gio: '19:00',
+    ten: 'Kiểm tra lần 1',
+  },
+  {
+    id: '07',
+    monHoc: 'Database nâng cao',
+    ngay: '2021-06-18',
+    gio: '19:00',
+    ten: 'Kiểm tra lần 1',
+  },
+  {
+    id: '08',
+    monHoc: 'Javascript nâng cao',
+    ngay: '2021-06-15',
+    gio: '19:00',
+    ten: 'Kiểm tra hệ số 2',
+  },
+  {
+    id: '09',
+    monHoc: 'Javascript nâng cao hơn chút xíu',
+    ngay: '2021-06-15',
+    gio: '19:00',
+    ten: 'Kiểm tra hệ số 9',
+  },
+  {
+    id: '10',
+    monHoc: 'PHP cơ bản',
+    ngay: '2021-06-15',
+    gio: '12:00',
+    ten: 'Kiểm tra lần 1',
+  },
+  {
+    id: '11',
+    monHoc: 'PHP cơ bản',
+    ngay: '2021-06-15',
+    gio: '19:00',
+    ten: 'Kiểm tra lần 2',
+  },
+];

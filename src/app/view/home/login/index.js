@@ -150,7 +150,7 @@ export const Login = ({navigation, route}) => {
             textAlign: 'left',
             marginBottom: -5,
           }}>
-          Super{' '}
+          Đồ án{' '}
         </Text>
         <Text
           style={{
@@ -160,7 +160,7 @@ export const Login = ({navigation, route}) => {
             textAlign: 'left',
             marginBottom: -5,
           }}>
-          Money
+          tốt nghiệp
         </Text>
       </View>
 
