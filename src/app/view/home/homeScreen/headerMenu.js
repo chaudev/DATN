@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text, Animated, TouchableOpacity} from 'react-native';
 import {Icon} from 'native-base';
 import {settings} from '../../../config';
+import {useNavigation} from '@react-navigation/native';
 
 const MAX_HEIGHT = 240;
 

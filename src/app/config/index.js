@@ -15,6 +15,8 @@ export const settings = {
     colorGreen: '#4CAF50',
     colorBlue: '#03A9F4',
     colorRed: '#e53935',
+    colorBoderLight: '#ECEFF1',
+    colorBoderDark: '#CFD8DC',
   },
   text: {
     AppName: 'Viet Social',

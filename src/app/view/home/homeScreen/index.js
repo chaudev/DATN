@@ -10,10 +10,14 @@ import {
   Alert,
 } from 'react-native';
 import {settings} from '../../../config';
+import {AppRouter} from '../../../navigation/AppRouter';
+import {useNavigation} from '@react-navigation/native';
 import {HeaderMenu} from './headerMenu';
 import {Icon, Picker} from 'native-base';
 import ModalSelector from 'react-native-modal-selector';
-import {mainStyles, QLMH, styleTK} from './styles';
+import {mainStyles, QLMH, styleTK} from '../../home/homeScreen/styles';
+
+import {i18n} from '../../../../i18n';
 
 // import {Picker} from '@react-native-picker/picker';
 
@@ -32,6 +36,7 @@ const data = [
 ];
 
 export const HomeScreen = ({navigation}) => {
+  const nav = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
   const scrollY = useRef(new Animated.Value(0)).current;
 
@@ -60,6 +65,14 @@ export const HomeScreen = ({navigation}) => {
 
   const HeaderHandle = value => {
     console.log('HeaderHandle: ', value);
+    if (value === 'Môn học') {
+      nav.navigate(AppRouter.COURSE);
+    }
+    if (value === 'Câu hỏi') {
+      nav.navigate(AppRouter.ALLEXERCISE, {
+        item: 'all',
+      });
+    }
   };
 
   const onRefresh = React.useCallback(() => {
@@ -72,7 +85,7 @@ export const HomeScreen = ({navigation}) => {
 
   const handleQLMonHoc = () => {
     console.log('quan ly mon hoc');
-    Alert.alert('Qua màn hình', 'Quản lý môn học');
+    nav.navigate(AppRouter.COURSE);
   };
 
   const handleQLBaiKT = () => {
@@ -143,9 +156,9 @@ export const HomeScreen = ({navigation}) => {
             />
           </View>
           <View>
-            <Text style={QLMH.textTitle}>Quản lý môn học</Text>
+            <Text style={QLMH.textTitle}>{i18n.t('Home.object-manage')}</Text>
             <Text style={QLMH.textSubTitle}>
-              Môn học, bài kiểm tra, câu hỏi, học sinh..
+              {i18n.t('Home.object-manage-sub')}
             </Text>
           </View>
           <View style={{flex: 1}} />

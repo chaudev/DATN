@@ -1,0 +1,11 @@
+{
+  "App": {
+    "appName": "Đồ Án",
+    "Home": "Trang chủ",
+    "Teacher": "Giáo viên"
+  },
+  "Home": {
+    "object-manage": "Quản lý môn học",
+    "object-manage-sub": "Môn học, bài kiểm tra, câu hỏi, học sinh.."
+  }
+}
