@@ -14,4 +14,8 @@ export const AppRouter = {
   LISTEXERCISE: 'LISTEXERCISE',
   ALLEXERCISE: 'ALLEXERCISE',
   INFO: 'INFO',
+  AddExercise: 'AddExercise',
+  AddAnswer: 'AddAnswer',
+  AddTest: 'AddTest',
+  QuestToTest: 'QuestToTest',
 };

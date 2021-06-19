@@ -15,7 +15,9 @@ import {i18n} from '../../../i18n';
 import {useNavigation} from '@react-navigation/native';
 import {mainStyles, QLMH, styleTK} from '../../view/home/homeScreen/styles';
 
-export const Header = () => {
+export const Header = ({GOTO}) => {
+  console.log('Header: ', GOTO);
+
   const nav = useNavigation();
   return (
     <View
@@ -34,7 +36,11 @@ export const Header = () => {
       />
       <TouchableOpacity
         onPress={() => {
-          nav.goBack();
+          if (GOTO !== undefined && GOTO !== null) {
+            nav.naigate(GOTO);
+          } else {
+            nav.goBack();
+          }
         }}
         activeOpacity={0.5}
         style={{

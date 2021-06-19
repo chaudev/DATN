@@ -28,7 +28,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.chau.kiemtra"
+        applicationId "com.doan"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -85,9 +85,8 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
-    // add
-    implementation 'com.facebook.fresco:fresco:2.0.0'
-    implementation 'com.facebook.fresco:animated-gif:2.0.0'
+    // Add
+    implementation project(path: ':@react-native-picker_picker')
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 

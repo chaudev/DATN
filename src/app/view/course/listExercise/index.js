@@ -13,7 +13,7 @@ import {
   Alert,
 } from 'react-native';
 import {settings} from '../../../config';
-import {Icon, Picker, Textarea} from 'native-base';
+import {Icon, Tab, Tabs, Textarea} from 'native-base';
 import {i18n} from '../../../../i18n';
 
 import {Header} from '../../../components/header';
@@ -23,10 +23,12 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import Toast from 'react-native-simple-toast';
 import {AppRouter} from '../../../navigation/AppRouter';
 
-export const ListExercise = () => {
+export const ListExercise = ({params}) => {
   const nav = useNavigation();
   const route = useRoute();
-  const params = route.params.item;
+  // const params = route.params.item;
+
+  // const params = 'cac';
 
   const [data, setData] = useState('');
   const [refreshing, setRefreshing] = React.useState(false);
@@ -117,7 +119,7 @@ export const ListExercise = () => {
 
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
-      <Header />
+      {/* <Header /> */}
 
       {data !== '' ? (
         <View style={{backgroundColor: '#fff', flex: 1}}>
@@ -163,7 +165,9 @@ export const ListExercise = () => {
             }}>
             <TouchableOpacity
               onPress={() => {
-                setModal(true);
+                nav.navigate(AppRouter.AddExercise, {
+                  item: params,
+                });
               }}
               activeOpacity={0.5}
               style={{
@@ -195,6 +199,7 @@ export const ListExercise = () => {
           <Text style={{fontSize: 14, color: 'red'}}>Không có data</Text>
         </View>
       )}
+
       <Modal
         animationType="fade"
         transparent={true}

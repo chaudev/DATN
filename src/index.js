@@ -3,7 +3,8 @@ import {View, LogBox} from 'react-native';
 import AppNavigation from './app/navigation/AppNavigation';
 
 LogBox.ignoreAllLogs();
-export default function App() {
+
+export function App() {
   return (
     <View style={{flex: 1}}>
       <AppNavigation />
