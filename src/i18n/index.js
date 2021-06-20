@@ -11,4 +11,4 @@ i18n.translations = {EN, VN};
 
 export {i18n};
 
-// hihi
+// hihi ne nha
