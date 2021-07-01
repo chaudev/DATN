@@ -13,7 +13,7 @@ import {
   Alert,
 } from 'react-native';
 import {settings} from '../../../../config';
-import {Icon, Picker, Textarea} from 'native-base';
+import {Icon, Textarea} from 'native-base';
 import {i18n} from '../../../../../i18n';
 
 import {Header} from '../../../../components/header';
@@ -23,29 +23,47 @@ import {AppRouter} from '../../../../navigation/AppRouter';
 import {Data} from '../../listExercise/data';
 import {RenderItem} from '../../listExercise/renderItem';
 
+import {Picker} from '@react-native-picker/picker';
+
 export const AddTest = () => {
+  console.log('render');
   const nav = useNavigation();
   const route = useRoute();
   const params = route.params.item.MaMonHoc;
   const [name, setName] = useState('');
+  const [render, setRender] = useState(1);
+  const [dataQuest, setDataQuest] = useState([]);
+  const [listQuest, setListQuest] = useState([]);
+
+  const [questAdd, setQuestAdd] = useState('');
 
   useEffect(() => {
-    console.log(params);
+    console.log('init: ', params);
+    setListQuest(Data);
   }, []);
+
+  useEffect(() => {
+    console.log('dataQuest: ', dataQuest);
+  }, [dataQuest]);
+
+  useEffect(() => {
+    if (questAdd !== '') {
+      let x = dataQuest;
+      const quest = listQuest.find(x => x.MaCauHoi === questAdd);
+      x.push(quest);
+      console.log('x ne nha: ', x);
+
+      setDataQuest(x);
+      setRender(render + 1);
+    }
+  }, [questAdd]);
 
   const handleAddQuest = () => {
     if (name === '') {
       Alert.alert('Không thể thêm', 'Vui lòng điền câu hỏi');
     } else {
-      nav.navigate(AppRouter.QuestToTest, {
-        quest: cauHoi,
-        MaChuDe: params,
-      });
+      nav.goBack();
     }
-  };
-
-  const initState = () => {
-    setCauHoi('');
   };
 
   const deleteQuest = () => {
@@ -93,14 +111,6 @@ export const AddTest = () => {
           </Text>
         </View>
 
-        {/* <Text
-          style={{
-            marginTop: 10,
-            color: settings.colors.colorGreen,
-            marginLeft: 10,
-          }}>
-          TÊN BÀI KIỂM TRA
-        </Text> */}
         <View
           style={{
             height: 52,
@@ -128,21 +138,30 @@ export const AddTest = () => {
             marginTop: 7,
             marginLeft: 10,
           }}>
-          DANH SÁCH CÂU HỎI - TỔNG: {Data.length}
+          DANH SÁCH CÂU HỎI - TỔNG: {dataQuest.length}
         </Text>
-        <FlatList
-          style={{flex: 1, marginTop: 5}}
-          data={Data}
-          renderItem={({item}) => (
-            <RenderItem
-              item={item}
-              data={Data}
-              handle={handlePressItem}
-              handleDelete={deleteQuest}
-            />
-          )}
-          keyExtractor={item => item.MaCauHoi}
-        />
+        {dataQuest.length !== 0 ? (
+          <FlatList
+            style={{flex: 1, marginTop: 5}}
+            data={dataQuest}
+            renderItem={({item}) => (
+              <RenderItem
+                item={item}
+                data={dataQuest}
+                handle={handlePressItem}
+                handleDelete={deleteQuest}
+              />
+            )}
+            keyExtractor={item => item.MaCauHoi}
+          />
+        ) : (
+          <View
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Text style={{fontSize: 14, color: settings.colors.colorRed}}>
+              Không có câu hỏi
+            </Text>
+          </View>
+        )}
 
         <View
           style={{flexDirection: 'row', width: '100%', alignItems: 'center'}}>
@@ -167,11 +186,9 @@ export const AddTest = () => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => {
-              handleAddQuest();
-            }}
             activeOpacity={0.5}
             style={{
+              width: 80,
               paddingHorizontal: 15,
               height: 45,
               marginTop: -45,
@@ -186,6 +203,23 @@ export const AddTest = () => {
               THÊM
             </Text>
           </TouchableOpacity>
+          <Picker
+            selectedValue="x05"
+            style={{
+              height: 50,
+              width: 80,
+              marginTop: -50,
+              marginLeft: -80,
+              opacity: 0,
+            }}
+            onValueChange={(itemValue, itemIndex) => {
+              console.log('setQuestAdd ', itemValue);
+              setQuestAdd(itemValue);
+            }}>
+            {listQuest.map(i => (
+              <Picker.Item label={i.TenCauHoi} value={i.MaCauHoi} />
+            ))}
+          </Picker>
         </View>
       </View>
     </View>

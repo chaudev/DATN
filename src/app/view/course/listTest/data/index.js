@@ -23,7 +23,7 @@ export const Data = [
     TrangThaiBatDau: 0,
   },
   {
-    MaBaiKT: 'x01',
+    MaBaiKT: 'x02',
     TenBaiKT: 'KIEM TRA LAN 2',
     KeyBaiKT: 'llpopandbhsjahs',
     Ngay: '15-05-2021',
@@ -35,7 +35,7 @@ export const Data = [
     TrangThaiBatDau: 1,
   },
   {
-    MaBaiKT: 'x01',
+    MaBaiKT: 'x03',
     TenBaiKT: 'KIEM TRA LAN 3',
     KeyBaiKT: 'llpopandbhsjahs',
     Ngay: '15-05-2021',
@@ -47,7 +47,7 @@ export const Data = [
     TrangThaiBatDau: 1,
   },
   {
-    MaBaiKT: 'x01',
+    MaBaiKT: 'x04',
     TenBaiKT: 'KIEM TRA LAN 4',
     KeyBaiKT: 'llpopandbhsjahs',
     Ngay: '15-05-2021',

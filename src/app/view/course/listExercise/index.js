@@ -151,7 +151,7 @@ export const ListExercise = ({params}) => {
                 handleDelete={deleteQuest}
               />
             )}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.MaCauHoi}
             style={{flex: 1, paddingTop: 10, backgroundColor: '#fff'}}
           />
           <View

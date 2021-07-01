@@ -90,7 +90,9 @@ export const HomeScreen = ({navigation}) => {
 
   const handleQLBaiKT = () => {
     console.log('quan ly bai kiem tra');
-    Alert.alert('Qua màn hình', 'Quản lý bài kiểm tra');
+    nav.navigate(AppRouter.TAB, {
+      tab: 1,
+    });
   };
 
   const handleHSG = () => {

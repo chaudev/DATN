@@ -155,7 +155,7 @@ export const Data = [
     MaGV: '0321',
   },
   {
-    MaCauHoi: 'x12',
+    MaCauHoi: 'x19',
     TenCauHoi: 'php là web hay app?',
     A: 'Là môn học',
     B: 'Là gì đó ai biết',

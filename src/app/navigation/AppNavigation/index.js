@@ -13,6 +13,11 @@ function AppNavigation() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
+          name={AppRouter.TAB}
+          options={{title: AppRouter.TAB, headerShown: false}}
+          component={HomeNavigation}
+        />
+        <Stack.Screen
           name={AppRouter.LOGIN}
           options={{title: AppRouter.LOGIN, headerShown: false}}
           component={Login}
@@ -21,11 +26,6 @@ function AppNavigation() {
           name={AppRouter.REGISTER}
           options={{title: AppRouter.REGISTER, headerShown: false}}
           component={Register}
-        />
-        <Stack.Screen
-          name={AppRouter.TAB}
-          options={{title: AppRouter.TAB, headerShown: false}}
-          component={HomeNavigation}
         />
       </Stack.Navigator>
     </NavigationContainer>

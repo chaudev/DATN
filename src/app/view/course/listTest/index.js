@@ -113,83 +113,174 @@ export const ListTest = ({params}) => {
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       {/* <Header /> */}
 
-      {data !== '' ? (
-        <View style={{backgroundColor: '#fff', flex: 1}}>
-          <FlatList
-            ListHeaderComponent={
-              <View>
-                <Text
-                  style={{
-                    marginLeft: '3%',
-                    color: settings.colors.colorThumblr,
-                    fontWeight: 'bold',
-                    marginBottom: 5,
-                    fontSize: 14,
-                  }}>
-                  DANH SÁCH BÀI KIỂM TRA {params.TenMonHoc}
-                </Text>
-              </View>
-            }
-            data={data}
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }
-            showsVerticalScrollIndicator={false}
-            renderItem={({item}) => (
-              <RenderItem
-                item={item}
+      {params !== undefined && params !== null ? (
+        <>
+          {data !== '' ? (
+            <View style={{backgroundColor: '#fff', flex: 1}}>
+              <FlatList
+                ListHeaderComponent={
+                  <View>
+                    <Text
+                      style={{
+                        marginLeft: '3%',
+                        color: settings.colors.colorThumblr,
+                        fontWeight: 'bold',
+                        marginBottom: 5,
+                        fontSize: 14,
+                      }}>
+                      DANH SÁCH BÀI KIỂM TRA {params.TenMonHoc}
+                    </Text>
+                  </View>
+                }
                 data={data}
-                handle={handlePressItem}
-                handleDelete={deleteQuest}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                  />
+                }
+                showsVerticalScrollIndicator={false}
+                renderItem={({item}) => (
+                  <RenderItem
+                    item={item}
+                    data={data}
+                    handle={handlePressItem}
+                    handleDelete={deleteQuest}
+                  />
+                )}
+                keyExtractor={item => item.MaBaiKT}
+                style={{flex: 1, paddingTop: 10, backgroundColor: '#fff'}}
               />
-            )}
-            keyExtractor={item => item.id}
-            style={{flex: 1, paddingTop: 10, backgroundColor: '#fff'}}
-          />
-          <View
-            style={{
-              width: '100%',
-              height: 50,
-              marginTop: -65,
-              alignItems: 'flex-end',
-              paddingRight: 15,
-              marginBottom: 15,
-            }}>
-            <TouchableOpacity
-              onPress={() => {
-                nav.navigate(AppRouter.AddTest, {
-                  item: params,
-                });
-              }}
-              activeOpacity={0.5}
+              <View
+                style={{
+                  width: '100%',
+                  height: 50,
+                  marginTop: -65,
+                  alignItems: 'flex-end',
+                  paddingRight: 15,
+                  marginBottom: 15,
+                }}>
+                <TouchableOpacity
+                  onPress={() => {
+                    nav.navigate(AppRouter.AddTest, {
+                      item: params,
+                    });
+                  }}
+                  activeOpacity={0.5}
+                  style={{
+                    width: 55,
+                    height: 55,
+                    borderRadius: 500,
+                    backgroundColor: settings.colors.colorMain,
+                    borderWidth: 0.5,
+                    borderColor: settings.colors.colorBoderDark,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <Icon
+                    type="Entypo"
+                    name="plus"
+                    style={{fontSize: 24, color: '#fff', marginBottom: -2}}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+          ) : (
+            <View
               style={{
-                width: 55,
-                height: 55,
-                borderRadius: 500,
-                backgroundColor: settings.colors.colorMain,
-                borderWidth: 0.5,
-                borderColor: settings.colors.colorBoderDark,
+                backgroundColor: '#fff',
+                flex: 1,
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              <Icon
-                type="Entypo"
-                name="plus"
-                style={{fontSize: 24, color: '#fff', marginBottom: -2}}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
+              <Text style={{fontSize: 14, color: 'red'}}>Không có data</Text>
+            </View>
+          )}
+        </>
       ) : (
-        <View
-          style={{
-            backgroundColor: '#fff',
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Text style={{fontSize: 14, color: 'red'}}>Không có data</Text>
-        </View>
+        <>
+          {data !== '' ? (
+            <View style={{backgroundColor: '#fff', flex: 1}}>
+              <FlatList
+                ListHeaderComponent={
+                  <View>
+                    <Text
+                      style={{
+                        marginLeft: '3%',
+                        color: settings.colors.colorThumblr,
+                        fontWeight: 'bold',
+                        marginBottom: 5,
+                        fontSize: 14,
+                      }}>
+                      DANH SÁCH BÀI KIỂM TRA TẤT CẢ MÔN
+                    </Text>
+                  </View>
+                }
+                data={data}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                  />
+                }
+                showsVerticalScrollIndicator={false}
+                renderItem={({item}) => (
+                  <RenderItem
+                    item={item}
+                    data={data}
+                    handle={handlePressItem}
+                    handleDelete={deleteQuest}
+                  />
+                )}
+                keyExtractor={item => item.MaBaiKT}
+                style={{flex: 1, paddingTop: 10, backgroundColor: '#fff'}}
+              />
+              <View
+                style={{
+                  width: '100%',
+                  height: 50,
+                  marginTop: -65,
+                  alignItems: 'flex-end',
+                  paddingRight: 15,
+                  marginBottom: 15,
+                }}>
+                <TouchableOpacity
+                  onPress={() => {
+                    nav.navigate(AppRouter.AddTest, {
+                      item: params,
+                    });
+                  }}
+                  activeOpacity={0.5}
+                  style={{
+                    width: 55,
+                    height: 55,
+                    borderRadius: 500,
+                    backgroundColor: settings.colors.colorMain,
+                    borderWidth: 0.5,
+                    borderColor: settings.colors.colorBoderDark,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <Icon
+                    type="Entypo"
+                    name="plus"
+                    style={{fontSize: 24, color: '#fff', marginBottom: -2}}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+          ) : (
+            <View
+              style={{
+                backgroundColor: '#fff',
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={{fontSize: 14, color: 'red'}}>Không có data</Text>
+            </View>
+          )}
+        </>
       )}
     </View>
   );

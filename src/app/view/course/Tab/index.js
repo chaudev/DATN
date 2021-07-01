@@ -1,5 +1,12 @@
 import React from 'react';
-import {Container, Tab, Tabs, TabHeading, Icon, Text} from 'native-base';
+import {
+  Container,
+  Tab,
+  Tabs,
+  TabHeading,
+  Text,
+  DefaultTabBar,
+} from 'native-base';
 import {ListExercise} from '../listExercise';
 
 import {ListTest} from '../listTest';
@@ -11,16 +18,28 @@ import {settings} from '../../../config';
 
 const colors = settings.colors;
 
+const renderTabBar = props => {
+  props.tabStyle = Object.create(props.tabStyle);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return <DefaultTabBar {...props} />;
+};
+
 export const TabHeader = () => {
-  const nav = useNavigation();
   const route = useRoute();
   const params = route.params.item;
-  const tab = params.tab;
+  const tab = route.params.tab;
+  console.log(params);
+
   return (
     <Container>
       <Header />
-      <Tabs initialPage={tab === undefined ? 0 : tab}>
+      <Tabs
+        style={{margin: 0}}
+        initialPage={tab === undefined ? 0 : tab}
+        renderTabBar={renderTabBar}>
         <Tab
+          tabStyle={{margin: 0}}
           heading={
             <TabHeading style={{backgroundColor: colors.colorGreen}}>
               <Text style={{fontSize: 14}}>CÂU HỎI</Text>
@@ -29,6 +48,7 @@ export const TabHeader = () => {
           <ListExercise params={params} />
         </Tab>
         <Tab
+          tabStyle={{margin: 0}}
           heading={
             <TabHeading style={{backgroundColor: colors.colorGreen}}>
               <Text style={{fontSize: 14}}>BÀI KIỂM TRA</Text>

@@ -78,7 +78,7 @@ export const ListObject = () => {
             renderItem={({item}) => (
               <RenderItem item={item} data={data} handle={handlePressItem} />
             )}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.MaMonHoc}
             style={{flex: 1, paddingTop: 10, backgroundColor: '#fff'}}
           />
         </View>
