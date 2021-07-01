@@ -7,11 +7,13 @@ import Toast from 'react-native-simple-toast';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import {useDispatch} from 'react-redux';
+import {activate} from '../../../../store/reducers/userSlice';
+
 import {
   View,
   StyleSheet,
   Image,
-  ImageBackground,
   TouchableOpacity,
   ScrollView,
   Text,
@@ -25,6 +27,7 @@ import {AppRouter} from '../../navigation/AppRouter';
 let colors = settings.colors;
 
 export const UserScreen = ({navigation, route}) => {
+  const dispatch = useDispatch();
   const [link, setLink] = useState('');
   const [url, setURL] = useState('https://bom.to/02HE45bT9BR2M');
 
@@ -71,7 +74,16 @@ export const UserScreen = ({navigation, route}) => {
 
   const handleLogOut = () => {
     console.log('Log out');
-    navigation.navigate(AppRouter.LOGIN);
+    deleteAccount();
+    dispatch(activate(false));
+  };
+
+  const deleteAccount = async () => {
+    try {
+      await AsyncStorage.removeItem('currentUser');
+    } catch (e) {
+      console.log('Khong xoa duoc');
+    }
   };
 
   const getImage = () => {

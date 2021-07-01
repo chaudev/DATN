@@ -1,5 +1,5 @@
 export const settings = {
-  hostURL: 'https://vietsocials.000webhostapp.com/api/', // Link to api
+  hostURL: 'https://doan-totnghiep.000webhostapp.com/api/', // Link to api
   oneSignalKey: '',
   userToken: '',
   colors: {
