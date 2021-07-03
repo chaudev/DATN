@@ -80,10 +80,15 @@ export const HomeScreen = ({navigation}) => {
     if (value === 'Môn học') {
       nav.navigate(AppRouter.COURSE);
     }
+
     if (value === 'Câu hỏi') {
       nav.navigate(AppRouter.ALLEXERCISE, {
         item: 'all',
       });
+    }
+
+    if (value === 'Chủ đề') {
+      nav.navigate(AppRouter.LISTCD);
     }
   };
 
