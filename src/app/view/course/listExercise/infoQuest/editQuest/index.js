@@ -1,40 +1,26 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {
-  View,
-  Text,
-  StatusBar,
-  RefreshControl,
-  TouchableOpacity,
-  FlatList,
-  Modal,
-  Settings,
-  TextInput,
-  ScrollView,
-  Alert,
-} from 'react-native';
-import {settings} from '../../../../config';
-import {Icon, Picker, Textarea} from 'native-base';
-import {i18n} from '../../../../../i18n';
-
-import {Header} from '../../../../components/header';
+import React, {useState} from 'react';
+import {View, Text, TouchableOpacity, ScrollView, Alert} from 'react-native';
+import {settings} from '../../../../../config';
+import {Icon, Textarea} from 'native-base';
+import {Header} from '../../../../../components/header';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import Toast from 'react-native-simple-toast';
-import {AppRouter} from '../../../../navigation/AppRouter';
+import {AppRouter} from '../../../../../navigation/AppRouter';
 
-export const AddExercise = () => {
+export const EditQuest = () => {
   const nav = useNavigation();
   const route = useRoute();
-  const MaMH = route.params.item.item.MaMH;
+  const item = route.params.item;
   const user = route.params.user;
-  const [cauHoi, setCauHoi] = useState('');
+
+  const [cauHoi, setCauHoi] = useState(item.CauHoi);
 
   const handleAddQuest = () => {
     if (cauHoi === '') {
       Alert.alert('Không thể thêm', 'Vui lòng điền câu hỏi');
     } else {
-      nav.navigate(AppRouter.AddAnswer, {
+      nav.navigate(AppRouter.EditAnswer, {
         quest: cauHoi,
-        MaMH: MaMH,
+        item: item,
         user: user,
       });
     }

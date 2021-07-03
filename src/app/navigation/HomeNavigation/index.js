@@ -5,6 +5,7 @@ import {HomeScreen} from '../../view/home/homeScreen';
 import {CourseNav} from '../../view/course';
 import {ListExercise} from '../../view/course/listExercise';
 import {TabHeader} from '../../view/course/Tab';
+import {User} from '../../view/user';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,11 @@ const HomeNavigator = () => {
         name={AppRouter.TAB}
         component={TabHeader}
         options={{title: AppRouter.TAB, headerShown: false}}
+      />
+      <Stack.Screen
+        name={AppRouter.USER}
+        component={User}
+        options={{title: AppRouter.USER, headerShown: false}}
       />
     </Stack.Navigator>
   );

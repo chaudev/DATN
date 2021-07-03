@@ -14,12 +14,10 @@ export const RenderItem = ({item, data, handle, handleDelete}) => {
 
   const marginBottom = () => {
     if (item?.MaCauHoi === data[data.length - 1]?.MaCauHoi) {
-      return 100;
+      return 10;
     } else {
       return 5;
     }
-
-    return 5;
   };
 
   const pressItem = () => {
@@ -69,7 +67,7 @@ export const RenderItem = ({item, data, handle, handleDelete}) => {
 
       <View style={{flex: 1}}>
         <Text numberOfLines={1} style={{width: '100%', fontWeight: 'bold'}}>
-          {item?.TenCauHoi}
+          {item?.CauHoi}
         </Text>
         <Text numberOfLines={1} style={{width: '100%', fontSize: 12}}>
           Đáp án đúng: {item?.DapAn}

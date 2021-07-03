@@ -1,12 +1,13 @@
-import {settings} from '../../app/config';
+import {settings} from '../../../app/config';
 
 let api = settings.hostURL;
 
-const getHistory = async phone => {
-  let resData = '';
+const getCH = async MaMH => {
+  console.log('MaMH: ', MaMH);
+  let res = '';
 
   var data = new FormData();
-  data.append('phone', phone);
+  data.append('MaMH', MaMH);
 
   var requestOptions = {
     method: 'POST',
@@ -14,14 +15,14 @@ const getHistory = async phone => {
     redirect: 'follow',
   };
 
-  await fetch(api + 'money/getHistory.php', requestOptions)
+  await fetch(api + 'CauHoi/getCH.php', requestOptions)
     .then(response => response.json())
     .then(data => {
-      resData = data;
+      res = data;
     })
     .catch(error => console.log('error', error));
 
-  return resData;
+  return res;
 };
 
-export {getHistory};
+export {getCH};

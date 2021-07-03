@@ -13,15 +13,14 @@ import {RenderItem} from './renderItem';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {AppRouter} from '../../../navigation/AppRouter';
 import {useIsFocused} from '@react-navigation/native';
-import {getCH} from '../../../../server/MonHoc/getCH';
+import {getGiangVien} from '../../../../server/User/getGiangVien';
 import {deleteCH} from '../../../../server/MonHoc/deleteCH';
 
-export const ListExercise = ({params}) => {
+export const ListGV = () => {
   const nav = useNavigation();
   const focus = useIsFocused();
   const route = useRoute();
   const par = route.params;
-  const MaMH = par.item.MaMH;
 
   const [data, setData] = useState('');
   const [refreshing, setRefreshing] = React.useState(false);
@@ -30,7 +29,7 @@ export const ListExercise = ({params}) => {
   // Kéo xuống để reload
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    getData(MaMH);
+    getData();
     wait(500).then(() => setRefreshing(false));
   }, []);
   const wait = timeout => {
@@ -40,7 +39,7 @@ export const ListExercise = ({params}) => {
   // Vừa focus vào là gọi refesh để lấy data
   useEffect(() => {
     if (focus) {
-      onRefresh(MaMH);
+      onRefresh();
     }
   }, [focus]);
 
@@ -52,9 +51,9 @@ export const ListExercise = ({params}) => {
   }, [data]);
 
   // Gọi api lấy danh sách câu hỏi theo mã môn học
-  const getData = async data => {
+  const getData = async () => {
     try {
-      const res = await getCH(data);
+      const res = await getGiangVien();
       setData(res.data);
     } catch (error) {
       console.log(error);
@@ -73,10 +72,7 @@ export const ListExercise = ({params}) => {
 
   // Nhấn vô item để nhảy qua trang thông tin
   const handlePressItem = item => {
-    nav.navigate(AppRouter.INFO, {
-      item: item,
-      user: par.user,
-    });
+    //
   };
 
   // Nhấn nút delete
@@ -90,21 +86,19 @@ export const ListExercise = ({params}) => {
         <>
           {data !== '' && data !== undefined && data.length !== 0 ? (
             <View style={{backgroundColor: '#fff', flex: 1}}>
+              <View>
+                <Text
+                  style={{
+                    marginLeft: '3%',
+                    color: settings.colors.colorThumblr,
+                    fontWeight: 'bold',
+                    fontSize: 14,
+                    marginTop: 10,
+                  }}>
+                  DANH SÁCH GIẢNG VIÊN
+                </Text>
+              </View>
               <FlatList
-                ListHeaderComponent={
-                  <View>
-                    <Text
-                      style={{
-                        marginLeft: '3%',
-                        color: settings.colors.colorThumblr,
-                        fontWeight: 'bold',
-                        marginBottom: 5,
-                        fontSize: 14,
-                      }}>
-                      DANH SÁCH CÂU HỎI MÔN {params.TenMonHoc}
-                    </Text>
-                  </View>
-                }
                 data={data}
                 refreshControl={
                   <RefreshControl
@@ -121,9 +115,40 @@ export const ListExercise = ({params}) => {
                     handleDelete={deleteQuest}
                   />
                 )}
-                keyExtractor={item => item.MaCH}
+                keyExtractor={item => item.MaGV}
                 style={{flex: 1, paddingTop: 10, backgroundColor: '#fff'}}
               />
+              <View
+                style={{
+                  width: '100%',
+                  height: 50,
+                  marginTop: -65,
+                  alignItems: 'flex-end',
+                  paddingRight: 15,
+                  marginBottom: 15,
+                }}>
+                <TouchableOpacity
+                  onPress={() => {
+                    // ----------------------------------------
+                  }}
+                  activeOpacity={0.5}
+                  style={{
+                    width: 55,
+                    height: 55,
+                    borderRadius: 500,
+                    backgroundColor: settings.colors.colorMain,
+                    borderWidth: 0.5,
+                    borderColor: settings.colors.colorBoderDark,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <Icon
+                    type="Entypo"
+                    name="plus"
+                    style={{fontSize: 24, color: '#fff', marginBottom: -2}}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
           ) : (
             <View
@@ -136,40 +161,6 @@ export const ListExercise = ({params}) => {
               <Text style={{fontSize: 14, color: 'red'}}>Không có câu hỏi</Text>
             </View>
           )}
-          <View
-            style={{
-              width: '100%',
-              height: 50,
-              marginTop: -65,
-              alignItems: 'flex-end',
-              paddingRight: 15,
-              marginBottom: 15,
-            }}>
-            <TouchableOpacity
-              onPress={() => {
-                nav.navigate(AppRouter.AddExercise, {
-                  item: par,
-                  user: par.user,
-                });
-              }}
-              activeOpacity={0.5}
-              style={{
-                width: 55,
-                height: 55,
-                borderRadius: 500,
-                backgroundColor: settings.colors.colorMain,
-                borderWidth: 0.5,
-                borderColor: settings.colors.colorBoderDark,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <Icon
-                type="Entypo"
-                name="plus"
-                style={{fontSize: 24, color: '#fff', marginBottom: -2}}
-              />
-            </TouchableOpacity>
-          </View>
         </>
       ) : (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>

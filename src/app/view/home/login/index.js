@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Image,
   TextInput,
-  Alert,
   Appearance,
   ImageBackground,
   StatusBar,
@@ -16,9 +15,6 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {AppRouter} from '../../../navigation/AppRouter';
 import {postLogin} from '../../../../server/login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import {useIsFocused} from '@react-navigation/native';
-
 import {useDispatch} from 'react-redux';
 import {activate} from '../../../../../store/reducers/userSlice';
 
@@ -27,12 +23,9 @@ const colors = settings.colors;
 export const Login = ({navigation, route}) => {
   const dispatch = useDispatch();
   const colorScheme = Appearance.getColorScheme();
-
   const [phone, setPhone] = useState('0775712017');
   const [passWord, setPassWord] = useState('111111');
-
   const [response, setResponse] = useState('');
-
   const [textError, setTextError] = useState('');
   const [isShowPassword, setShowPassword] = useState(false);
   const [isLoading, setLoading] = useState(false);

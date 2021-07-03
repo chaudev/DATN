@@ -1,81 +1,75 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
-  StatusBar,
-  RefreshControl,
   TouchableOpacity,
-  FlatList,
-  Modal,
-  Settings,
   TextInput,
   ScrollView,
   Alert,
 } from 'react-native';
-import {settings} from '../../../../../config';
+import {settings} from '../../../../../../config';
 import {Icon} from 'native-base';
-
-import {Header} from '../../../../../components/header';
+import {Header} from '../../../../../../components/header';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import Toast from 'react-native-simple-toast';
-import {AppRouter} from '../../../../../navigation/AppRouter';
-
+import {AppRouter} from '../../../../../../navigation/AppRouter';
 import {Picker} from '@react-native-picker/picker';
+import {updateCH} from '../../../../../../../server/MonHoc/updateCH';
 
-import {createCH} from '../../../../../../server/MonHoc/createCH';
-
-export const AddAnswer = () => {
+export const EditAnswer = () => {
   const nav = useNavigation();
   const route = useRoute();
   const CauHoi = route.params.quest;
-  const MaMH = route.params.MaMH;
+  const item = route.params.item;
   const user = route.params.user;
 
-  const [A, setA] = useState('');
-  const [B, setB] = useState('');
-  const [C, setC] = useState('');
-  const [D, setD] = useState('');
-  const [dapAn, setDapAn] = useState('');
-
+  const [A, setA] = useState(item.A);
+  const [B, setB] = useState(item.B);
+  const [C, setC] = useState(item.C);
+  const [D, setD] = useState(item.D);
+  const [dapAn, setDapAn] = useState(item.DapAn);
   const [resPOST, setResPOST] = useState('');
 
-  useEffect(() => {
-    console.log('user: ', user);
-    console.log('MaMH: ', MaMH);
-  }, []);
-
+  // Quay lại danh sách câu hỏi
   useEffect(() => {
     if (resPOST !== '') {
-      Toast.show('Thêm thành công', Toast.SHORT);
+      Toast.show('Sửa thành công', Toast.SHORT);
+      console.log('resPOST: ', resPOST);
       nav.navigate(AppRouter.LISTEXERCISE);
     }
   }, [resPOST]);
 
+  // Nhấn nút sửa
   const handleAddQuest = () => {
     if (A === '' || B === '' || C === '' || D === '' || dapAn === '') {
       Alert.alert('Không thể thêm', 'Vui lòng điền đầy đủ thông tin');
     } else {
+      console.log('\n------------ nhan nut -------------');
       postData();
     }
   };
 
+  // Gọi api
   const postData = async () => {
     try {
-      const res = await createCH(MaMH, CauHoi, A, B, C, D, dapAn);
+      const res = await updateCH(
+        item.MaCH,
+        CauHoi,
+        A,
+        B,
+        C,
+        D,
+        dapAn,
+        item.MaCD,
+      );
+      console.log('res: ', res);
       setResPOST(res);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const initState = () => {
-    setA('');
-    setB('');
-    setC('');
-    setD('');
-    setDapAn('');
-  };
-
+  // Giao diện
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <Header user={user} />
@@ -109,7 +103,7 @@ export const AddAnswer = () => {
               flex: 1,
               marginLeft: 5,
             }}>
-            THÊM BÀI TẬP
+            SỬA BÀI TẬP
           </Text>
         </View>
         <ScrollView>
@@ -288,7 +282,7 @@ export const AddAnswer = () => {
             justifyContent: 'center',
           }}>
           <Text style={{color: '#ffF', fontSize: 14, fontWeight: 'bold'}}>
-            THÊM CÂU HỎI
+            LƯU CÂU HỎI
           </Text>
         </TouchableOpacity>
       </View>

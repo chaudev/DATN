@@ -1,19 +1,19 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Dimensions} from 'react-native';
-import {Icon} from 'native-base';
+import {Icon, Fab} from 'native-base';
 import {settings} from '../../../config';
 
-export const RenderItem = ({item, data, handle}) => {
+export const RenderItem = ({item, data, handle, del, user}) => {
   const getMarginTop = () => {
-    if (item.id === data[0].id) {
-      return 5;
+    if (item.MaMH === data[0].MaMH) {
+      return 10;
     } else {
       return 0;
     }
   };
 
   const marginBottom = () => {
-    if (item.id === data[data.length - 1].id) {
+    if (item.MaMH === data[data.length - 1].MaMH) {
       return 25;
     } else {
       return 15;
@@ -22,6 +22,10 @@ export const RenderItem = ({item, data, handle}) => {
 
   const pressItem = () => {
     handle(item);
+  };
+
+  const pressDelete = () => {
+    del(item);
   };
 
   return (
@@ -38,59 +42,51 @@ export const RenderItem = ({item, data, handle}) => {
         backgroundColor: '#fff',
         borderWidth: 1,
         borderColor: settings.colors.colorThumblr,
-        width: '44%',
-        height: 150,
+        height: 70,
+        flexDirection: 'row',
+        alignItems: 'center',
       }}>
-      <View
-        style={{
-          height: 40,
-          backgroundColor: settings.colors.colorThumblr,
-          borderTopStartRadius: 9,
-          borderTopEndRadius: 9,
-          flexDirection: 'row',
-          alignItems: 'center',
-          paddingHorizontal: 10,
-        }}>
+      <View style={{marginLeft: 15, flex: 1}}>
         <Text
           numberOfLines={1}
           style={{
-            color: '#fff',
+            color: settings.colors.colorThumblr,
             width: '100%',
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: 'bold',
+            marginBottom: 10,
           }}>
           {item.TenMonHoc}
         </Text>
-      </View>
-      <Text style={{marginTop: 10, fontSize: 14, marginLeft: 10}}>
-        Số tín chỉ: {item.SoTinChi}
-      </Text>
-      <Text style={{marginTop: 10, fontSize: 14, marginLeft: 10}}>
-        Số tiết: {item.SoTiet}
-      </Text>
-      <Text style={{marginTop: 10, fontSize: 14, marginLeft: 10}}>
-        Loại: {item.Type}
-      </Text>
 
-      {/* <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
-        <View
+        <Text
           style={{
-            width: 20,
-            height: 20,
-            marginLeft: 10,
-            borderRadius: 700,
-            flexDirection: 'row',
-            alignItems: 'center',
-            backgroundColor:
-              item.TrangThai === 0
-                ? settings.colors.colorGreen
-                : settings.colors.colorRed,
-          }}></View>
-        <Text style={{color: '#000', fontSize: 12, marginLeft: 5}}>
-          {item.TrangThai === 0 ? 'Đang làm' : 'Chưa đến giờ'}
+            fontSize: 14,
+            color: '#000',
+          }}>
+          Số tín chỉ: {item.SoTinChi} - Số tiết: {item.SoTiet}
         </Text>
-      </View> */}
-      <View style={{flex: 1}} />
+      </View>
+
+      {user[0]?.isAdmin !== undefined && parseInt(user[0]?.isAdmin) === 1 && (
+        <TouchableOpacity
+          onPress={() => {
+            pressDelete();
+          }}
+          activeOpacity={0.5}
+          style={{
+            width: 50,
+            height: 50,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Icon
+            type="AntDesign"
+            name="delete"
+            style={{fontSize: 26, color: settings.colors.colorThumblr}}
+          />
+        </TouchableOpacity>
+      )}
     </TouchableOpacity>
   );
 };

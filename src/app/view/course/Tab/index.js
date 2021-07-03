@@ -20,24 +20,32 @@ const colors = settings.colors;
 
 const renderTabBar = props => {
   props.tabStyle = Object.create(props.tabStyle);
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   return <DefaultTabBar {...props} />;
 };
 
 export const TabHeader = () => {
   const route = useRoute();
+  console.log('params: ', route.params);
   const params = route.params.item;
+  const user = route.params.user;
   const tab = route.params.tab;
-  console.log(params);
 
   return (
     <Container>
-      <Header />
+      <Header user={user} />
       <Tabs
         style={{margin: 0}}
         initialPage={tab === undefined ? 0 : tab}
         renderTabBar={renderTabBar}>
+        <Tab
+          tabStyle={{margin: 0}}
+          heading={
+            <TabHeading style={{backgroundColor: colors.colorGreen}}>
+              <Text style={{fontSize: 14}}>CHƯƠNG</Text>
+            </TabHeading>
+          }>
+          {/* <ListTest params={params} /> */}
+        </Tab>
         <Tab
           tabStyle={{margin: 0}}
           heading={

@@ -19,4 +19,7 @@ export const AppRouter = {
   AddTest: 'AddTest',
   QuestToTest: 'QuestToTest',
   LOADING: 'LOADING',
+  EditQuest: 'EditQuest',
+  EditAnswer: 'EditAnswer',
+  USER: 'USER',
 };

@@ -10,6 +10,8 @@ import {AddAnswer} from '../../view/course/listExercise/addExercise/addAnswer';
 import {AddTest} from './listTest/addTest';
 import {QuestToTest} from './listTest/addTest/addQestToTest';
 import {TabHeader} from './Tab';
+import {EditQuest} from './listExercise/infoQuest/editQuest';
+import {EditAnswer} from './listExercise/infoQuest/editQuest/editAnswer';
 
 const Stack = createStackNavigator();
 
@@ -50,6 +52,16 @@ function CourseNav() {
         name={AppRouter.QuestToTest}
         options={{title: AppRouter.AddAnswer, headerShown: false}}
         component={QuestToTest}
+      />
+      <Stack.Screen
+        name={AppRouter.EditQuest}
+        options={{title: AppRouter.AddAnswer, headerShown: false}}
+        component={EditQuest}
+      />
+      <Stack.Screen
+        name={AppRouter.EditAnswer}
+        options={{title: AppRouter.AddAnswer, headerShown: false}}
+        component={EditAnswer}
       />
     </Stack.Navigator>
   );

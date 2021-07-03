@@ -1,32 +1,23 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
-  StatusBar,
-  RefreshControl,
   TouchableOpacity,
-  FlatList,
-  Modal,
-  Settings,
-  TextInput,
   ScrollView,
   Alert,
   Image,
 } from 'react-native';
 import {settings} from '../../../../config';
-import {Icon, Picker, Textarea} from 'native-base';
-import {i18n} from '../../../../../i18n';
-
+import {Icon, Picker} from 'native-base';
 import {Header} from '../../../../components/header';
-import {Data} from '../data';
-import {RenderItem} from '../renderItem';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import Toast from 'react-native-simple-toast';
+import {AppRouter} from '../../../../../app/navigation/AppRouter';
 
 export const InfomationQuestion = () => {
   const nav = useNavigation();
   const route = useRoute();
   const params = route.params.item;
+  const user = route.params.user;
 
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -45,19 +36,15 @@ export const InfomationQuestion = () => {
   }, []);
 
   const edit = () => {
-    Alert.alert(
-      'Thông báo',
-      'Bạn vừa chọn chỉnh sửa \n\nChức năng hiện chưa update',
-    );
-  };
-
-  const del = () => {
-    Alert.alert('Thông báo', 'Bạn vừa chọn xóa \n\nChức năng hiện chưa update');
+    nav.navigate(AppRouter.EditQuest, {
+      item: params,
+      user: user,
+    });
   };
 
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
-      <Header />
+      <Header user={user} />
 
       {params !== undefined ? (
         <View style={{backgroundColor: '#fff', flex: 1}}>
@@ -114,9 +101,8 @@ export const InfomationQuestion = () => {
               <Text style={{fontWeight: 'bold', marginRight: 5, fontSize: 16}}>
                 Câu hỏi:
               </Text>
-              <Text style={{flex: 1, fontSize: 16}}>{params.TenCauHoi}</Text>
+              <Text style={{flex: 1, fontSize: 16}}>{params.CauHoi}</Text>
             </View>
-
             <View
               style={{
                 flexDirection: 'row',
@@ -191,25 +177,6 @@ export const InfomationQuestion = () => {
               }}>
               <Text style={{color: '#fff', fontSize: 14, fontWeight: 'bold'}}>
                 CHỈNH SỬA CÂU HỎI
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                del();
-              }}
-              activeOpacity={0.5}
-              style={{
-                height: 45,
-                width: 60,
-                marginRight: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: settings.colors.colorGreen,
-                marginBottom: 10,
-                borderRadius: 10,
-              }}>
-              <Text style={{color: '#fff', fontSize: 14, fontWeight: 'bold'}}>
-                XÓA
               </Text>
             </TouchableOpacity>
           </View>
