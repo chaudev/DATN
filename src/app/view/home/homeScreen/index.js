@@ -8,6 +8,7 @@ import {
   RefreshControl,
   TouchableOpacity,
   Alert,
+  Platform,
 } from 'react-native';
 import {settings} from '../../../config';
 import {AppRouter} from '../../../navigation/AppRouter';
@@ -445,6 +446,7 @@ export const HomeScreen = ({navigation}) => {
           mainStyles.topBar,
           {
             backgroundColor: mainColor,
+            marginTop: Platform.OS === 'ios' ? 35 : 0,
           },
         ]}>
         <View
@@ -470,8 +472,10 @@ export const HomeScreen = ({navigation}) => {
             paddingLeft: 15,
             flexDirection: 'row',
             alignItems: 'center',
+            marginTop: Platform.OS === 'ios' ? 35 : 0,
           },
         ]}>
+        <SafeAreaView />
         <View style={{flex: 1, height: 60, justifyContent: 'center'}}>
           <Text style={[mainStyles.title, {fontWeight: 'bold', fontSize: 10}]}>
             {user[0]?.TenGV !== undefined ? 'Giáo viên' : 'Sinh viên'}

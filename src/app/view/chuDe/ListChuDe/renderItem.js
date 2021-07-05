@@ -5,7 +5,7 @@ import {settings} from '../../../config';
 
 export const RenderItem = ({item, data, handle, del, user}) => {
   const getMarginTop = () => {
-    if (item.MaMH === data[0].MaMH) {
+    if (item.MaCD === data[0].MaCD) {
       return 10;
     } else {
       return 0;
@@ -13,7 +13,7 @@ export const RenderItem = ({item, data, handle, del, user}) => {
   };
 
   const marginBottom = () => {
-    if (item.MaMH === data[data.length - 1].MaMH) {
+    if (item.MaCD === data[data.length - 1].MaCD) {
       return 25;
     } else {
       return 15;
@@ -42,7 +42,7 @@ export const RenderItem = ({item, data, handle, del, user}) => {
         backgroundColor: '#fff',
         borderWidth: 1,
         borderColor: settings.colors.colorThumblr,
-        height: 70,
+        height: 100,
         flexDirection: 'row',
         alignItems: 'center',
       }}>
@@ -52,11 +52,23 @@ export const RenderItem = ({item, data, handle, del, user}) => {
           style={{
             color: settings.colors.colorThumblr,
             width: '100%',
+            fontSize: 14,
+            fontWeight: 'bold',
+            marginBottom: 10,
+          }}>
+          Môn học: {item.TenMH}
+        </Text>
+
+        <Text
+          numberOfLines={1}
+          style={{
+            color: settings.colors.colorThumblr,
+            width: '100%',
             fontSize: 16,
             fontWeight: 'bold',
             marginBottom: 10,
           }}>
-          {item.TenMonHoc}
+          Chủ đề: {item.TenCD}
         </Text>
 
         <Text

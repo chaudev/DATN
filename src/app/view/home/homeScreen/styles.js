@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {settings} from '../../../config';
 
 const MAX_HEIGHT = 240;
@@ -7,7 +7,8 @@ const mainColor = settings.colors.colorMain;
 const mainStyles = StyleSheet.create({
   saveArea: {
     flex: 1,
-    backgroundColor: '#eff3fb',
+    backgroundColor: '#fff',
+    // marginTop: Platform.OS === 'ios' ? 35 : 0,
   },
   headerBackground: {
     position: 'absolute',

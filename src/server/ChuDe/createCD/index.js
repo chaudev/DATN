@@ -2,11 +2,12 @@ import {settings} from '../../../app/config';
 
 let api = settings.hostURL;
 
-const getCD = async MaGV => {
-  console.log('getCD - MaGV: ', MaGV);
+const createCD = async (TenCD, MaMH, MaGV) => {
   let res = '';
 
   var data = new FormData();
+  data.append('TenCD', TenCD);
+  data.append('MaMH', MaMH);
   data.append('MaGV', MaGV);
 
   var requestOptions = {
@@ -15,7 +16,7 @@ const getCD = async MaGV => {
     redirect: 'follow',
   };
 
-  await fetch(api + 'ChuDe/getCD.php', requestOptions)
+  await fetch(api + 'ChuDe/createCD.php', requestOptions)
     .then(response => response.json())
     .then(data => {
       res = data;
@@ -25,4 +26,4 @@ const getCD = async MaGV => {
   return res;
 };
 
-export {getCD};
+export {createCD};

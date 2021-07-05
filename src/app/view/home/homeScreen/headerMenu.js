@@ -1,10 +1,17 @@
 import React from 'react';
-import {StyleSheet, View, Text, Animated, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Animated,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
 import {Icon} from 'native-base';
 import {settings} from '../../../config';
 import {useNavigation} from '@react-navigation/native';
 
-const MAX_HEIGHT = 240;
+const MAX_HEIGHT = Platform.OS === 'ios' ? 290 : 240;
 
 const mainColor = settings.colors.colorMain;
 
@@ -16,6 +23,7 @@ export const HeaderMenu = ({headerY, imageOpacity, imageY, Handle}) => {
   return (
     <Animated.View
       style={[styles.header, {transform: [{translateY: headerY}]}]}>
+      <SafeAreaView />
       <Animated.Image
         style={[
           styles.headerBackground,
@@ -35,7 +43,13 @@ export const HeaderMenu = ({headerY, imageOpacity, imageY, Handle}) => {
           opacity: imageOpacity,
           transform: [{translateY: imageY}],
         }}>
-        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+        <SafeAreaView
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginTop: Platform.OS === 'ios' ? 20 : 0,
+          }}>
           <TouchableOpacity
             onPress={() => {
               HeaderHandle('Môn học');
@@ -109,7 +123,7 @@ export const HeaderMenu = ({headerY, imageOpacity, imageY, Handle}) => {
             </View>
             <Text style={items.textTitle}>Sắp diễn ra</Text>
           </TouchableOpacity>
-        </View>
+        </SafeAreaView>
         <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
           <TouchableOpacity
             onPress={() => {

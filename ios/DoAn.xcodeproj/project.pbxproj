@@ -8,29 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* DoAnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* DoAnTests.m */; };
+		0BBA41D0AB144923AED55951 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDA05E6562E24A1F9A03CD21 /* Feather.ttf */; };
+		10E8F59C29A24197B06C35DE /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA2977BC62E745E2A1AA2A61 /* Foundation.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		85BDC31B6F3044B69D3CF522 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1295F739AEDE4F50A3DAE2A4 /* AntDesign.ttf */; };
-		6546C7B1E97247FCACC6C724 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7A464419A8D4387A8E6D7FB /* Entypo.ttf */; };
-		E14E83BB0D604AE5845209E7 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE422CE72D474E9085A37E28 /* EvilIcons.ttf */; };
-		0BBA41D0AB144923AED55951 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDA05E6562E24A1F9A03CD21 /* Feather.ttf */; };
-		3D10F7211AA44A4A83752261 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 25068DA8645646A0A2DE6062 /* FontAwesome.ttf */; };
-		F0B85BEA158F4B60B21A7F45 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F077207B5AC7414FB17FA381 /* FontAwesome5_Brands.ttf */; };
-		2BF3747C86954960A11FDCCF /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4747D801CA484DB2948EA6EE /* FontAwesome5_Regular.ttf */; };
-		29EACB1AF7C040D984FA28EE /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2957E2464904A6BAEF3897E /* FontAwesome5_Solid.ttf */; };
-		F288C7DBADAB46EFAA13982F /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1FF0D3B76B494A87241464 /* Fontisto.ttf */; };
-		10E8F59C29A24197B06C35DE /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA2977BC62E745E2A1AA2A61 /* Foundation.ttf */; };
-		E15B6EB704FC4BC398B86524 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5D7EC1E276045A9AC3BA6D5 /* Ionicons.ttf */; };
 		22EA7A6C723C45B3A71F0055 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D98FD2A2F8A34BEE83981D5B /* MaterialCommunityIcons.ttf */; };
-		D28D37C5F3E64587AD647D9B /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F8B856C43494811A202D47A /* MaterialIcons.ttf */; };
-		82F779BC46AA43C8BC4B6394 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 174D0AB74D4F44A6AA6D1766 /* Octicons.ttf */; };
-		A38D36FD1C2D476FA5E6D38A /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 30CC685B88064F85B9DCF391 /* Roboto_medium.ttf */; };
-		CC02E728071843C9ABDAB317 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B8E7FB1950F14D2685DDAE49 /* Roboto.ttf */; };
-		A79C7A306DBD4CA8B8AB34BC /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 838BC5C283C04284ADF404A5 /* rubicon-icon-font.ttf */; };
-		95CABB0CC65147639E485448 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 680D4E4BC4A84C89B9CD151A /* SimpleLineIcons.ttf */; };
+		29EACB1AF7C040D984FA28EE /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2957E2464904A6BAEF3897E /* FontAwesome5_Solid.ttf */; };
+		2BF3747C86954960A11FDCCF /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4747D801CA484DB2948EA6EE /* FontAwesome5_Regular.ttf */; };
 		35C9178D741B49108B458CA3 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A76F77D187534910A8045AB6 /* Zocial.ttf */; };
+		3D10F7211AA44A4A83752261 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 25068DA8645646A0A2DE6062 /* FontAwesome.ttf */; };
+		42751449A51280E6217D8069 /* libPods-DoAn-DoAnTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEC0B65E6642EF4F71144B3 /* libPods-DoAn-DoAnTests.a */; };
+		6546C7B1E97247FCACC6C724 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7A464419A8D4387A8E6D7FB /* Entypo.ttf */; };
+		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		82F779BC46AA43C8BC4B6394 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 174D0AB74D4F44A6AA6D1766 /* Octicons.ttf */; };
+		85BDC31B6F3044B69D3CF522 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1295F739AEDE4F50A3DAE2A4 /* AntDesign.ttf */; };
+		95CABB0CC65147639E485448 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 680D4E4BC4A84C89B9CD151A /* SimpleLineIcons.ttf */; };
+		A38D36FD1C2D476FA5E6D38A /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 30CC685B88064F85B9DCF391 /* Roboto_medium.ttf */; };
+		A79C7A306DBD4CA8B8AB34BC /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 838BC5C283C04284ADF404A5 /* rubicon-icon-font.ttf */; };
+		C32956E0C5592CB7D0B6DB50 /* libPods-DoAn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3087FD186A83F2166854CC4D /* libPods-DoAn.a */; };
+		CC02E728071843C9ABDAB317 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B8E7FB1950F14D2685DDAE49 /* Roboto.ttf */; };
+		D28D37C5F3E64587AD647D9B /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F8B856C43494811A202D47A /* MaterialIcons.ttf */; };
+		E14E83BB0D604AE5845209E7 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE422CE72D474E9085A37E28 /* EvilIcons.ttf */; };
+		E15B6EB704FC4BC398B86524 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5D7EC1E276045A9AC3BA6D5 /* Ionicons.ttf */; };
+		F0B85BEA158F4B60B21A7F45 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F077207B5AC7414FB17FA381 /* FontAwesome5_Brands.ttf */; };
+		F288C7DBADAB46EFAA13982F /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1FF0D3B76B494A87241464 /* Fontisto.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,33 +49,39 @@
 		00E356EE1AD99517003FC87E /* DoAnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DoAnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* DoAnTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoAnTests.m; sourceTree = "<group>"; };
+		027244F91289BF6FDCDF6D01 /* Pods-DoAn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoAn.release.xcconfig"; path = "Target Support Files/Pods-DoAn/Pods-DoAn.release.xcconfig"; sourceTree = "<group>"; };
+		0A1FF0D3B76B494A87241464 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/native-base/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
+		1295F739AEDE4F50A3DAE2A4 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/native-base/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* DoAn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoAn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = DoAn/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = DoAn/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = DoAn/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = DoAn/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = DoAn/main.m; sourceTree = "<group>"; };
+		174D0AB74D4F44A6AA6D1766 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		1F8B856C43494811A202D47A /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		1FB65475C2491FD87B285B4D /* Pods-DoAn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoAn.debug.xcconfig"; path = "Target Support Files/Pods-DoAn/Pods-DoAn.debug.xcconfig"; sourceTree = "<group>"; };
+		25068DA8645646A0A2DE6062 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		3087FD186A83F2166854CC4D /* libPods-DoAn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DoAn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		30CC685B88064F85B9DCF391 /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
+		4747D801CA484DB2948EA6EE /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		50D515119EDE91165D4F1FC6 /* Pods-DoAn-DoAnTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoAn-DoAnTests.release.xcconfig"; path = "Target Support Files/Pods-DoAn-DoAnTests/Pods-DoAn-DoAnTests.release.xcconfig"; sourceTree = "<group>"; };
+		56516E5C34E1C10E342653E9 /* Pods-DoAn-DoAnTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoAn-DoAnTests.debug.xcconfig"; path = "Target Support Files/Pods-DoAn-DoAnTests/Pods-DoAn-DoAnTests.debug.xcconfig"; sourceTree = "<group>"; };
+		680D4E4BC4A84C89B9CD151A /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = DoAn/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		838BC5C283C04284ADF404A5 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; };
+		A76F77D187534910A8045AB6 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		B2957E2464904A6BAEF3897E /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		B5D7EC1E276045A9AC3BA6D5 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		B8E7FB1950F14D2685DDAE49 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
+		BE422CE72D474E9085A37E28 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		D98FD2A2F8A34BEE83981D5B /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		DA2977BC62E745E2A1AA2A61 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		DCEC0B65E6642EF4F71144B3 /* libPods-DoAn-DoAnTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DoAn-DoAnTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7A464419A8D4387A8E6D7FB /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		1295F739AEDE4F50A3DAE2A4 /* AntDesign.ttf */ = {isa = PBXFileReference; name = "AntDesign.ttf"; path = "../node_modules/native-base/Fonts/AntDesign.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E7A464419A8D4387A8E6D7FB /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		BE422CE72D474E9085A37E28 /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		FDA05E6562E24A1F9A03CD21 /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		25068DA8645646A0A2DE6062 /* FontAwesome.ttf */ = {isa = PBXFileReference; name = "FontAwesome.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F077207B5AC7414FB17FA381 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Brands.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		4747D801CA484DB2948EA6EE /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Regular.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B2957E2464904A6BAEF3897E /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Solid.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		0A1FF0D3B76B494A87241464 /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../node_modules/native-base/Fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		DA2977BC62E745E2A1AA2A61 /* Foundation.ttf */ = {isa = PBXFileReference; name = "Foundation.ttf"; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B5D7EC1E276045A9AC3BA6D5 /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D98FD2A2F8A34BEE83981D5B /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; name = "MaterialCommunityIcons.ttf"; path = "../node_modules/native-base/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1F8B856C43494811A202D47A /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		174D0AB74D4F44A6AA6D1766 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		30CC685B88064F85B9DCF391 /* Roboto_medium.ttf */ = {isa = PBXFileReference; name = "Roboto_medium.ttf"; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B8E7FB1950F14D2685DDAE49 /* Roboto.ttf */ = {isa = PBXFileReference; name = "Roboto.ttf"; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		838BC5C283C04284ADF404A5 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		680D4E4BC4A84C89B9CD151A /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A76F77D187534910A8045AB6 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F077207B5AC7414FB17FA381 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		FDA05E6562E24A1F9A03CD21 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42751449A51280E6217D8069 /* libPods-DoAn-DoAnTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C32956E0C5592CB7D0B6DB50 /* libPods-DoAn.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,47 +134,19 @@
 			name = DoAn;
 			sourceTree = "<group>";
 		};
-		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
+		13B64C51835F258C813CAE6F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				1FB65475C2491FD87B285B4D /* Pods-DoAn.debug.xcconfig */,
+				027244F91289BF6FDCDF6D01 /* Pods-DoAn.release.xcconfig */,
+				56516E5C34E1C10E342653E9 /* Pods-DoAn-DoAnTests.debug.xcconfig */,
+				50D515119EDE91165D4F1FC6 /* Pods-DoAn-DoAnTests.release.xcconfig */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Libraries;
-			sourceTree = "<group>";
-		};
-		83CBB9F61A601CBA00E9B192 = {
-			isa = PBXGroup;
-			children = (
-				13B07FAE1A68108700A75B9A /* DoAn */,
-				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* DoAnTests */,
-				83CBBA001A601CBA00E9B192 /* Products */,
-				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				19A2D8FE72334AA7B64C0CD2 /* Resources */,
-			);
-			indentWidth = 2;
-			sourceTree = "<group>";
-			tabWidth = 2;
-			usesTabs = 0;
-		};
-		83CBBA001A601CBA00E9B192 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				13B07F961A680F5B00A75B9A /* DoAn.app */,
-				00E356EE1AD99517003FC87E /* DoAnTests.xctest */,
-			);
-			name = Products;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		19A2D8FE72334AA7B64C0CD2 /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				1295F739AEDE4F50A3DAE2A4 /* AntDesign.ttf */,
 				E7A464419A8D4387A8E6D7FB /* Entypo.ttf */,
@@ -188,7 +170,48 @@
 			);
 			name = Resources;
 			sourceTree = "<group>";
-			path = "";
+		};
+		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				3087FD186A83F2166854CC4D /* libPods-DoAn.a */,
+				DCEC0B65E6642EF4F71144B3 /* libPods-DoAn-DoAnTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		83CBB9F61A601CBA00E9B192 = {
+			isa = PBXGroup;
+			children = (
+				13B07FAE1A68108700A75B9A /* DoAn */,
+				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				00E356EF1AD99517003FC87E /* DoAnTests */,
+				83CBBA001A601CBA00E9B192 /* Products */,
+				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				19A2D8FE72334AA7B64C0CD2 /* Resources */,
+				13B64C51835F258C813CAE6F /* Pods */,
+			);
+			indentWidth = 2;
+			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 0;
+		};
+		83CBBA001A601CBA00E9B192 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13B07F961A680F5B00A75B9A /* DoAn.app */,
+				00E356EE1AD99517003FC87E /* DoAnTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -197,9 +220,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "DoAnTests" */;
 			buildPhases = (
+				CA2B7F383B2C67CADD1F4AB9 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				633451C18D074B81344D5D05 /* [CP] Embed Pods Frameworks */,
+				F6575A8E958BC40B592E1824 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -215,11 +241,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "DoAn" */;
 			buildPhases = (
+				1D9A805C3B5D36371C51ABE2 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				CCA4AF7A6088CF5F6D82AE76 /* [CP] Embed Pods Frameworks */,
+				D81BD7F9F54DA0457958D5C8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -319,6 +348,116 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
+		1D9A805C3B5D36371C51ABE2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DoAn-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		633451C18D074B81344D5D05 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DoAn-DoAnTests/Pods-DoAn-DoAnTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DoAn-DoAnTests/Pods-DoAn-DoAnTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DoAn-DoAnTests/Pods-DoAn-DoAnTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA2B7F383B2C67CADD1F4AB9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DoAn-DoAnTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CCA4AF7A6088CF5F6D82AE76 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DoAn/Pods-DoAn-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DoAn/Pods-DoAn-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D81BD7F9F54DA0457958D5C8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DoAn/Pods-DoAn-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DoAn/Pods-DoAn-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F6575A8E958BC40B592E1824 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DoAn-DoAnTests/Pods-DoAn-DoAnTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DoAn-DoAnTests/Pods-DoAn-DoAnTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DoAn-DoAnTests/Pods-DoAn-DoAnTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -371,6 +510,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56516E5C34E1C10E342653E9 /* Pods-DoAn-DoAnTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -397,6 +537,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50D515119EDE91165D4F1FC6 /* Pods-DoAn-DoAnTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -420,10 +561,12 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1FB65475C2491FD87B285B4D /* Pods-DoAn.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SR667SS8FR;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DoAn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -435,7 +578,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chau.datn;
 				PRODUCT_NAME = DoAn;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -445,10 +588,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 027244F91289BF6FDCDF6D01 /* Pods-DoAn.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SR667SS8FR;
 				INFOPLIST_FILE = DoAn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -459,7 +604,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chau.datn;
 				PRODUCT_NAME = DoAn;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -499,6 +644,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -563,6 +709,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

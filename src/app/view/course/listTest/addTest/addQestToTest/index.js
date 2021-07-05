@@ -20,7 +20,6 @@ import {Header} from '../../../../../components/header';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import Toast from 'react-native-simple-toast';
 import {AppRouter} from '../../../../../navigation/AppRouter';
-// import {Picker} from '@react-native-community/picker';
 
 import {Picker} from '@react-native-picker/picker';
 

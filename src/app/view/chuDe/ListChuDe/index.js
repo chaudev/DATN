@@ -9,19 +9,27 @@ import {
   Image,
   Modal,
   TextInput,
+  Dimensions,
+  SafeAreaView,
+  StatusBarPropsIOS,
 } from 'react-native';
 import {settings} from '../../../config';
-import {Icon, Fab} from 'native-base';
+import {Icon, Fab, Picker} from 'native-base';
 import {AppRouter} from '../../../navigation/AppRouter';
 import {Header} from '../../../components/header';
 import {RenderItem} from './renderItem';
 import {useNavigation} from '@react-navigation/native';
 
 import {getCD} from '../../../../server/ChuDe/getCD';
-import {createMH} from '../../../../server/MonHoc/createMH';
-import {deleteMH} from '../../../../server/MonHoc/deleteMH';
+import {createCD} from '../../../../server/ChuDe/createCD';
+import {deleteCD} from '../../../../server/ChuDe/deleteCD';
+
+import {getMH} from '../../../../server/MonHoc/getMH';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+// import {Picker} from '@react-native-picker/picker';
+
+const {width: dW, height: dH} = Dimensions.get('window');
 
 export const ListChuDe = () => {
   const nav = useNavigation();
@@ -31,14 +39,17 @@ export const ListChuDe = () => {
   const [resPOST, setResPOST] = useState('');
   const [showModal, setModal] = useState(false);
 
-  const [tenMH, setTenMH] = useState('');
-  const [tinChi, setTinChi] = useState('');
+  const [tenCD, setTenCD] = useState('');
+  const [monHoc, setMonHoc] = useState('Chọn môn học');
   const [tiet, setTiet] = useState('');
   const [user, setUser] = useState('');
+
+  const [listMonHoc, setListMonHoc] = useState('');
 
   // Kéo xuống để reload
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
+    getMonHoc();
     getData();
     wait(500).then(() => setRefreshing(false));
   }, []);
@@ -50,13 +61,22 @@ export const ListChuDe = () => {
   // Bất đồng bộ ---
   useEffect(() => {
     getAccount();
+    getMonHoc();
     getData();
   }, []);
+
+  useEffect(() => {
+    if (user !== '') {
+      console.log('user: ', user);
+      getMonHoc();
+      getData();
+    }
+  }, [user]);
 
   // Khi thêm thành công thì sẽ refesh lại
   useEffect(() => {
     if (resPOST !== '') {
-      onRefresh();
+      getData();
     }
   }, [resPOST]);
 
@@ -77,7 +97,7 @@ export const ListChuDe = () => {
     }
   };
 
-  // Lấy danh sách môn học
+  // Lấy danh sách chủ đề
   const getData = async () => {
     try {
       const res = await getCD(user[0]?.MaGV);
@@ -87,20 +107,32 @@ export const ListChuDe = () => {
     }
   };
 
+  // Lấy danh sách môn học
+  const getMonHoc = async () => {
+    try {
+      const res = await getMH();
+      setListMonHoc(res.data);
+      console.log('Mon hoc: ', listMonHoc);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // Tạo môn học mới
   const postData = async () => {
     try {
-      const res = await createMH(tenMH, tinChi, tiet);
+      const res = await createCD(tenCD, monHoc, user[0]?.MaGV);
       setResPOST(res);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // Xóa môn học
+  // Xóa chủ đề
   const postDel = async data => {
     try {
-      const res = await deleteMH(data);
+      const res = await deleteCD(data);
+      console.log('res: ', res);
     } catch (error) {
       console.log(error);
     }
@@ -116,19 +148,23 @@ export const ListChuDe = () => {
   };
 
   // Nhấn nút thêm môn học
-  const createMonHoc = () => {
+  const createChuDe = () => {
     setModal(false);
     postData();
+
+    setMonHoc('Chọn môn học');
+    setTenCD('');
   };
 
   // Nhấn nút xóa môn học
   const del = item => {
-    postDel(item?.MaMH);
-    onRefresh();
+    postDel(item?.MaCD);
+    getData();
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: '#fff'}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: settings.colors.colorMain}}>
+      <StatusBar barStyle="dark-content" hidden={true} />
       <Header user={user} />
 
       {!loading ? (
@@ -151,12 +187,12 @@ export const ListChuDe = () => {
                   </View>
                 }
                 data={data}
-                refreshControl={
-                  <RefreshControl
-                    refreshing={refreshing}
-                    onRefresh={onRefresh}
-                  />
-                }
+                // refreshControl={
+                //   <RefreshControl
+                //     refreshing={refreshing}
+                //     onRefresh={onRefresh}
+                //   />
+                // }
                 showsVerticalScrollIndicator={false}
                 renderItem={({item}) => (
                   <RenderItem
@@ -167,7 +203,7 @@ export const ListChuDe = () => {
                     user={user}
                   />
                 )}
-                keyExtractor={item => item.MaMH}
+                keyExtractor={item => item.MaCD}
                 style={{flex: 1, paddingTop: 10, backgroundColor: '#fff'}}
               />
             </View>
@@ -196,7 +232,13 @@ export const ListChuDe = () => {
           )}
         </>
       ) : (
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#fff',
+          }}>
           <Image
             source={require('../../../asset/gif/load321.gif')}
             resizeMode="contain"
@@ -237,7 +279,7 @@ export const ListChuDe = () => {
               style={{
                 width: '90%',
                 backgroundColor: '#fff',
-                height: 370,
+                height: 280,
                 borderRadius: 12,
               }}>
               <View
@@ -255,7 +297,7 @@ export const ListChuDe = () => {
                     fontWeight: 'bold',
                     flex: 1,
                   }}>
-                  THÊM MÔN HỌC
+                  THÊM CHỦ ĐỀ
                 </Text>
                 <TouchableOpacity
                   onPress={() => {
@@ -294,11 +336,11 @@ export const ListChuDe = () => {
                   borderRadius: 12,
                 }}>
                 <TextInput
-                  placeholder="Tên môn học"
-                  placeholderTextColor="#B0BEC5"
-                  value={tenMH}
+                  placeholder="Tên chủ đề"
+                  placeholderTextColor="#8a817c"
+                  value={tenCD}
                   onChangeText={t => {
-                    setTenMH(t);
+                    setTenCD(t);
                   }}
                   style={{
                     flex: 1,
@@ -316,67 +358,47 @@ export const ListChuDe = () => {
                 }}>
                 Số tín chỉ
               </Text>
+
               <View
                 style={{
-                  height: 50,
                   marginTop: 5,
                   marginHorizontal: 10,
                   borderWidth: 1,
                   borderColor: settings.colors.colorBoderDark,
+                  height: 45,
                   borderRadius: 12,
+                  flexDirection: 'row',
+                  alignItems: 'center',
                 }}>
-                <TextInput
-                  placeholder="Số tín chỉ"
-                  placeholderTextColor="#B0BEC5"
-                  value={tinChi}
-                  onChangeText={t => {
-                    setTinChi(t);
-                  }}
+                <Text
                   style={{
-                    flex: 1,
-                    marginHorizontal: 10,
-                    marginVertical: 2,
-                    color: '#000',
-                  }}
-                />
+                    height: 20,
+                    marginLeft: 10,
+                    color: monHoc === 'Chọn môn học' ? '#8a817c' : '#000',
+                  }}>
+                  {monHoc === 'Chọn môn học' ? monHoc : ''}
+                </Text>
+                {listMonHoc !== '' && (
+                  <Picker
+                    selectedValue={monHoc}
+                    mode="dialog"
+                    style={{height: 45, width: dW - 65, marginLeft: -15}}
+                    onValueChange={(itemValue, itemIndex) => {
+                      console.log('cac');
+                      setMonHoc(itemValue);
+                    }}>
+                    {listMonHoc?.map(i => (
+                      <Picker.Item label={i.TenMonHoc} value={i.MaMH} />
+                    ))}
+                  </Picker>
+                )}
               </View>
-              <Text
-                style={{
-                  marginTop: 10,
-                  color: settings.colors.colorGreen,
-                  marginLeft: 10,
-                }}>
-                Số tiết
-              </Text>
-              <View
-                style={{
-                  height: 50,
-                  marginTop: 5,
-                  marginHorizontal: 10,
-                  borderWidth: 1,
-                  borderColor: settings.colors.colorBoderDark,
-                  borderRadius: 12,
-                }}>
-                <TextInput
-                  placeholder="Số tiết"
-                  placeholderTextColor="#B0BEC5"
-                  value={tiet}
-                  onChangeText={t => {
-                    setTiet(t);
-                  }}
-                  style={{
-                    flex: 1,
-                    marginHorizontal: 10,
-                    marginVertical: 2,
-                    color: '#000',
-                  }}
-                />
-              </View>
+
               <View style={{height: 10}} />
 
               <TouchableOpacity
                 onPress={() => {
-                  createMonHoc();
+                  createChuDe();
                 }}
                 activeOpacity={0.5}
                 style={{
@@ -389,7 +411,7 @@ export const ListChuDe = () => {
                   justifyContent: 'center',
                 }}>
                 <Text style={{color: '#ffF', fontSize: 14, fontWeight: 'bold'}}>
-                  THÊM MÔN HỌC
+                  THÊM CHỦ ĐỀ
                 </Text>
               </TouchableOpacity>
             </View>
@@ -408,6 +430,6 @@ export const ListChuDe = () => {
           />
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 };
