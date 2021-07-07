@@ -23,4 +23,5 @@ export const AppRouter = {
   EditAnswer: 'EditAnswer',
   USER: 'USER',
   LISTCD: 'LISTCHUDE',
+  QUESTION: 'QUESTION',
 };

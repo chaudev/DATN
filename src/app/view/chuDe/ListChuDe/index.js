@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -41,28 +41,17 @@ export const ListChuDe = () => {
 
   const [tenCD, setTenCD] = useState('');
   const [monHoc, setMonHoc] = useState('Chọn môn học');
-  const [tiet, setTiet] = useState('');
   const [user, setUser] = useState('');
 
   const [listMonHoc, setListMonHoc] = useState('');
 
-  // Kéo xuống để reload
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    getMonHoc();
-    getData();
-    wait(500).then(() => setRefreshing(false));
-  }, []);
-  const wait = timeout => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  };
+  const [showFilter, setShowFilter] = useState(false);
+  const [filter, setFilter] = useState(0);
 
   // Lấy thông tin tài khoản đang đăng nhập vs danh sách môn học
   // Bất đồng bộ ---
   useEffect(() => {
     getAccount();
-    getMonHoc();
-    getData();
   }, []);
 
   useEffect(() => {
@@ -87,6 +76,11 @@ export const ListChuDe = () => {
     }
   }, [data]);
 
+  // Khi filter thi chay
+  useEffect(() => {
+    getData(filter);
+  }, [filter]);
+
   // Lấy thông tin tài khoản đang đăng nhập
   const getAccount = async () => {
     try {
@@ -100,7 +94,8 @@ export const ListChuDe = () => {
   // Lấy danh sách chủ đề
   const getData = async () => {
     try {
-      const res = await getCD(user[0]?.MaGV);
+      const res = await getCD(user[0]?.MaGV, filter);
+      console.log('data : ', res);
       setData(res.data);
     } catch (error) {
       console.log(error);
@@ -141,7 +136,7 @@ export const ListChuDe = () => {
   // Nhấn vô item
   const handlePressItem = item => {
     console.log(item);
-    nav.navigate(AppRouter.LISTEXERCISE, {
+    nav.navigate(AppRouter.QUESTION, {
       item: item,
       user: user,
     });
@@ -169,57 +164,84 @@ export const ListChuDe = () => {
 
       {!loading ? (
         <>
-          {data !== '' ? (
-            <View style={{backgroundColor: '#fff', flex: 1}}>
-              <FlatList
-                ListHeaderComponent={
-                  <View>
-                    <Text
-                      style={{
-                        marginLeft: '3%',
-                        color: settings.colors.colorThumblr,
-                        fontWeight: 'bold',
-                        marginBottom: 5,
-                        fontSize: 16,
-                      }}>
-                      DANH SÁCH CHỦ ĐỀ
-                    </Text>
-                  </View>
-                }
-                data={data}
-                // refreshControl={
-                //   <RefreshControl
-                //     refreshing={refreshing}
-                //     onRefresh={onRefresh}
-                //   />
-                // }
-                showsVerticalScrollIndicator={false}
-                renderItem={({item}) => (
-                  <RenderItem
-                    item={item}
-                    data={data}
-                    handle={handlePressItem}
-                    del={del}
-                    user={user}
-                  />
-                )}
-                keyExtractor={item => item.MaCD}
-                style={{flex: 1, paddingTop: 10, backgroundColor: '#fff'}}
-              />
-            </View>
-          ) : (
+          <View style={{backgroundColor: '#fff', flex: 1}}>
             <View
-              style={{
-                backgroundColor: '#fff',
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <Text style={{fontSize: 14, color: 'red'}}>Không có data</Text>
+              style={{flexDirection: 'row', alignItems: 'center', height: 45}}>
+              <Text
+                style={{
+                  flex: 1,
+                  marginLeft: '3%',
+                  color: settings.colors.colorThumblr,
+                  fontWeight: 'bold',
+                  marginBottom: 5,
+                  fontSize: 16,
+                  marginTop: 10,
+                }}>
+                DANH SÁCH CHỦ ĐỀ
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setShowFilter(!showFilter);
+                }}
+                style={{
+                  width: 30,
+                  height: 30,
+                  marginRight: 10,
+                  borderRadius: 500,
+                  backgroundColor: settings.colors.colorMain,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Icon
+                  type="FontAwesome"
+                  name="filter"
+                  style={{fontSize: 18, color: '#fff', marginTop: 2}}
+                />
+              </TouchableOpacity>
+              <View
+                style={{
+                  width: 40,
+                  height: 40,
+                  marginRight: 10,
+                  marginLeft: -50,
+                }}>
+                {listMonHoc !== '' && (
+                  <Picker
+                    selectedValue={0}
+                    mode="dialog"
+                    textStyle={{opacity: 0}}
+                    style={{height: 45, width: 50, opacity: 0}}
+                    onValueChange={(itemValue, itemIndex) => {
+                      console.log(itemValue);
+                      setFilter(itemValue);
+                    }}>
+                    <Picker.Item label="Tất cả" value={'0'} />
+                    {listMonHoc?.map(i => (
+                      <Picker.Item label={i.TenMonHoc} value={i.MaMH} />
+                    ))}
+                  </Picker>
+                )}
+              </View>
             </View>
-          )}
 
-          {user[0]?.isAdmin !== undefined && parseInt(user[0]?.isAdmin) === 1 && (
+            <FlatList
+              data={data}
+              showsVerticalScrollIndicator={false}
+              renderItem={({item}) => (
+                <RenderItem
+                  item={item}
+                  data={data}
+                  handle={handlePressItem}
+                  del={del}
+                  user={user}
+                />
+              )}
+              keyExtractor={item => item.MaCD}
+              style={{flex: 1, backgroundColor: '#fff', marginTop: -5}}
+            />
+          </View>
+
+          {user[0]?.isAdmin !== undefined && (
             <Fab
               containerStyle={{}}
               style={{backgroundColor: settings.colors.colorMain}}

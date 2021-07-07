@@ -2,12 +2,14 @@ import {settings} from '../../../app/config';
 
 let api = settings.hostURL;
 
-const getCD = async MaGV => {
-  console.log('getCD - MaGV: ', MaGV);
+const getCD = async (MaGV, MaMH) => {
   let res = '';
 
   var data = new FormData();
   data.append('MaGV', MaGV);
+  data.append('MaMH', MaMH);
+
+  console.log(MaGV, ' - ', MaMH);
 
   var requestOptions = {
     method: 'POST',

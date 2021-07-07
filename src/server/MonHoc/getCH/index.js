@@ -2,12 +2,12 @@ import {settings} from '../../../app/config';
 
 let api = settings.hostURL;
 
-const getCH = async MaMH => {
-  console.log('MaMH: ', MaMH);
+const getCH = async MaCD => {
+  console.log('MaCD: ', MaCD);
   let res = '';
 
   var data = new FormData();
-  data.append('MaMH', MaMH);
+  data.append('MaCD', MaCD);
 
   var requestOptions = {
     method: 'POST',

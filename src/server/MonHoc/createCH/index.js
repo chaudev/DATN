@@ -5,6 +5,8 @@ let api = settings.hostURL;
 const createCH = async (MaCD, CauHoi, A, B, C, D, DapAn) => {
   let res = '';
 
+  console.log('MaCD: ', MaCD, ' CauHoi: ', CauHoi, ' DapAn: ', DapAn);
+
   var data = new FormData();
   data.append('MaCD', MaCD);
   data.append('CauHoi', CauHoi);
@@ -27,6 +29,7 @@ const createCH = async (MaCD, CauHoi, A, B, C, D, DapAn) => {
     })
     .catch(error => console.log('error', error));
 
+  console.log('res: ', res);
   return res;
 };
 

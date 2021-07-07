@@ -1,7 +1,15 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Dimensions} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
 import {Icon, Fab} from 'native-base';
 import {settings} from '../../../config';
+
+const {width: dW, height: dH} = Dimensions.get;
 
 export const RenderItem = ({item, data, handle, del, user}) => {
   const getMarginTop = () => {
@@ -14,7 +22,7 @@ export const RenderItem = ({item, data, handle, del, user}) => {
 
   const marginBottom = () => {
     if (item.MaCD === data[data.length - 1].MaCD) {
-      return 25;
+      return 100;
     } else {
       return 15;
     }
@@ -80,7 +88,7 @@ export const RenderItem = ({item, data, handle, del, user}) => {
         </Text>
       </View>
 
-      {user[0]?.isAdmin !== undefined && parseInt(user[0]?.isAdmin) === 1 && (
+      {user[0]?.isAdmin !== undefined && (
         <TouchableOpacity
           onPress={() => {
             pressDelete();
@@ -91,12 +99,25 @@ export const RenderItem = ({item, data, handle, del, user}) => {
             height: 50,
             alignItems: 'center',
             justifyContent: 'center',
+            backgroundColor: settings.colors.colorThumblr,
+            height: '100%',
+            marginRight: -1,
+            borderTopEndRadius: 10,
+            borderBottomEndRadius: 10,
           }}>
           <Icon
             type="AntDesign"
             name="delete"
-            style={{fontSize: 26, color: settings.colors.colorThumblr}}
+            style={{fontSize: 22, color: '#fff'}}
           />
+          <Text
+            style={{
+              color: '#fff',
+              marginTop: 5,
+              fontSize: 12,
+            }}>
+            Xóa
+          </Text>
         </TouchableOpacity>
       )}
     </TouchableOpacity>

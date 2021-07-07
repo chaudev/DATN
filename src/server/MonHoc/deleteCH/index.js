@@ -21,6 +21,8 @@ const deleteCH = async MaCH => {
     })
     .catch(error => console.log('error', error));
 
+  console.log('deleteCH: ', res);
+
   return res;
 };
 
