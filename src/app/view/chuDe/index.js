@@ -8,12 +8,18 @@ import {EditQuest} from './cauHoi/infoQuest/editQuest';
 import {EditAnswer} from './cauHoi/infoQuest/editQuest/editAnswer';
 import {AddExercise} from './cauHoi/addExercise';
 import {AddAnswer} from './cauHoi/addExercise/addAnswer';
+import {MonHoc} from './listMonHoc';
 
 const Stack = createStackNavigator();
 
 function ChuDeNav() {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name={AppRouter.MONHOC}
+        options={{title: AppRouter.MONHOC, headerShown: false}}
+        component={MonHoc}
+      />
       <Stack.Screen
         name={AppRouter.LISTCD}
         options={{headerShown: false}}

@@ -24,4 +24,7 @@ export const AppRouter = {
   USER: 'USER',
   LISTCD: 'LISTCHUDE',
   QUESTION: 'QUESTION',
+  LISTLHP: 'LISTLHP',
+  ADDQUEST: 'ADDQUEST',
+  MONHOC: 'MONHOC',
 };

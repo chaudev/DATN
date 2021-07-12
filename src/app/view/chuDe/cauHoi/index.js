@@ -23,6 +23,7 @@ export const CauHoi = ({params}) => {
   const focus = useIsFocused();
   const route = useRoute();
   const MaCD = route.params.item.MaCD;
+  const MonHoc = route.params.monHoc;
   const user = route.params.user;
 
   const [data, setData] = useState('');
@@ -42,6 +43,7 @@ export const CauHoi = ({params}) => {
   // Vừa focus vào là gọi refesh để lấy data
   useEffect(() => {
     if (focus) {
+      console.log('route.params: ', route.params);
       onRefresh(MaCD);
     }
   }, [focus]);
@@ -95,21 +97,30 @@ export const CauHoi = ({params}) => {
         <>
           {data !== '' && data !== undefined && data.length !== 0 ? (
             <View style={{backgroundColor: '#fff', flex: 1}}>
+              <View style={{borderBottomWidth: 0.5, borderColor: '#CFD8DC'}}>
+                <Text
+                  style={{
+                    marginLeft: '3%',
+                    color: settings.colors.colorThumblr,
+                    fontWeight: 'bold',
+                    marginBottom: 5,
+                    fontSize: 16,
+                    marginTop: 10,
+                  }}>
+                  CHỦ ĐỀ: {route.params.item.TenCD}
+                </Text>
+                <Text
+                  style={{
+                    marginLeft: '3%',
+                    color: settings.colors.colorThumblr,
+                    fontWeight: 'bold',
+                    marginBottom: 10,
+                    fontSize: 14,
+                  }}>
+                  MÔN HỌC: {MonHoc.TenMonHoc}
+                </Text>
+              </View>
               <FlatList
-                ListHeaderComponent={
-                  <View>
-                    <Text
-                      style={{
-                        marginLeft: '3%',
-                        color: settings.colors.colorThumblr,
-                        fontWeight: 'bold',
-                        marginBottom: 5,
-                        fontSize: 14,
-                      }}>
-                      {route.params.item.TenCD}
-                    </Text>
-                  </View>
-                }
                 data={data}
                 refreshControl={
                   <RefreshControl

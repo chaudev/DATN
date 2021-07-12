@@ -7,6 +7,7 @@ import {ListExercise} from '../../view/course/listExercise';
 import {TabHeader} from '../../view/course/Tab';
 import {ChuDeNav} from '../../view/chuDe';
 import {User} from '../../view/user';
+import {LopHocPhanNav} from '../../view/lopHocPhan';
 
 const Stack = createStackNavigator();
 
@@ -42,6 +43,11 @@ const HomeNavigator = () => {
         name={AppRouter.LISTCD}
         component={ChuDeNav}
         options={{title: AppRouter.LISTCD, headerShown: false}}
+      />
+      <Stack.Screen
+        name={AppRouter.LISTLHP}
+        component={LopHocPhanNav}
+        options={{title: AppRouter.LISTLHP, headerShown: false}}
       />
     </Stack.Navigator>
   );

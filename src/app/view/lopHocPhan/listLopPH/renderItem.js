@@ -1,17 +1,8 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Dimensions,
-  ScrollView,
-} from 'react-native';
-import {Icon, Fab} from 'native-base';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {settings} from '../../../config';
 
-const {width: dW, height: dH} = Dimensions.get;
-
-export const RenderItem = ({item, data, handle, del, user}) => {
+export const RenderItem = ({item, data, handle, del}) => {
   const getMarginTop = () => {
     if (item.MaCD === data[0].MaCD) {
       return 10;
@@ -21,10 +12,13 @@ export const RenderItem = ({item, data, handle, del, user}) => {
   };
 
   const marginBottom = () => {
-    if (item.MaCD === data[data.length - 1].MaCD) {
+    if (
+      item.MaLopHP === data[data.length - 1].MaLopHP ||
+      item.MaLopHP === data[data.length - 2].MaLopHP
+    ) {
       return 100;
     } else {
-      return 15;
+      return 5;
     }
   };
 
@@ -43,40 +37,67 @@ export const RenderItem = ({item, data, handle, del, user}) => {
         pressItem();
       }}
       style={{
+        width: '45.5%',
+        marginLeft: '3%',
         marginTop: getMarginTop(),
-        marginHorizontal: '3%',
         marginBottom: marginBottom(),
         borderRadius: 10,
         backgroundColor: '#fff',
-        borderWidth: 1,
+        // borderWidth: 1,
         borderColor: settings.colors.colorThumblr,
-        height: 75,
         flexDirection: 'row',
-        alignItems: 'center',
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        backgroundColor: '#F5F5F5',
       }}>
-      <View style={{marginLeft: 15, flex: 1}}>
+      <View style={{flex: 1}}>
+        <Text
+          numberOfLines={3}
+          style={{
+            color: settings.colors.colorThumblr,
+            width: '100%',
+            fontSize: 14,
+            fontWeight: 'bold',
+            marginBottom: 10,
+          }}>
+          {item.TenLopHP}
+        </Text>
+
         <Text
           numberOfLines={1}
           style={{
             color: settings.colors.colorThumblr,
             width: '100%',
-            fontSize: 16,
-            fontWeight: 'bold',
+            fontSize: 12,
             marginBottom: 10,
           }}>
-          Chủ đề: {item.TenCD}
+          Môn: {item.TenMonHoc}
         </Text>
 
         <Text
+          numberOfLines={1}
           style={{
-            fontSize: 14,
-            color: '#000',
+            color: settings.colors.colorThumblr,
+            fontSize: 12,
+            width: '100%',
+            marginBottom: 10,
           }}>
-          Số tín chỉ: {item.SoTinChi} - Số tiết: {item.SoTiet}
+          Lớp: {item.TenLop}
+        </Text>
+
+        <Text
+          numberOfLines={1}
+          style={{
+            color: settings.colors.colorThumblr,
+            fontSize: 12,
+            width: '100%',
+            marginBottom: 10,
+          }}>
+          Số lượng học sinh: {item.Sum}
         </Text>
       </View>
 
-      {user[0]?.isAdmin !== undefined && (
+      {/* {user[0]?.isAdmin !== undefined && (
         <TouchableOpacity
           onPress={() => {
             pressDelete();
@@ -107,7 +128,7 @@ export const RenderItem = ({item, data, handle, del, user}) => {
             Xóa
           </Text>
         </TouchableOpacity>
-      )}
+      )} */}
     </TouchableOpacity>
   );
 };

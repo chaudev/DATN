@@ -16,37 +16,47 @@ import {Icon, Fab, Picker} from 'native-base';
 import {AppRouter} from '../../../navigation/AppRouter';
 import {Header} from '../../../components/header';
 import {RenderItem} from './renderItem';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import {getCD} from '../../../../server/ChuDe/getCD';
-import {createCD} from '../../../../server/ChuDe/createCD';
+import {useNavigation} from '@react-navigation/native';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import {getLPH} from '../../../../server/LopHP/getLHP';
+import {createLPH} from '../../../../server/LopHP/createLHP';
 import {deleteCD} from '../../../../server/ChuDe/deleteCD';
 import {getMH} from '../../../../server/MonHoc/getMH';
+import {getLop} from '../../../../server/Lop/getLop/index.js';
 
 const {width: dW, height: dH} = Dimensions.get('window');
 
-export const ListChuDe = () => {
+export const ListLopHP = () => {
   const nav = useNavigation();
-  const route = useRoute();
-  const MonHoc = route.params.item;
-  const user = route.params.user;
-
   const [data, setData] = useState('');
+  const [listMonHoc, setListMonHoc] = useState('');
+  const [listLopHoc, setListLopHoc] = useState('');
   const [loading, setLoading] = useState(true);
   const [resPOST, setResPOST] = useState('');
   const [showModal, setModal] = useState(false);
   const [tenCD, setTenCD] = useState('');
   const [monHoc, setMonHoc] = useState('Chọn môn học');
-  const [listMonHoc, setListMonHoc] = useState('');
+  const [lopHoc, setLopHoc] = useState('Chọn lớp');
+  const [user, setUser] = useState('');
   const [showFilter, setShowFilter] = useState(false);
   const [filter, setFilter] = useState(0);
 
   // Lấy thông tin tài khoản đang đăng nhập vs danh sách môn học
   // Bất đồng bộ ---
   useEffect(() => {
-    console.log('user: ', user);
-    getMonHoc();
-    getData();
+    getAccount();
   }, []);
+
+  useEffect(() => {
+    if (user !== '') {
+      console.log('user: ', user);
+      getMonHoc();
+      getData();
+      getLopHoc();
+    }
+  }, [user]);
 
   // Khi thêm thành công thì sẽ refesh lại
   useEffect(() => {
@@ -62,11 +72,26 @@ export const ListChuDe = () => {
     }
   }, [data]);
 
+  // Khi filter thi chay
+  useEffect(() => {
+    getData(filter);
+  }, [filter]);
+
+  // Lấy thông tin tài khoản đang đăng nhập
+  const getAccount = async () => {
+    try {
+      const res = await AsyncStorage.getItem('currentUser');
+      setUser(JSON.parse(res));
+    } catch (e) {
+      // error reading value
+    }
+  };
+
   // Lấy danh sách chủ đề
   const getData = async () => {
     try {
-      const res = await getCD(user[0]?.MaGV, MonHoc.MaMH);
-      console.log('data : ', res);
+      const res = await getLPH(user[0]?.MaGV, filter);
+      console.log('Lop hoc phan : ', res);
       setData(res.data);
     } catch (error) {
       console.log(error);
@@ -84,10 +109,21 @@ export const ListChuDe = () => {
     }
   };
 
-  // Tạo môn học mới
+  // Lấy danh sách lớp học
+  const getLopHoc = async () => {
+    try {
+      const res = await getLop();
+      setListLopHoc(res.data);
+      console.log('Lop hoc: ', listLopHoc);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Tạo lớp học phần
   const postData = async () => {
     try {
-      const res = await createCD(tenCD, monHoc, user[0]?.MaGV);
+      const res = await createLPH(tenCD, user[0]?.MaGV, monHoc, lopHoc);
       setResPOST(res);
     } catch (error) {
       console.log(error);
@@ -106,10 +142,9 @@ export const ListChuDe = () => {
 
   // Nhấn vô item
   const handlePressItem = item => {
-    console.log(item);
+    console.log('handlePressItem: ', item);
     nav.navigate(AppRouter.QUESTION, {
       item: item,
-      monHoc: MonHoc,
       user: user,
     });
   };
@@ -137,9 +172,11 @@ export const ListChuDe = () => {
       {!loading ? (
         <>
           <View style={{backgroundColor: '#fff', flex: 1}}>
-            <View style={{borderBottomWidth: 0.5, borderColor: '#CFD8DC'}}>
+            <View
+              style={{flexDirection: 'row', alignItems: 'center', height: 45}}>
               <Text
                 style={{
+                  flex: 1,
                   marginLeft: '3%',
                   color: settings.colors.colorThumblr,
                   fontWeight: 'bold',
@@ -147,22 +184,57 @@ export const ListChuDe = () => {
                   fontSize: 16,
                   marginTop: 10,
                 }}>
-                DANH SÁCH CHỦ ĐỀ
+                DANH SÁCH LỚP HỌC PHẦN
               </Text>
-              <Text
+              <TouchableOpacity
+                onPress={() => {
+                  setShowFilter(!showFilter);
+                }}
                 style={{
-                  marginLeft: '3%',
-                  color: settings.colors.colorThumblr,
-                  fontWeight: 'bold',
-                  marginBottom: 10,
-                  fontSize: 14,
+                  width: 30,
+                  height: 30,
+                  marginRight: 10,
+                  borderRadius: 500,
+                  backgroundColor: settings.colors.colorMain,
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}>
-                MÔN HỌC: {MonHoc.TenMonHoc}
-              </Text>
+                <Icon
+                  type="FontAwesome"
+                  name="filter"
+                  style={{fontSize: 18, color: '#fff', marginTop: 2}}
+                />
+              </TouchableOpacity>
+              <View
+                style={{
+                  width: 40,
+                  height: 40,
+                  marginRight: 10,
+                  marginLeft: -50,
+                }}>
+                {listMonHoc !== '' && (
+                  <Picker
+                    selectedValue={0}
+                    mode="dialog"
+                    textStyle={{opacity: 0}}
+                    style={{height: 45, width: 50, opacity: 0}}
+                    onValueChange={(itemValue, itemIndex) => {
+                      console.log(itemValue);
+                      setFilter(itemValue);
+                    }}>
+                    <Picker.Item label="Tất cả" value={'0'} />
+                    {listMonHoc?.map(i => (
+                      <Picker.Item label={i.TenMonHoc} value={i.MaMH} />
+                    ))}
+                  </Picker>
+                )}
+              </View>
             </View>
 
             <FlatList
               data={data}
+              horizontal={false}
+              numColumns={2}
               showsVerticalScrollIndicator={false}
               renderItem={({item}) => (
                 <RenderItem
@@ -173,8 +245,8 @@ export const ListChuDe = () => {
                   user={user}
                 />
               )}
-              keyExtractor={item => item.MaCD}
-              style={{flex: 1, backgroundColor: '#fff'}}
+              keyExtractor={item => item.MaLopHP}
+              style={{flex: 1, backgroundColor: '#fff', marginTop: -5}}
             />
           </View>
 
@@ -238,7 +310,7 @@ export const ListChuDe = () => {
               style={{
                 width: '90%',
                 backgroundColor: '#fff',
-                height: 280,
+                height: 355,
                 borderRadius: 12,
               }}>
               <View
@@ -256,7 +328,7 @@ export const ListChuDe = () => {
                     fontWeight: 'bold',
                     flex: 1,
                   }}>
-                  THÊM CHỦ ĐỀ
+                  THÊM LỚP HỌC PHẦN
                 </Text>
                 <TouchableOpacity
                   onPress={() => {
@@ -283,7 +355,7 @@ export const ListChuDe = () => {
                   color: settings.colors.colorGreen,
                   marginLeft: 10,
                 }}>
-                Tên môn học
+                Tên lớp học phần
               </Text>
               <View
                 style={{
@@ -295,7 +367,7 @@ export const ListChuDe = () => {
                   borderRadius: 12,
                 }}>
                 <TextInput
-                  placeholder="Tên chủ đề"
+                  placeholder="Tên lớp học phần"
                   placeholderTextColor="#8a817c"
                   value={tenCD}
                   onChangeText={t => {
@@ -306,6 +378,7 @@ export const ListChuDe = () => {
                     marginHorizontal: 10,
                     marginVertical: 2,
                     color: '#000',
+                    fontSize: 16,
                   }}
                 />
               </View>
@@ -315,7 +388,7 @@ export const ListChuDe = () => {
                   color: settings.colors.colorGreen,
                   marginLeft: 10,
                 }}>
-                Số tín chỉ
+                Chọn môn học
               </Text>
 
               <View
@@ -353,6 +426,50 @@ export const ListChuDe = () => {
                 )}
               </View>
 
+              <Text
+                style={{
+                  marginTop: 10,
+                  color: settings.colors.colorGreen,
+                  marginLeft: 10,
+                }}>
+                Chọn lớp
+              </Text>
+
+              <View
+                style={{
+                  marginTop: 5,
+                  marginHorizontal: 10,
+                  borderWidth: 1,
+                  borderColor: settings.colors.colorBoderDark,
+                  height: 45,
+                  borderRadius: 12,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}>
+                <Text
+                  style={{
+                    height: 20,
+                    marginLeft: 10,
+                    color: lopHoc === 'Chọn lớp' ? '#8a817c' : '#000',
+                  }}>
+                  {lopHoc === 'Chọn lớp' ? lopHoc : ''}
+                </Text>
+                {listLopHoc !== '' && (
+                  <Picker
+                    selectedValue={lopHoc}
+                    mode="dialog"
+                    style={{height: 45, width: dW - 65, marginLeft: -15}}
+                    onValueChange={(itemValue, itemIndex) => {
+                      console.log('cac');
+                      setLopHoc(itemValue);
+                    }}>
+                    {listLopHoc?.map(i => (
+                      <Picker.Item label={i.TenLop} value={i.MaLop} />
+                    ))}
+                  </Picker>
+                )}
+              </View>
+
               <View style={{height: 10}} />
 
               <TouchableOpacity
@@ -370,7 +487,7 @@ export const ListChuDe = () => {
                   justifyContent: 'center',
                 }}>
                 <Text style={{color: '#ffF', fontSize: 14, fontWeight: 'bold'}}>
-                  THÊM CHỦ ĐỀ
+                  THÊM LỚP HỌC PHẦN
                 </Text>
               </TouchableOpacity>
             </View>

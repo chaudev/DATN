@@ -76,6 +76,7 @@ export const HomeScreen = ({navigation}) => {
     extrapolate: 'clamp',
   });
 
+  // ------ nhấn item trên header
   const HeaderHandle = value => {
     console.log('HeaderHandle: ', value);
     if (value === 'Môn học') {
@@ -90,6 +91,10 @@ export const HomeScreen = ({navigation}) => {
 
     if (value === 'Chủ đề') {
       nav.navigate(AppRouter.LISTCD);
+    }
+
+    if (value === 'Lớp học phần') {
+      nav.navigate(AppRouter.LISTLHP);
     }
   };
 
