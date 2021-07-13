@@ -1,20 +1,20 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Dimensions} from 'react-native';
 import {Icon} from 'native-base';
-import {settings} from '../../../config';
+import {settings} from '../../../../config';
 
 export const RenderItem = ({item, data, handle, handleDelete}) => {
   const getMarginTop = () => {
-    if (item?.id === data[0]?.id) {
-      return 5;
-    } else {
+    if (item?.CauHoi === data[0]?.CauHoi) {
       return 0;
+    } else {
+      return 5;
     }
   };
 
   const marginBottom = () => {
-    if (item?.MaBaiKT === data[data.length - 1]?.MaBaiKT) {
-      return 10;
+    if (item?.CauHoi === data[data.length - 1]?.CauHoi) {
+      return 70;
     } else {
       return 5;
     }
@@ -84,10 +84,10 @@ export const RenderItem = ({item, data, handle, handleDelete}) => {
 
       <View style={{flex: 1}}>
         <Text numberOfLines={1} style={{width: '100%', fontWeight: 'bold'}}>
-          {item?.TenBaiKT}
+          Câu hỏi: {item?.CauHoi}
         </Text>
         <Text numberOfLines={1} style={{width: '100%', fontSize: 12}}>
-          Ngày: {getDate(item?.Ngay)}
+          Chủ đề: {item?.TenCD}
         </Text>
         {/* <Text numberOfLines={1} style={{width: '100%', fontSize: 12}}>
           Thời gian: {item?.ThoiGianLam}

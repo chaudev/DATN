@@ -37,8 +37,6 @@ export const ListChuDe = () => {
   const [tenCD, setTenCD] = useState('');
   const [monHoc, setMonHoc] = useState('Chọn môn học');
   const [listMonHoc, setListMonHoc] = useState('');
-  const [showFilter, setShowFilter] = useState(false);
-  const [filter, setFilter] = useState(0);
 
   // Lấy thông tin tài khoản đang đăng nhập vs danh sách môn học
   // Bất đồng bộ ---

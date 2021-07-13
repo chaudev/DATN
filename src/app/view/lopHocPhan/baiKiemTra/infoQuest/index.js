@@ -3,25 +3,29 @@ import {
   View,
   Text,
   TouchableOpacity,
-  ScrollView,
-  Alert,
-  Image,
+  FlatList,
   Modal,
   StatusBar,
   TextInput,
 } from 'react-native';
+import {useNavigation, useRoute, useIsFocused} from '@react-navigation/native';
 import {settings} from '../../../../config';
-import {Icon, Picker} from 'native-base';
+import {Icon} from 'native-base';
 import {Header} from '../../../../components/header';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import {AppRouter} from '../../../../navigation/AppRouter';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import NumericInput from 'react-native-numeric-input';
+import {AppRouter} from '../../../../navigation/AppRouter';
+import {RenderItem} from './renderItem';
+
+// API
 import {updateBaiKT} from '../../../../../server/BaiKiemTra/updateBaiKT';
+import {getCTBKT} from '../../../../../server/BaiKiemTra/getCTBKT';
+import {deleteCTBKT} from '../../../../../server/BaiKiemTra/deleteCTBKT';
 
 export const InfomationQuestion = () => {
   const nav = useNavigation();
   const route = useRoute();
+  const focused = useIsFocused();
   const item = route.params.item;
   const user = route.params.user;
 
@@ -30,27 +34,24 @@ export const InfomationQuestion = () => {
   const [ngay, setNgay] = useState(new Date(item.Ngay));
   const [thoiGian, setThoiGian] = useState(0);
   const [datePicker, setDatePicker] = useState(false);
+  const [questions, setQuestions] = useState('');
 
-  const [refreshing, setRefreshing] = React.useState(false);
+  // Modal chi tiết câu hỏi
+  const [showDetails, setShowDetails] = useState(false);
+  const [details, setDetails] = useState('');
 
-  // Kéo xuống để reload
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(500).then(() => setRefreshing(false));
-  }, []);
-
-  const wait = timeout => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  };
-
+  // Focus vô thì chạy
   useEffect(() => {
-    console.log('params: ', route.params);
-    timeToNumber(item.ThoiGianLam);
-  }, []);
+    if (focused) {
+      timeToNumber(item.ThoiGianLam);
+      getQuestion(route.params.item.MaBaiKT);
+    }
+  }, [focused]);
 
+  // Update bài kiểm tra (gọi api)
   const editBaiKT = async () => {
     try {
-      const res = await updateBaiKT(
+      await updateBaiKT(
         item.MaBaiKT,
         tenBaiKT,
         getDate(ngay),
@@ -63,15 +64,32 @@ export const InfomationQuestion = () => {
     }
   };
 
-  const edit = () => {
-    setModal(true);
-    // nav.navigate(AppRouter.EditQuest, {
-    //   item: item,
-    //   user: user,
-    // });
+  // Gọi api lấy danh sách câu hỏi theo mã môn học
+  const getQuestion = async data => {
+    try {
+      const res = await getCTBKT(data);
+      setQuestions(res);
+    } catch (error) {
+      //
+    }
   };
 
-  // vậy đó
+  // Gọi api xóa câu hỏi
+  const deleteCauHoi = async data => {
+    try {
+      const res = await deleteCTBKT(route.params.item.MaBaiKT, data);
+      getQuestion(route.params.item.MaBaiKT);
+    } catch (error) {
+      //
+    }
+  };
+
+  // Nhấn nút sửa
+  const edit = () => {
+    setModal(true);
+  };
+
+  // Convert 1 => 01
   const getNum = num => {
     return num < 10 ? '0' + num : num;
   };
@@ -100,7 +118,7 @@ export const InfomationQuestion = () => {
     );
   };
 
-  // num to time
+  // Convert number to time
   const minToTime = n => {
     var num = n;
     var hours = num / 60;
@@ -110,13 +128,29 @@ export const InfomationQuestion = () => {
     return getNum(rhours) + ':' + getNum(rminutes) + ':' + '00';
   };
 
-  //
+  // Convert time to number
   const timeToNumber = time => {
-    console.log(time);
     const num = parseInt(time[0] + time[1]) * 60 + parseInt(time[3] + time[4]);
     setThoiGian(parseInt(num));
   };
 
+  // Nhấn nút delete trong item
+  const deleteQuest = x => {
+    deleteCauHoi(x?.MaCH);
+  };
+
+  // Nhấn vô item
+  const handlePressItem = a => {
+    setDetails(a);
+    setShowDetails(true);
+  };
+
+  // Nhấn nút bắt đầu
+  const handleStart = () => {
+    console.log('handleStart');
+  };
+
+  // Render screen
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <Header user={user} />
@@ -129,6 +163,7 @@ export const InfomationQuestion = () => {
               flexDirection: 'row',
               alignItems: 'center',
               marginTop: 5,
+              height: 35,
             }}>
             <Icon
               type="MaterialCommunityIcons"
@@ -145,9 +180,34 @@ export const InfomationQuestion = () => {
                 fontSize: 16,
                 fontWeight: 'bold',
                 marginHorizontal: 10,
+                flex: 1,
               }}>
               CHI TIẾT BÀI KIỂM TRA
             </Text>
+            <TouchableOpacity
+              onPress={() => {
+                handleStart();
+              }}
+              activeOpacity={0.7}
+              style={{
+                height: 30,
+                width: 74,
+                backgroundColor: settings.colors.colorGreen,
+                marginRight: 5,
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 500,
+              }}>
+              <Text
+                style={{
+                  color: '#fff',
+                  fontWeight: 'bold',
+                  fontSize: 14,
+                  textTransform: 'uppercase',
+                }}>
+                Bắt đầu
+              </Text>
+            </TouchableOpacity>
           </View>
           <View
             style={{
@@ -226,17 +286,41 @@ export const InfomationQuestion = () => {
           </View>
           <View
             style={{flexDirection: 'row', marginLeft: 10, marginVertical: 5}}>
-            <Text style={{fontSize: 14, color: settings.colors.colorThumblr}}>
-              Số câu hỏi: xxx
+            <Text
+              style={{
+                fontSize: 14,
+                color: settings.colors.colorThumblr,
+                fontWeight: 'bold',
+              }}>
+              Số câu hỏi: {questions?.SoLuong}
             </Text>
           </View>
           <View
-            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <Text style={{color: 'red', fontWeight: 'bold', fontSize: 18}}>
-              DANH SÁCH CÂU HỎI
-            </Text>
+            style={{
+              flex: 1,
+            }}>
+            <FlatList
+              data={questions.data}
+              showsVerticalScrollIndicator={false}
+              renderItem={({item}) => (
+                <RenderItem
+                  item={item}
+                  data={questions.data}
+                  handle={handlePressItem}
+                  handleDelete={deleteQuest}
+                />
+              )}
+              keyExtractor={item => item.CauHoi}
+              style={{flex: 1, backgroundColor: '#fff'}}
+            />
           </View>
-          <View style={{flexDirection: 'row'}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              height: 50,
+              paddingBottom: 5,
+              marginTop: -55,
+            }}>
             <TouchableOpacity
               onPress={() => {
                 nav.navigate(AppRouter.ADDQUEST, {
@@ -451,7 +535,6 @@ export const InfomationQuestion = () => {
                 <NumericInput
                   value={thoiGian}
                   onChange={value => {
-                    console.log(value);
                     setThoiGian(value);
                   }}
                   minValue={0}
@@ -499,6 +582,414 @@ export const InfomationQuestion = () => {
           <Text
             onPress={() => {
               setModal(false);
+            }}
+            style={{flex: 1}}
+          />
+        </View>
+      </Modal>
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={showDetails}
+        onRequestClose={() => {
+          setShowDetails(false);
+        }}>
+        <StatusBar
+          barStyle={'light-content'}
+          backgroundColor="rgba(0,0,0,1)"
+          hidden={false}
+          animated={true}
+        />
+        <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.5)'}}>
+          <Text
+            onPress={() => {
+              setShowDetails(false);
+            }}
+            style={{flex: 1}}
+          />
+          <View
+            style={{width: '100%', flexDirection: 'row', alignItems: 'center'}}>
+            <Text
+              onPress={() => {
+                setShowDetails(false);
+              }}
+              style={{flex: 1}}
+            />
+            <View
+              style={{
+                width: '90%',
+                backgroundColor: '#fff',
+                height: 275,
+                borderRadius: 12,
+              }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingHorizontal: 10,
+                  width: '100%',
+                  paddingTop: 10,
+                  paddingBottom: 9,
+                  backgroundColor: settings.colors.colorGreen,
+                  borderTopStartRadius: 12,
+                  borderTopEndRadius: 12,
+                }}>
+                <Icon
+                  type="Ionicons"
+                  name="book"
+                  style={{
+                    fontSize: 20,
+                    color: '#fff',
+                    marginRight: 10,
+                    marginBottom: -2,
+                  }}
+                />
+                <Text
+                  style={{
+                    color: '#fff',
+                    fontSize: 16,
+                    fontWeight: 'bold',
+                    flex: 1,
+                  }}>
+                  CHI TIẾT CÂU HỎI
+                </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    setShowDetails(false);
+                  }}
+                  style={{
+                    height: '100%',
+                    paddingLeft: 20,
+                  }}>
+                  <Icon
+                    type="Ionicons"
+                    name="close"
+                    style={{
+                      fontSize: 24,
+                      color: '#fff',
+                      marginBottom: -2,
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
+
+              <View style={{flexDirection: 'row', marginTop: 10}}>
+                <View
+                  style={{
+                    width: 30,
+                    alignItems: 'flex-end',
+                  }}>
+                  <View
+                    style={{
+                      width: 18,
+                      height: 18,
+                      borderRadius: 500,
+                      backgroundColor: '#d11149',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 'bold',
+                        color: '#fff',
+                      }}>
+                      *.*
+                    </Text>
+                  </View>
+                </View>
+                <Text
+                  style={{
+                    color: settings.colors.colorThumblr,
+                    marginLeft: 10,
+                    fontWeight: 'bold',
+                  }}>
+                  Chủ đề:{' '}
+                </Text>
+                <Text
+                  numberOfLines={1}
+                  style={{
+                    width: '75%',
+                    color: settings.colors.colorThumblr,
+                  }}>
+                  {details.TenCD}
+                </Text>
+              </View>
+
+              <View style={{flexDirection: 'row', marginTop: 10}}>
+                <View
+                  style={{
+                    width: 30,
+                    alignItems: 'flex-end',
+                  }}>
+                  <View
+                    style={{
+                      width: 18,
+                      height: 18,
+                      borderRadius: 500,
+                      backgroundColor: '#a47e1b',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        marginTop: -1,
+                        fontWeight: 'bold',
+                        color: '#fff',
+                      }}>
+                      ?
+                    </Text>
+                  </View>
+                </View>
+                <Text
+                  style={{
+                    color: settings.colors.colorThumblr,
+                    marginLeft: 10,
+                    fontWeight: 'bold',
+                  }}>
+                  Câu hỏi:{' '}
+                </Text>
+                <Text
+                  numberOfLines={2}
+                  style={{
+                    width: '75%',
+                    color: settings.colors.colorThumblr,
+                  }}>
+                  {details.CauHoi}
+                </Text>
+              </View>
+
+              <View style={{flexDirection: 'row', marginTop: 10}}>
+                <View
+                  style={{
+                    width: 30,
+                    alignItems: 'flex-end',
+                  }}>
+                  <View
+                    style={{
+                      width: 18,
+                      height: 18,
+                      borderRadius: 500,
+                      backgroundColor: settings.colors.colorFacebook,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        marginTop: -2,
+                        fontWeight: 'bold',
+                        color: '#fff',
+                      }}>
+                      A
+                    </Text>
+                  </View>
+                </View>
+                <Text
+                  style={{
+                    color: settings.colors.colorThumblr,
+                    marginLeft: 10,
+                    fontWeight: 'bold',
+                  }}>
+                  Câu A:{' '}
+                </Text>
+                <Text
+                  numberOfLines={1}
+                  style={{
+                    width: '75%',
+                    color: settings.colors.colorThumblr,
+                  }}>
+                  {details.A}
+                </Text>
+              </View>
+
+              <View style={{flexDirection: 'row', marginTop: 10}}>
+                <View
+                  style={{
+                    width: 30,
+                    alignItems: 'flex-end',
+                  }}>
+                  <View
+                    style={{
+                      width: 18,
+                      height: 18,
+                      borderRadius: 500,
+                      backgroundColor: settings.colors.colorPinteres,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        marginTop: -1,
+                        fontWeight: 'bold',
+                        color: '#fff',
+                      }}>
+                      B
+                    </Text>
+                  </View>
+                </View>
+                <Text
+                  style={{
+                    color: settings.colors.colorThumblr,
+                    marginLeft: 10,
+                    fontWeight: 'bold',
+                  }}>
+                  Câu B:{' '}
+                </Text>
+                <Text
+                  numberOfLines={1}
+                  style={{
+                    width: '75%',
+                    color: settings.colors.colorThumblr,
+                  }}>
+                  {details.B}
+                </Text>
+              </View>
+
+              <View style={{flexDirection: 'row', marginTop: 10}}>
+                <View
+                  style={{
+                    width: 30,
+                    alignItems: 'flex-end',
+                  }}>
+                  <View
+                    style={{
+                      width: 18,
+                      height: 18,
+                      borderRadius: 500,
+                      backgroundColor: '#89b0ae',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        marginTop: -1,
+                        fontWeight: 'bold',
+                        color: '#fff',
+                      }}>
+                      C
+                    </Text>
+                  </View>
+                </View>
+                <Text
+                  style={{
+                    color: settings.colors.colorThumblr,
+                    marginLeft: 10,
+                    fontWeight: 'bold',
+                  }}>
+                  Câu C:{' '}
+                </Text>
+                <Text
+                  numberOfLines={1}
+                  style={{
+                    width: '75%',
+                    color: settings.colors.colorThumblr,
+                  }}>
+                  {details.C}
+                </Text>
+              </View>
+
+              <View style={{flexDirection: 'row', marginTop: 10}}>
+                <View
+                  style={{
+                    width: 30,
+                    alignItems: 'flex-end',
+                  }}>
+                  <View
+                    style={{
+                      width: 18,
+                      height: 18,
+                      borderRadius: 500,
+                      backgroundColor: '#7b2cbf',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        marginTop: -1,
+                        fontWeight: 'bold',
+                        color: '#fff',
+                      }}>
+                      D
+                    </Text>
+                  </View>
+                </View>
+                <Text
+                  style={{
+                    color: settings.colors.colorThumblr,
+                    marginLeft: 10,
+                    fontWeight: 'bold',
+                  }}>
+                  Câu D:{' '}
+                </Text>
+                <Text
+                  numberOfLines={1}
+                  style={{
+                    width: '75%',
+                    color: settings.colors.colorThumblr,
+                  }}>
+                  {details.D}
+                </Text>
+              </View>
+
+              <View style={{flexDirection: 'row', marginTop: 10}}>
+                <View
+                  style={{
+                    width: 30,
+                    alignItems: 'flex-end',
+                  }}>
+                  <View
+                    style={{
+                      width: 18,
+                      height: 18,
+                      borderRadius: 500,
+                      backgroundColor: '#50514f',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        fontWeight: 'bold',
+                        color: '#fff',
+                      }}>
+                      T
+                    </Text>
+                  </View>
+                </View>
+                <Text
+                  style={{
+                    color: settings.colors.colorThumblr,
+                    marginLeft: 10,
+                    fontWeight: 'bold',
+                  }}>
+                  Đáp án:{' '}
+                </Text>
+                <Text
+                  numberOfLines={1}
+                  style={{
+                    width: '75%',
+                    color: settings.colors.colorThumblr,
+                  }}>
+                  {details.DapAn}
+                </Text>
+              </View>
+            </View>
+            <Text
+              onPress={() => {
+                setShowDetails(false);
+              }}
+              style={{flex: 1}}
+            />
+          </View>
+          <Text
+            onPress={() => {
+              setShowDetails(false);
             }}
             style={{flex: 1}}
           />

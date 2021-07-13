@@ -11,17 +11,19 @@ import {
   TextInput,
 } from 'react-native';
 import {settings} from '../../../config';
-import {Icon, Picker} from 'native-base';
+import {Icon} from 'native-base';
 import {RenderItem} from './renderItem';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {AppRouter} from '../../../navigation/AppRouter';
 import {useIsFocused} from '@react-navigation/native';
-import {getBaiKiemTraGV} from '../../../../server/BaiKiemTra/getBaiKiemTraGV';
-import {createBaiKT} from '../../../../server/BaiKiemTra/createBaiKT';
-import {deleteBaiKT} from '../../../../server/BaiKiemTra/deleteBaiKT';
 import {Header} from '../../../components/header';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import NumericInput from 'react-native-numeric-input';
+
+// API
+import {getBaiKiemTraGV} from '../../../../server/BaiKiemTra/getBaiKiemTraGV';
+import {createBaiKT} from '../../../../server/BaiKiemTra/createBaiKT';
+import {deleteBaiKT} from '../../../../server/BaiKiemTra/deleteBaiKT';
 
 export const BaiKiemTra = ({params}) => {
   const nav = useNavigation();
@@ -61,19 +63,18 @@ export const BaiKiemTra = ({params}) => {
 
   // Khi lấy data xong khi không load nữa
   useEffect(() => {
-    // setThoiGian('20:50:27');
     if (data !== '') {
       setLoading(false);
     }
   }, [data]);
 
-  // Gọi api lấy danh sách câu hỏi theo mã môn học
+  // Gọi api lấy thông tin bài kiểm tra
   const getData = async data => {
     try {
       const res = await getBaiKiemTraGV(user[0].MaGV, data);
       setData(res.data);
     } catch (error) {
-      console.log(error);
+      //
     }
   };
 
@@ -83,7 +84,7 @@ export const BaiKiemTra = ({params}) => {
       const res = await deleteBaiKT(data);
       onRefresh();
     } catch (error) {
-      console.log(error);
+      //
     }
   };
 
@@ -114,7 +115,7 @@ export const BaiKiemTra = ({params}) => {
       );
       onRefresh();
     } catch (error) {
-      console.log(error);
+      //
     }
   };
 
@@ -167,6 +168,7 @@ export const BaiKiemTra = ({params}) => {
     return getNum(rhours) + ':' + getNum(rminutes) + ':' + '00';
   };
 
+  // Render screen
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <StatusBar barStyle="dark-content" hidden={true} />
@@ -174,6 +176,7 @@ export const BaiKiemTra = ({params}) => {
 
       <View>
         <Text
+          numberOfLines={1}
           style={{
             marginLeft: '3%',
             color: settings.colors.colorThumblr,
@@ -183,7 +186,20 @@ export const BaiKiemTra = ({params}) => {
             zIndex: 999,
             marginTop: 10,
           }}>
-          {route.params.item.TenLopHP}
+          Lớp học phần: {route.params.item.TenLopHP}
+        </Text>
+        <Text
+          numberOfLines={1}
+          style={{
+            marginLeft: '3%',
+            color: settings.colors.colorThumblr,
+            fontWeight: 'bold',
+            marginBottom: -5,
+            fontSize: 16,
+            zIndex: 999,
+            marginTop: 10,
+          }}>
+          DANH SÁCH BÀI KIỂM TRA
         </Text>
       </View>
 
@@ -234,11 +250,6 @@ export const BaiKiemTra = ({params}) => {
             }}>
             <TouchableOpacity
               onPress={() => {
-                // nav.navigate(AppRouter.AddExercise, {
-                //   item: route.params,
-                //   user: route.params.user,
-                // });
-
                 setModal(true);
               }}
               activeOpacity={0.5}

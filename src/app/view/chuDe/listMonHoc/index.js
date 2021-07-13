@@ -13,7 +13,7 @@ import {Header} from '../../../components/header';
 import {RenderItem} from './renderItem';
 import {useNavigation} from '@react-navigation/native';
 import {getMH} from '../../../../server/MonHoc/getMH';
-
+import Toast from 'react-native-simple-toast';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const MonHoc = () => {
@@ -22,8 +22,6 @@ export const MonHoc = () => {
   const [user, setUser] = useState('');
   const [listMonHoc, setListMonHoc] = useState('');
 
-  // Lấy thông tin tài khoản đang đăng nhập vs danh sách môn học
-  // Bất đồng bộ ---
   useEffect(() => {
     getAccount();
   }, []);
@@ -39,6 +37,7 @@ export const MonHoc = () => {
   useEffect(() => {
     if (listMonHoc !== '') {
       setLoading(false);
+      Toast.show('Hãy chọn 1 môn học', Toast.SHORT);
     }
   }, [listMonHoc]);
 
@@ -57,15 +56,13 @@ export const MonHoc = () => {
     try {
       const res = await getMH();
       setListMonHoc(res.data);
-      console.log('Mon hoc: ', listMonHoc);
     } catch (error) {
-      console.log(error);
+      //
     }
   };
 
   // Nhấn vô item
   const handlePressItem = item => {
-    console.log(item);
     nav.navigate(AppRouter.LISTCD, {
       item: item,
       user: user,
@@ -92,7 +89,7 @@ export const MonHoc = () => {
                   fontSize: 16,
                   marginTop: 10,
                 }}>
-                DANH SÁCH CHỦ ĐỀ
+                DANH SÁCH MÔN HỌC
               </Text>
             </View>
 
