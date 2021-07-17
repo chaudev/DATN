@@ -7,6 +7,8 @@ import {
   FlatList,
   Image,
   StatusBar,
+  Modal,
+  TextInput,
 } from 'react-native';
 import {settings} from '../../../config';
 import {Icon} from 'native-base';
@@ -14,25 +16,38 @@ import {RenderItem} from './renderItem';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {AppRouter} from '../../../navigation/AppRouter';
 import {useIsFocused} from '@react-navigation/native';
-import {getCH} from '../../../../server/MonHoc/getCH';
-import {deleteCH} from '../../../../server/MonHoc/deleteCH';
 import {Header} from '../../../components/header';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import NumericInput from 'react-native-numeric-input';
 
-export const CauHoi = ({params}) => {
+// API
+import {getCTLopHP} from '../../../../server/LopHP/getCTLopHP';
+// import {createBaiKT} from '../../../../server/BaiKiemTra/createBaiKT';
+import {deleteSV} from '../../../../server/LopHP/deleteSV';
+
+export const SinhVien = ({}) => {
   const nav = useNavigation();
   const focus = useIsFocused();
   const route = useRoute();
-  const MaCD = route.params.item.MaCD;
-  const MonHoc = route.params.monHoc;
-  const user = route.params.user;
+  const params = route.params;
+  const LopHP = params.LopHP;
+  const user = params.user;
+
+  const [showModal, setModal] = useState(false);
+  const [tenBaiKT, setTenBaiKT] = useState('');
+  const [ngay, setNgay] = useState(new Date());
+  const [thoiGian, setThoiGian] = useState(0);
 
   const [data, setData] = useState('');
   const [refreshing, setRefreshing] = React.useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const [datePicker, setDatePicker] = useState(false);
 
   // Kéo xuống để reload
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    getData(MaCD);
+    getData();
     wait(500).then(() => setRefreshing(false));
   }, []);
   const wait = timeout => {
@@ -42,43 +57,107 @@ export const CauHoi = ({params}) => {
   // Vừa focus vào là gọi refesh để lấy data
   useEffect(() => {
     if (focus) {
-      onRefresh(MaCD);
+      onRefresh();
     }
   }, [focus]);
 
-  // Gọi api lấy danh sách câu hỏi theo mã môn học
-  const getData = async data => {
+  // Khi lấy data xong khi không load nữa
+  useEffect(() => {
+    if (data !== '') {
+      setLoading(false);
+    }
+  }, [data]);
+
+  // Gọi api lấy thông tin bài kiểm tra
+  const getData = async () => {
     try {
-      const res = await getCH(data);
+      const res = await getCTLopHP(LopHP.MaLopHP);
       setData(res.data);
     } catch (error) {
-      console.log(error);
+      //
     }
   };
 
-  // Xóa câu hỏi bằng mã câu hỏi
+  // Xóa bài kiểm tra
   const del = async data => {
     try {
-      const res = await deleteCH(data);
+      const res = await deleteSV(LopHP.MaLopHP, data);
+      console.log('res: ', res);
       onRefresh();
     } catch (error) {
-      console.log(error);
+      //
     }
   };
 
-  // Nhấn vô item để nhảy qua trang thông tin
-  const handlePressItem = item => {
+  // Nhấn vô
+  const handlePressItem = data => {
     nav.navigate(AppRouter.INFO, {
-      item: item,
+      item: data,
+      TenMH: item.TenMonHoc,
+      MaMH: item.MaMH,
       user: route.params.user,
-      MonHoc: MonHoc,
-      ChuDe: route.params.item,
     });
   };
 
   // Nhấn nút delete
   const deleteQuest = item => {
-    del(item.MaCH);
+    console.log(item);
+    del(item.MaSV);
+  };
+
+  // Gọi api tạo mới
+  const postData = async () => {
+    try {
+      const res = await createBaiKT(
+        tenBaiKT,
+        getDate(ngay),
+        user[0]?.MaGV,
+        MaLopPH,
+        minToTime(thoiGian),
+      );
+      onRefresh();
+    } catch (error) {
+      //
+    }
+  };
+
+  // vậy đó
+  const getNum = num => {
+    return num < 10 ? '0' + num : num;
+  };
+
+  // Lấy ra dạng ngay-tháng-năm
+  const getStrDate = date => {
+    const newDate = new Date(date);
+    return (
+      getNum(newDate.getDate()) +
+      '-' +
+      getNum(newDate.getMonth() + 1) +
+      '-' +
+      newDate.getFullYear()
+    );
+  };
+
+  // Lấy ra dạng năm-tháng-ngày
+  const getDate = date => {
+    const newDate = new Date(date);
+    return (
+      newDate.getFullYear() +
+      '-' +
+      getNum(newDate.getMonth() + 1) +
+      '-' +
+      getNum(newDate.getDate())
+    );
+  };
+
+  // num to time
+  const minToTime = n => {
+    var num = n;
+    var hours = num / 60;
+    var rhours = Math.floor(hours);
+    var minutes = (hours - rhours) * 60;
+    var rminutes = Math.round(minutes);
+    return getNum(rhours) + ':' + getNum(rminutes) + ':' + '00';
   };
 
   // Render screen
@@ -86,32 +165,33 @@ export const CauHoi = ({params}) => {
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <StatusBar barStyle="dark-content" hidden={true} />
       <Header user={user} />
-      <View
-        style={{
-          borderBottomWidth: 0.5,
-          borderColor: '#CFD8DC',
-          backgroundColor: '#fff',
-        }}>
+
+      <View>
         <Text
+          numberOfLines={1}
           style={{
             marginLeft: '3%',
             color: settings.colors.colorThumblr,
             fontWeight: 'bold',
-            marginBottom: 5,
-            fontSize: 16,
+            marginBottom: -5,
+            fontSize: 14,
+            zIndex: 999,
             marginTop: 10,
           }}>
-          CHỦ ĐỀ: {route.params.item.TenCD}
+          Lớp học phần: {LopHP.TenLopHP}
         </Text>
         <Text
+          numberOfLines={1}
           style={{
             marginLeft: '3%',
             color: settings.colors.colorThumblr,
             fontWeight: 'bold',
-            marginBottom: 10,
-            fontSize: 14,
+            marginBottom: -5,
+            fontSize: 16,
+            zIndex: 999,
+            marginTop: 10,
           }}>
-          MÔN HỌC: {MonHoc.TenMonHoc}
+          DANH SÁCH SINH VIÊN
         </Text>
       </View>
 
@@ -136,7 +216,7 @@ export const CauHoi = ({params}) => {
                     handleDelete={deleteQuest}
                   />
                 )}
-                keyExtractor={item => item.MaCH}
+                keyExtractor={item => item.MaBaiKT}
                 style={{flex: 1, paddingTop: 10, backgroundColor: '#fff'}}
               />
             </View>
@@ -162,10 +242,9 @@ export const CauHoi = ({params}) => {
             }}>
             <TouchableOpacity
               onPress={() => {
-                nav.navigate(AppRouter.AddExercise, {
-                  item: route.params,
-                  user: route.params.user,
-                  MonHoc: MonHoc,
+                nav.navigate(AppRouter.ADDSINHVIEN, {
+                  LopHP: LopHP,
+                  user: user,
                 });
               }}
               activeOpacity={0.5}

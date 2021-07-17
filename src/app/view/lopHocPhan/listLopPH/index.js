@@ -10,9 +10,10 @@ import {
   TextInput,
   Dimensions,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import {settings} from '../../../config';
-import {Icon, Fab, Picker} from 'native-base';
+import {Icon, Fab, Picker, Item} from 'native-base';
 import {AppRouter} from '../../../navigation/AppRouter';
 import {Header} from '../../../components/header';
 import {RenderItem} from './renderItem';
@@ -25,6 +26,7 @@ import {createLPH} from '../../../../server/LopHP/createLHP';
 import {deleteCD} from '../../../../server/ChuDe/deleteCD';
 import {getMH} from '../../../../server/MonHoc/getMH';
 import {getLop} from '../../../../server/Lop/getLop/index.js';
+import {getGiangVien} from '../../../../server/User/getGiangVien';
 
 const {width: dW, height: dH} = Dimensions.get('window');
 
@@ -37,8 +39,10 @@ export const ListLopHP = () => {
   const [resPOST, setResPOST] = useState('');
   const [showModal, setModal] = useState(false);
   const [tenCD, setTenCD] = useState('');
-  const [monHoc, setMonHoc] = useState('Chọn môn học');
-  const [lopHoc, setLopHoc] = useState('Chọn lớp');
+  const [monHoc, setMonHoc] = useState('');
+  const [teachers, setTeachers] = useState('');
+  const [lopHoc, setLopHoc] = useState('');
+  const [teach, setTeach] = useState('');
   const [user, setUser] = useState('');
   const [showFilter, setShowFilter] = useState(false);
   const [filter, setFilter] = useState(0);
@@ -55,6 +59,7 @@ export const ListLopHP = () => {
       getMonHoc();
       getData();
       getLopHoc();
+      getTeachers();
     }
   }, [user]);
 
@@ -91,8 +96,18 @@ export const ListLopHP = () => {
   const getData = async () => {
     try {
       const res = await getLPH(user[0]?.MaGV, filter);
-      console.log('Lop hoc phan : ', res);
+      console.log('res: ', res);
       setData(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Lấy danh sách giang vien
+  const getTeachers = async () => {
+    try {
+      const res = await getGiangVien();
+      await setTeachers(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -123,7 +138,7 @@ export const ListLopHP = () => {
   // Tạo lớp học phần
   const postData = async () => {
     try {
-      const res = await createLPH(tenCD, user[0]?.MaGV, monHoc, lopHoc);
+      const res = await createLPH(tenCD, teach, monHoc, lopHoc);
       setResPOST(res);
     } catch (error) {
       console.log(error);
@@ -151,17 +166,42 @@ export const ListLopHP = () => {
 
   // Nhấn nút thêm môn học
   const createChuDe = () => {
-    setModal(false);
-    postData();
+    if (tenCD.trim() === '' || tenCD === '') {
+      Alert.alert('Không thành công', 'Vui lòng nhập tên chủ đề');
+    } else {
+      if (teach === '' || tenCD === 'Chọn giảng viên') {
+        Alert.alert('Không thành công', 'Vui lòng chọn giảng viên');
+      } else {
+        if (monHoc === '' || monHoc === 'Chọn môn học') {
+          Alert.alert('Không thành công', 'Vui lòng chọn môn học');
+        } else {
+          if (lopHoc === '' || lopHoc === 'Chọn lớp') {
+            Alert.alert('Không thành công', 'Vui lòng chọn lớp');
+          } else {
+            setModal(false);
+            postData();
 
-    setMonHoc('Chọn môn học');
-    setTenCD('');
+            setMonHoc('Chọn môn học');
+            setTenCD('');
+          }
+        }
+      }
+    }
   };
 
   // Nhấn nút xóa môn học
   const del = item => {
     postDel(item?.MaCD);
     getData();
+  };
+
+  // Nhấn nút
+  const handlePressButton = item => {
+    console.log(item);
+    nav.navigate(AppRouter.SINHVIEN, {
+      LopHP: item,
+      user: user,
+    });
   };
 
   return (
@@ -243,14 +283,22 @@ export const ListLopHP = () => {
                   handle={handlePressItem}
                   del={del}
                   user={user}
+                  handlePressButton={handlePressButton}
                 />
               )}
               keyExtractor={item => item.MaLopHP}
-              style={{flex: 1, backgroundColor: '#fff', marginTop: -5}}
+              style={{
+                flex: 1,
+                backgroundColor: '#fff',
+                marginTop: -5,
+              }}
+              ListFooterComponent={
+                <View style={{width: '100%', height: 100}} />
+              }
             />
           </View>
 
-          {user[0]?.isAdmin !== undefined && (
+          {user[0]?.isAdmin !== undefined && parseInt(user[0]?.isAdmin) === 1 && (
             <Fab
               containerStyle={{}}
               style={{backgroundColor: settings.colors.colorMain}}
@@ -310,7 +358,7 @@ export const ListLopHP = () => {
               style={{
                 width: '90%',
                 backgroundColor: '#fff',
-                height: 355,
+                height: 436,
                 borderRadius: 12,
               }}>
               <View
@@ -401,15 +449,8 @@ export const ListLopHP = () => {
                   borderRadius: 12,
                   flexDirection: 'row',
                   alignItems: 'center',
+                  paddingLeft: 15,
                 }}>
-                <Text
-                  style={{
-                    height: 20,
-                    marginLeft: 10,
-                    color: monHoc === 'Chọn môn học' ? '#8a817c' : '#000',
-                  }}>
-                  {monHoc === 'Chọn môn học' ? monHoc : ''}
-                </Text>
                 {listMonHoc !== '' && (
                   <Picker
                     selectedValue={monHoc}
@@ -419,6 +460,7 @@ export const ListLopHP = () => {
                       console.log('cac');
                       setMonHoc(itemValue);
                     }}>
+                    <Picker.Item label="Chọn môn học" value="Chọn môn học" />
                     {listMonHoc?.map(i => (
                       <Picker.Item label={i.TenMonHoc} value={i.MaMH} />
                     ))}
@@ -445,15 +487,8 @@ export const ListLopHP = () => {
                   borderRadius: 12,
                   flexDirection: 'row',
                   alignItems: 'center',
+                  paddingLeft: 15,
                 }}>
-                <Text
-                  style={{
-                    height: 20,
-                    marginLeft: 10,
-                    color: lopHoc === 'Chọn lớp' ? '#8a817c' : '#000',
-                  }}>
-                  {lopHoc === 'Chọn lớp' ? lopHoc : ''}
-                </Text>
                 {listLopHoc !== '' && (
                   <Picker
                     selectedValue={lopHoc}
@@ -463,8 +498,50 @@ export const ListLopHP = () => {
                       console.log('cac');
                       setLopHoc(itemValue);
                     }}>
+                    <Picker.Item label="Chọn lớp" value="Chọn lớp" />
                     {listLopHoc?.map(i => (
                       <Picker.Item label={i.TenLop} value={i.MaLop} />
+                    ))}
+                  </Picker>
+                )}
+              </View>
+
+              <Text
+                style={{
+                  marginTop: 10,
+                  color: settings.colors.colorGreen,
+                  marginLeft: 10,
+                }}>
+                Chọn giảng viên
+              </Text>
+
+              <View
+                style={{
+                  marginTop: 5,
+                  marginHorizontal: 10,
+                  borderWidth: 1,
+                  borderColor: settings.colors.colorBoderDark,
+                  height: 45,
+                  borderRadius: 12,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingLeft: 15,
+                }}>
+                {teachers !== '' && (
+                  <Picker
+                    selectedValue={teach}
+                    mode="dialog"
+                    style={{height: 45, width: dW - 65, marginLeft: -15}}
+                    onValueChange={(itemValue, itemIndex) => {
+                      console.log('cac');
+                      setTeach(itemValue);
+                    }}>
+                    <Picker.Item
+                      label="Chọn giảng viên"
+                      value="Chọn giảng viên"
+                    />
+                    {teachers?.map(i => (
+                      <Picker.Item label={i.TenGV} value={i.MaGV} />
                     ))}
                   </Picker>
                 )}

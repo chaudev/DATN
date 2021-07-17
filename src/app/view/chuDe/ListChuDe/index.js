@@ -8,11 +8,10 @@ import {
   Image,
   Modal,
   TextInput,
-  Dimensions,
   SafeAreaView,
 } from 'react-native';
 import {settings} from '../../../config';
-import {Icon, Fab, Picker} from 'native-base';
+import {Icon, Fab} from 'native-base';
 import {AppRouter} from '../../../navigation/AppRouter';
 import {Header} from '../../../components/header';
 import {RenderItem} from './renderItem';
@@ -22,8 +21,6 @@ import {createCD} from '../../../../server/ChuDe/createCD';
 import {deleteCD} from '../../../../server/ChuDe/deleteCD';
 import {getMH} from '../../../../server/MonHoc/getMH';
 
-const {width: dW, height: dH} = Dimensions.get('window');
-
 export const ListChuDe = () => {
   const nav = useNavigation();
   const route = useRoute();
@@ -31,11 +28,10 @@ export const ListChuDe = () => {
   const user = route.params.user;
 
   const [data, setData] = useState('');
-  const [loading, setLoading] = useState(true);
   const [resPOST, setResPOST] = useState('');
   const [showModal, setModal] = useState(false);
   const [tenCD, setTenCD] = useState('');
-  const [monHoc, setMonHoc] = useState('Chọn môn học');
+  const [monHoc, setMonHoc] = useState(MonHoc.MaMH);
   const [listMonHoc, setListMonHoc] = useState('');
 
   // Lấy thông tin tài khoản đang đăng nhập vs danh sách môn học
@@ -53,13 +49,6 @@ export const ListChuDe = () => {
     }
   }, [resPOST]);
 
-  // Khi lấy data xong thì không load nữa
-  useEffect(() => {
-    if (data !== '') {
-      setLoading(false);
-    }
-  }, [data]);
-
   // Lấy danh sách chủ đề
   const getData = async () => {
     try {
@@ -71,7 +60,7 @@ export const ListChuDe = () => {
     }
   };
 
-  // Lấy danh sách môn học
+  // Lấy danh sách chủ đề
   const getMonHoc = async () => {
     try {
       const res = await getMH();
@@ -82,7 +71,7 @@ export const ListChuDe = () => {
     }
   };
 
-  // Tạo môn học mới
+  // Tạo môn chủ đề
   const postData = async () => {
     try {
       const res = await createCD(tenCD, monHoc, user[0]?.MaGV);
@@ -112,16 +101,15 @@ export const ListChuDe = () => {
     });
   };
 
-  // Nhấn nút thêm môn học
+  // Nhấn nút thêm chủ đề
   const createChuDe = () => {
     setModal(false);
     postData();
-
     setMonHoc('Chọn môn học');
     setTenCD('');
   };
 
-  // Nhấn nút xóa môn học
+  // Nhấn nút xóa chủ đề
   const del = item => {
     postDel(item?.MaCD);
     getData();
@@ -131,50 +119,66 @@ export const ListChuDe = () => {
     <SafeAreaView style={{flex: 1, backgroundColor: settings.colors.colorMain}}>
       <StatusBar barStyle="dark-content" hidden={true} />
       <Header user={user} />
+      <View
+        style={{
+          borderBottomWidth: 0.5,
+          borderColor: '#CFD8DC',
+          backgroundColor: '#fff',
+        }}>
+        <Text
+          style={{
+            marginLeft: '3%',
+            color: settings.colors.colorThumblr,
+            fontWeight: 'bold',
+            marginBottom: 5,
+            fontSize: 16,
+            marginTop: 10,
+          }}>
+          DANH SÁCH CHỦ ĐỀ
+        </Text>
+        <Text
+          style={{
+            marginLeft: '3%',
+            color: settings.colors.colorThumblr,
+            fontWeight: 'bold',
+            marginBottom: 10,
+            fontSize: 14,
+          }}>
+          MÔN HỌC: {MonHoc.TenMonHoc}
+        </Text>
+      </View>
 
-      {!loading ? (
+      {data !== '' ? (
         <>
-          <View style={{backgroundColor: '#fff', flex: 1}}>
-            <View style={{borderBottomWidth: 0.5, borderColor: '#CFD8DC'}}>
-              <Text
-                style={{
-                  marginLeft: '3%',
-                  color: settings.colors.colorThumblr,
-                  fontWeight: 'bold',
-                  marginBottom: 5,
-                  fontSize: 16,
-                  marginTop: 10,
-                }}>
-                DANH SÁCH CHỦ ĐỀ
-              </Text>
-              <Text
-                style={{
-                  marginLeft: '3%',
-                  color: settings.colors.colorThumblr,
-                  fontWeight: 'bold',
-                  marginBottom: 10,
-                  fontSize: 14,
-                }}>
-                MÔN HỌC: {MonHoc.TenMonHoc}
-              </Text>
+          {data.length !== 0 ? (
+            <View style={{backgroundColor: '#fff', flex: 1}}>
+              <FlatList
+                data={data}
+                showsVerticalScrollIndicator={false}
+                renderItem={({item}) => (
+                  <RenderItem
+                    item={item}
+                    data={data}
+                    handle={handlePressItem}
+                    del={del}
+                    user={user}
+                  />
+                )}
+                keyExtractor={item => item.MaCD}
+                style={{flex: 1, backgroundColor: '#fff'}}
+              />
             </View>
-
-            <FlatList
-              data={data}
-              showsVerticalScrollIndicator={false}
-              renderItem={({item}) => (
-                <RenderItem
-                  item={item}
-                  data={data}
-                  handle={handlePressItem}
-                  del={del}
-                  user={user}
-                />
-              )}
-              keyExtractor={item => item.MaCD}
-              style={{flex: 1, backgroundColor: '#fff'}}
-            />
-          </View>
+          ) : (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#fff',
+              }}>
+              <Text style={{fontSize: 14, color: 'red'}}>Không có chủ đề</Text>
+            </View>
+          )}
 
           {user[0]?.isAdmin !== undefined && (
             <Fab
@@ -205,6 +209,8 @@ export const ListChuDe = () => {
       )}
 
       <Modal
+        // -------------------
+        // -------------------------- SHOW MODAL
         animationType="fade"
         transparent={true}
         visible={showModal}
@@ -236,7 +242,7 @@ export const ListChuDe = () => {
               style={{
                 width: '90%',
                 backgroundColor: '#fff',
-                height: 280,
+                height: 195,
                 borderRadius: 12,
               }}>
               <View
@@ -281,7 +287,7 @@ export const ListChuDe = () => {
                   color: settings.colors.colorGreen,
                   marginLeft: 10,
                 }}>
-                Tên môn học
+                Tên chủ đề
               </Text>
               <View
                 style={{
@@ -307,51 +313,8 @@ export const ListChuDe = () => {
                   }}
                 />
               </View>
-              <Text
-                style={{
-                  marginTop: 10,
-                  color: settings.colors.colorGreen,
-                  marginLeft: 10,
-                }}>
-                Số tín chỉ
-              </Text>
 
-              <View
-                style={{
-                  marginTop: 5,
-                  marginHorizontal: 10,
-                  borderWidth: 1,
-                  borderColor: settings.colors.colorBoderDark,
-                  height: 45,
-                  borderRadius: 12,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                }}>
-                <Text
-                  style={{
-                    height: 20,
-                    marginLeft: 10,
-                    color: monHoc === 'Chọn môn học' ? '#8a817c' : '#000',
-                  }}>
-                  {monHoc === 'Chọn môn học' ? monHoc : ''}
-                </Text>
-                {listMonHoc !== '' && (
-                  <Picker
-                    selectedValue={monHoc}
-                    mode="dialog"
-                    style={{height: 45, width: dW - 65, marginLeft: -15}}
-                    onValueChange={(itemValue, itemIndex) => {
-                      console.log('cac');
-                      setMonHoc(itemValue);
-                    }}>
-                    {listMonHoc?.map(i => (
-                      <Picker.Item label={i.TenMonHoc} value={i.MaMH} />
-                    ))}
-                  </Picker>
-                )}
-              </View>
-
-              <View style={{height: 10}} />
+              <View style={{height: 5}} />
 
               <TouchableOpacity
                 onPress={() => {

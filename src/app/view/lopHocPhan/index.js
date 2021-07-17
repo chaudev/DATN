@@ -7,6 +7,8 @@ import {InfomationQuestion} from './baiKiemTra/infoQuest';
 import {EditQuest} from './baiKiemTra/infoQuest/editQuest';
 import {EditAnswer} from './baiKiemTra/infoQuest/editQuest/editAnswer';
 import {ThemCauHoi} from './baiKiemTra/addQuestion';
+import {SinhVien} from './sinhVien';
+import {ThemSinhvVien} from './sinhVien/addSinhVien';
 
 const Stack = createStackNavigator();
 
@@ -42,6 +44,16 @@ function LopHocPhanNav() {
         name={AppRouter.ADDQUEST}
         options={{title: AppRouter.AddAnswer, headerShown: false}}
         component={ThemCauHoi}
+      />
+      <Stack.Screen
+        name={AppRouter.SINHVIEN}
+        options={{title: AppRouter.SINHVIEN, headerShown: false}}
+        component={SinhVien}
+      />
+      <Stack.Screen
+        name={AppRouter.ADDSINHVIEN}
+        options={{title: AppRouter.ADDSINHVIEN, headerShown: false}}
+        component={ThemSinhvVien}
       />
     </Stack.Navigator>
   );

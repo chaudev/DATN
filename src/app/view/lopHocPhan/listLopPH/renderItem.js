@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {settings} from '../../../config';
 
-export const RenderItem = ({item, data, handle, del}) => {
+export const RenderItem = ({item, data, handle, del, handlePressButton}) => {
   const getMarginTop = () => {
     if (item.MaCD === data[0].MaCD) {
       return 10;
@@ -16,7 +16,7 @@ export const RenderItem = ({item, data, handle, del}) => {
       item.MaLopHP === data[data.length - 1].MaLopHP ||
       item.MaLopHP === data[data.length - 2].MaLopHP
     ) {
-      return 100;
+      return 5;
     } else {
       return 5;
     }
@@ -85,7 +85,7 @@ export const RenderItem = ({item, data, handle, del}) => {
           Lớp: {item.TenLop}
         </Text>
 
-        <Text
+        {/* <Text
           numberOfLines={1}
           style={{
             color: settings.colors.colorThumblr,
@@ -93,42 +93,29 @@ export const RenderItem = ({item, data, handle, del}) => {
             width: '100%',
             marginBottom: 10,
           }}>
-          Số lượng học sinh: {item.Sum}
-        </Text>
-      </View>
+          Số lượng học sinh: {item?.SoLuongSV}
+        </Text> */}
 
-      {/* {user[0]?.isAdmin !== undefined && (
-        <TouchableOpacity
-          onPress={() => {
-            pressDelete();
-          }}
-          activeOpacity={0.5}
-          style={{
-            width: 50,
-            height: 50,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: settings.colors.colorThumblr,
-            height: '100%',
-            marginRight: -1,
-            borderTopEndRadius: 10,
-            borderBottomEndRadius: 10,
-          }}>
-          <Icon
-            type="AntDesign"
-            name="delete"
-            style={{fontSize: 22, color: '#fff'}}
-          />
-          <Text
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <TouchableOpacity
+            onPress={() => {
+              handlePressButton(item);
+            }}
+            activeOpacity={0.5}
             style={{
-              color: '#fff',
-              marginTop: 5,
-              fontSize: 12,
+              width: '100%',
+              height: 30,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#65ca69',
+              borderRadius: 5,
             }}>
-            Xóa
-          </Text>
-        </TouchableOpacity>
-      )} */}
+            <Text style={{color: '#fff', fontSize: 12}}>
+              Danh sách sinh viên
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </TouchableOpacity>
   );
 };

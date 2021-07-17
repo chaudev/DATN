@@ -5,9 +5,7 @@ import {ListChuDe} from '../chuDe/ListChuDe';
 import {CauHoi} from '../chuDe/cauHoi';
 import {InfomationQuestion} from './cauHoi/infoQuest';
 import {EditQuest} from './cauHoi/infoQuest/editQuest';
-import {EditAnswer} from './cauHoi/infoQuest/editQuest/editAnswer';
 import {AddExercise} from './cauHoi/addExercise';
-import {AddAnswer} from './cauHoi/addExercise/addAnswer';
 import {MonHoc} from './listMonHoc';
 
 const Stack = createStackNavigator();
@@ -41,19 +39,9 @@ function ChuDeNav() {
         component={AddExercise}
       />
       <Stack.Screen
-        name={AppRouter.AddAnswer}
-        options={{title: AppRouter.AddAnswer, headerShown: false}}
-        component={AddAnswer}
-      />
-      <Stack.Screen
         name={AppRouter.EditQuest}
         options={{title: AppRouter.AddAnswer, headerShown: false}}
         component={EditQuest}
-      />
-      <Stack.Screen
-        name={AppRouter.EditAnswer}
-        options={{title: AppRouter.AddAnswer, headerShown: false}}
-        component={EditAnswer}
       />
     </Stack.Navigator>
   );

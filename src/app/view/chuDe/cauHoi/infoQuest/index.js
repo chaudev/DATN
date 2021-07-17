@@ -1,14 +1,6 @@
 import React, {useEffect} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  Alert,
-  Image,
-} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView, Image} from 'react-native';
 import {settings} from '../../../../config';
-import {Icon, Picker} from 'native-base';
 import {Header} from '../../../../components/header';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {AppRouter} from '../../../../../app/navigation/AppRouter';
@@ -18,27 +10,19 @@ export const InfomationQuestion = () => {
   const route = useRoute();
   const params = route.params.item;
   const user = route.params.user;
-
-  const [refreshing, setRefreshing] = React.useState(false);
-
-  // Kéo xuống để reload
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(500).then(() => setRefreshing(false));
-  }, []);
-
-  const wait = timeout => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  };
+  const MonHoc = route.params.MonHoc;
+  const ChuDe = route.params.ChuDe;
 
   useEffect(() => {
-    console.log('params: ', params);
+    console.log('params: ', route.params);
   }, []);
 
   const edit = () => {
     nav.navigate(AppRouter.EditQuest, {
       item: params,
       user: user,
+      MonHoc: MonHoc,
+      ChuDe: ChuDe,
     });
   };
 
@@ -49,55 +33,41 @@ export const InfomationQuestion = () => {
       {params !== undefined ? (
         <View style={{backgroundColor: '#fff', flex: 1}}>
           <Image
-            source={require('../../../../asset/images/content.jpg')}
+            source={require('../../../../asset/images/chau-at-0030.png')}
             style={{
               width: '100%',
               height: undefined,
-              resizeMode: 'cover',
-              aspectRatio: 2,
+              resizeMode: 'contain',
+              aspectRatio: 1.1,
+              zIndex: -99,
+              marginTop: -20,
             }}
           />
-          <View
-            style={{
-              width: '100%',
-              height: 50,
-              backgroundColor: settings.colors.colorGreen,
-              marginTop: -25,
-              flexDirection: 'row',
-              alignItems: 'center',
-
-              shadowColor: '#000',
-              shadowOffset: {
-                width: 0,
-                height: 1,
-              },
-              shadowOpacity: 0.2,
-              shadowRadius: 1.41,
-
-              elevation: 2,
-            }}>
-            <Icon
-              type="MaterialCommunityIcons"
-              name="book-open-variant"
-              style={{
-                fontSize: 24,
-                color: '#fff',
-                marginLeft: 10,
-              }}
-            />
-            <Text
-              style={{
-                color: '#fff',
-                fontSize: 16,
-                fontWeight: 'bold',
-                marginHorizontal: 10,
-              }}>
-              CHI TIẾT CÂU HỎI
-            </Text>
-          </View>
           <ScrollView
-            style={{width: '100%', marginTop: 10, paddingHorizontal: 10}}>
+            style={{width: '100%', marginTop: -40, paddingHorizontal: 10}}>
             <View style={{flexDirection: 'row', alignItems: 'flex-start'}}>
+              <Text style={{fontWeight: 'bold', marginRight: 5, fontSize: 16}}>
+                Môn học:
+              </Text>
+              <Text style={{flex: 1, fontSize: 16}}>{MonHoc?.TenMonHoc}</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                marginTop: 5,
+              }}>
+              <Text style={{fontWeight: 'bold', marginRight: 5, fontSize: 16}}>
+                Chủ đề:
+              </Text>
+              <Text style={{flex: 1, fontSize: 16}}>{ChuDe?.TenCD}</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                marginTop: 5,
+              }}>
               <Text style={{fontWeight: 'bold', marginRight: 5, fontSize: 16}}>
                 Câu hỏi:
               </Text>
