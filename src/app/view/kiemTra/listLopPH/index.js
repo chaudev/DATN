@@ -25,9 +25,8 @@ import {getLPH} from '../../../../server/LopHP/getLHP';
 import {createLPH} from '../../../../server/LopHP/createLHP';
 import {deleteCD} from '../../../../server/ChuDe/deleteCD';
 import {getMH} from '../../../../server/MonHoc/getMH';
-import {getLop} from '../../../../server/Lop/getLop/index.js';
+import {getLop} from '../../../../server/Lop/getLop/index.js.js';
 import {getGiangVien} from '../../../../server/User/getGiangVien';
-import Toast from 'react-native-simple-toast';
 
 const {width: dW, height: dH} = Dimensions.get('window');
 
@@ -51,7 +50,6 @@ export const ListLopHP = () => {
   // Lấy thông tin tài khoản đang đăng nhập vs danh sách môn học
   // Bất đồng bộ ---
   useEffect(() => {
-    Toast.show('Chọn 1 lớp học phần', Toast.SHORT);
     getAccount();
   }, []);
 
@@ -299,6 +297,18 @@ export const ListLopHP = () => {
               }
             />
           </View>
+
+          {user[0]?.isAdmin !== undefined && parseInt(user[0]?.isAdmin) === 1 && (
+            <Fab
+              containerStyle={{}}
+              style={{backgroundColor: settings.colors.colorMain}}
+              position="bottomRight"
+              onPress={() => {
+                setModal(true);
+              }}>
+              <Icon name="plus" type="AntDesign" />
+            </Fab>
+          )}
         </>
       ) : (
         <View
@@ -315,6 +325,264 @@ export const ListLopHP = () => {
           />
         </View>
       )}
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={showModal}
+        onRequestClose={() => {
+          setModal(false);
+        }}>
+        <StatusBar
+          barStyle={'light-content'}
+          backgroundColor="rgba(0,0,0,1)"
+          hidden={false}
+          animated={true}
+        />
+        <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.5)'}}>
+          <Text
+            onPress={() => {
+              setModal(false);
+            }}
+            style={{flex: 1}}
+          />
+          <View
+            style={{width: '100%', flexDirection: 'row', alignItems: 'center'}}>
+            <Text
+              onPress={() => {
+                setModal(false);
+              }}
+              style={{flex: 1}}
+            />
+            <View
+              style={{
+                width: '90%',
+                backgroundColor: '#fff',
+                height: 436,
+                borderRadius: 12,
+              }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingHorizontal: 10,
+                  width: '100%',
+                  marginTop: 10,
+                }}>
+                <Text
+                  style={{
+                    color: settings.colors.colorGreen,
+                    fontSize: 16,
+                    fontWeight: 'bold',
+                    flex: 1,
+                  }}>
+                  THÊM LỚP HỌC PHẦN
+                </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    setModal(false);
+                  }}
+                  style={{
+                    height: '100%',
+                    paddingLeft: 20,
+                  }}>
+                  <Icon
+                    type="AntDesign"
+                    name="close"
+                    style={{
+                      fontSize: 24,
+                      color: settings.colors.colorGreen,
+                      marginBottom: -2,
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
+              <Text
+                style={{
+                  marginTop: 10,
+                  color: settings.colors.colorGreen,
+                  marginLeft: 10,
+                }}>
+                Tên lớp học phần
+              </Text>
+              <View
+                style={{
+                  height: 50,
+                  marginTop: 5,
+                  marginHorizontal: 10,
+                  borderWidth: 1,
+                  borderColor: settings.colors.colorBoderDark,
+                  borderRadius: 12,
+                }}>
+                <TextInput
+                  placeholder="Tên lớp học phần"
+                  placeholderTextColor="#8a817c"
+                  value={tenCD}
+                  onChangeText={t => {
+                    setTenCD(t);
+                  }}
+                  style={{
+                    flex: 1,
+                    marginHorizontal: 10,
+                    marginVertical: 2,
+                    color: '#000',
+                    fontSize: 16,
+                  }}
+                />
+              </View>
+              <Text
+                style={{
+                  marginTop: 10,
+                  color: settings.colors.colorGreen,
+                  marginLeft: 10,
+                }}>
+                Chọn môn học
+              </Text>
+
+              <View
+                style={{
+                  marginTop: 5,
+                  marginHorizontal: 10,
+                  borderWidth: 1,
+                  borderColor: settings.colors.colorBoderDark,
+                  height: 45,
+                  borderRadius: 12,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingLeft: 15,
+                }}>
+                {listMonHoc !== '' && (
+                  <Picker
+                    selectedValue={monHoc}
+                    mode="dialog"
+                    style={{height: 45, width: dW - 65, marginLeft: -15}}
+                    onValueChange={(itemValue, itemIndex) => {
+                      console.log('cac');
+                      setMonHoc(itemValue);
+                    }}>
+                    <Picker.Item label="Chọn môn học" value="Chọn môn học" />
+                    {listMonHoc?.map(i => (
+                      <Picker.Item label={i.TenMonHoc} value={i.MaMH} />
+                    ))}
+                  </Picker>
+                )}
+              </View>
+
+              <Text
+                style={{
+                  marginTop: 10,
+                  color: settings.colors.colorGreen,
+                  marginLeft: 10,
+                }}>
+                Chọn lớp
+              </Text>
+
+              <View
+                style={{
+                  marginTop: 5,
+                  marginHorizontal: 10,
+                  borderWidth: 1,
+                  borderColor: settings.colors.colorBoderDark,
+                  height: 45,
+                  borderRadius: 12,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingLeft: 15,
+                }}>
+                {listLopHoc !== '' && (
+                  <Picker
+                    selectedValue={lopHoc}
+                    mode="dialog"
+                    style={{height: 45, width: dW - 65, marginLeft: -15}}
+                    onValueChange={(itemValue, itemIndex) => {
+                      console.log('cac');
+                      setLopHoc(itemValue);
+                    }}>
+                    <Picker.Item label="Chọn lớp" value="Chọn lớp" />
+                    {listLopHoc?.map(i => (
+                      <Picker.Item label={i.TenLop} value={i.MaLop} />
+                    ))}
+                  </Picker>
+                )}
+              </View>
+
+              <Text
+                style={{
+                  marginTop: 10,
+                  color: settings.colors.colorGreen,
+                  marginLeft: 10,
+                }}>
+                Chọn giảng viên
+              </Text>
+
+              <View
+                style={{
+                  marginTop: 5,
+                  marginHorizontal: 10,
+                  borderWidth: 1,
+                  borderColor: settings.colors.colorBoderDark,
+                  height: 45,
+                  borderRadius: 12,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingLeft: 15,
+                }}>
+                {teachers !== '' && (
+                  <Picker
+                    selectedValue={teach}
+                    mode="dialog"
+                    style={{height: 45, width: dW - 65, marginLeft: -15}}
+                    onValueChange={(itemValue, itemIndex) => {
+                      console.log('cac');
+                      setTeach(itemValue);
+                    }}>
+                    <Picker.Item
+                      label="Chọn giảng viên"
+                      value="Chọn giảng viên"
+                    />
+                    {teachers?.map(i => (
+                      <Picker.Item label={i.TenGV} value={i.MaGV} />
+                    ))}
+                  </Picker>
+                )}
+              </View>
+
+              <View style={{height: 10}} />
+
+              <TouchableOpacity
+                onPress={() => {
+                  createChuDe();
+                }}
+                activeOpacity={0.5}
+                style={{
+                  height: 50,
+                  backgroundColor: settings.colors.colorGreen,
+                  marginHorizontal: 10,
+                  marginVertical: 10,
+                  borderRadius: 12,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Text style={{color: '#ffF', fontSize: 14, fontWeight: 'bold'}}>
+                  THÊM LỚP HỌC PHẦN
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <Text
+              onPress={() => {
+                setModal(false);
+              }}
+              style={{flex: 1}}
+            />
+          </View>
+          <Text
+            onPress={() => {
+              setModal(false);
+            }}
+            style={{flex: 1}}
+          />
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 };

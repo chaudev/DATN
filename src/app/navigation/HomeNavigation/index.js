@@ -8,6 +8,7 @@ import {TabHeader} from '../../view/course/Tab';
 import {ChuDeNav} from '../../view/chuDe';
 import {User} from '../../view/user';
 import {LopHocPhanNav} from '../../view/lopHocPhan';
+import {KiemTraNav} from '../../view/kiemTra';
 
 const Stack = createStackNavigator();
 
@@ -48,6 +49,11 @@ const HomeNavigator = () => {
         name={AppRouter.LISTLHP}
         component={LopHocPhanNav}
         options={{title: AppRouter.LISTLHP, headerShown: false}}
+      />
+      <Stack.Screen
+        name={AppRouter.KIEMTRA}
+        component={KiemTraNav}
+        options={{title: AppRouter.KIEMTRA, headerShown: false}}
       />
     </Stack.Navigator>
   );

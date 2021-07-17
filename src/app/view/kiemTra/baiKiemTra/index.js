@@ -72,7 +72,6 @@ export const BaiKiemTra = ({params}) => {
   const getData = async data => {
     try {
       const res = await getBaiKiemTraGV(user[0].MaGV, data);
-      console.log('getData: ', res);
       setData(res.data);
     } catch (error) {
       //

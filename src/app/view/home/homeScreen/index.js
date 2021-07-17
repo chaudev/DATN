@@ -116,16 +116,13 @@ export const HomeScreen = ({navigation}) => {
   };
 
   const handleQLMonHoc = () => {
-    console.log('quan ly mon hoc');
     nav.navigate(AppRouter.COURSE);
   };
 
   const handleQLBaiKT = () => {
-    console.log('quan ly bai kiem tra');
-    // nav.navigate(AppRouter.TAB, {
-    //   tab: 1,
-    //   user: user,
-    // });
+    nav.navigate(AppRouter.KIEMTRA, {
+      user: user,
+    });
   };
 
   const handleHSG = () => {

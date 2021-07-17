@@ -29,4 +29,5 @@ export const AppRouter = {
   MONHOC: 'MONHOC',
   SINHVIEN: 'SINHVIEN',
   ADDSINHVIEN: 'ADDSINHVIEN',
+  KIEMTRA: 'KIEMTRA',
 };
