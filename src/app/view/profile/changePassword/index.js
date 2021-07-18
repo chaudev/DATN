@@ -12,6 +12,7 @@ import {Icon} from 'native-base';
 import {settings} from '../../../../app/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {updateGV} from '../../../../server/GiangVien/updateGV';
+import {updateSV} from '../../../../server/SinhVien/updateSV';
 import Toast from 'react-native-simple-toast';
 
 export const ChangePassword = () => {
@@ -63,16 +64,34 @@ export const ChangePassword = () => {
           newPassword,
         );
         setLoading(false);
-        console.log(res);
         res.status === 'Thành công'
           ? Toast.show('Thành công', Toast.SHORT)
           : Toast.show('Không thành công', Toast.SHORT);
+        nav.goBack();
       } catch (e) {
-        // error reading value
+        //
+      }
+    } else {
+      try {
+        const res = await updateSV(
+          user.MaSV,
+          user.TenSV,
+          parseInt(user.GioiTinh),
+          user.DiaChi,
+          newPassword,
+        );
+        setLoading(false);
+        res.status === 'Thành công'
+          ? Toast.show('Thành công', Toast.SHORT)
+          : Toast.show('Không thành công', Toast.SHORT);
+        nav.goBack();
+      } catch (e) {
+        //
       }
     }
   };
 
+  // RENDER
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <TouchableOpacity
@@ -170,7 +189,7 @@ export const ChangePassword = () => {
             flexDirection: 'row',
           }}>
           <TextInput
-            placeholder="Mật khẩu cũ"
+            placeholder="Mật khẩu mới"
             secureTextEntry={!showNewPassword}
             value={newPassword}
             onChangeText={t => {
@@ -212,7 +231,7 @@ export const ChangePassword = () => {
             flexDirection: 'row',
           }}>
           <TextInput
-            placeholder="Mật khẩu cũ"
+            placeholder="Nhập lại mật khẩu"
             secureTextEntry={!showAgainPassword}
             value={againPassword}
             onChangeText={t => {

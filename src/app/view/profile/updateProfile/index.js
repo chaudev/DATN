@@ -12,6 +12,7 @@ import {Icon, CheckBox} from 'native-base';
 import {settings} from '../../../../app/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {updateGV} from '../../../../server/GiangVien/updateGV';
+import {updateSV} from '../../../../server/SinhVien/updateSV';
 import Toast from 'react-native-simple-toast';
 
 export const UpdateProfile = () => {
@@ -77,8 +78,27 @@ export const UpdateProfile = () => {
         res.status === 'Thành công'
           ? Toast.show('Thành công', Toast.SHORT)
           : Toast.show('Không thành công', Toast.SHORT);
+        nav.goBack();
       } catch (e) {
-        // error reading value
+        //
+      }
+    } else {
+      try {
+        const res = await updateSV(
+          user.MaSV,
+          fullName,
+          parseInt(getNum()),
+          address,
+          user.Password,
+        );
+        setLoading(false);
+        console.log(res);
+        res.status === 'Thành công'
+          ? Toast.show('Thành công', Toast.SHORT)
+          : Toast.show('Không thành công', Toast.SHORT);
+        nav.goBack();
+      } catch (e) {
+        //
       }
     }
   };
