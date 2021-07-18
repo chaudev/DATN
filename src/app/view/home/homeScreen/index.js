@@ -7,7 +7,6 @@ import {
   StatusBar,
   RefreshControl,
   TouchableOpacity,
-  Alert,
   Platform,
 } from 'react-native';
 import {settings} from '../../../config';
@@ -15,38 +14,23 @@ import {AppRouter} from '../../../navigation/AppRouter';
 import {useNavigation} from '@react-navigation/native';
 import {HeaderMenu} from './headerMenu';
 import {Icon} from 'native-base';
-import ModalSelector from 'react-native-modal-selector';
 import {mainStyles, QLMH, styleTK} from '../../home/homeScreen/styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {thongKe} from '../../../../server/LinhTinh';
 
 import {i18n} from '../../../../i18n';
-
-// import {Picker} from '@react-native-picker/picker';
 
 const MAX_HEIGHT = 240;
 const MIN_HEIGHT = 84;
 const SCROLL_DISTANCE = MAX_HEIGHT - MIN_HEIGHT;
 const mainColor = settings.colors.colorMain;
 
-const data = [
-  {key: '01', section: true, label: 'SELECT OBJECT'},
-  {key: '02', label: 'Java'},
-  {key: '03', label: 'Hệ quản trị cơ sở dữ liệu'},
-  {key: '04', label: 'Cơ sở dữ liệu'},
-  {key: '05', label: 'Thiết kế website'},
-  {key: '06', label: 'Lập trình hướng đối tượng'},
-];
-
-export const HomeScreen = ({navigation}) => {
+export const HomeScreen = () => {
   const nav = useNavigation();
   const [user, setUser] = useState('');
+  const [dataThongKe, setDataThongKe] = useState('');
   const [refreshing, setRefreshing] = useState(false);
   const scrollY = useRef(new Animated.Value(0)).current;
-
-  const [soHocSinhGioi, setHocSinhGioi] = useState(15);
-  const [soHocSinhKha, setHocSinhKha] = useState(35);
-  const [soHocSinhTrungBinh, setHocSinhTrungBinh] = useState(8);
-  const [soHocSinhYeu, setHocSinhYeu] = useState(2);
 
   useEffect(() => {
     getAccount();
@@ -55,6 +39,7 @@ export const HomeScreen = ({navigation}) => {
   useEffect(() => {
     if (user !== '') {
       console.log('user: ', user);
+      getThongKe();
     }
   }, [user]);
 
@@ -119,6 +104,16 @@ export const HomeScreen = ({navigation}) => {
     }
   };
 
+  // Get thong ke
+  const getThongKe = async () => {
+    try {
+      const res = await thongKe(user[0]?.MaGV);
+      setDataThongKe(res);
+    } catch (e) {
+      // error reading value
+    }
+  };
+
   const handleQLMonHoc = () => {
     nav.navigate(AppRouter.COURSE);
   };
@@ -127,27 +122,6 @@ export const HomeScreen = ({navigation}) => {
     nav.navigate(AppRouter.KIEMTRA, {
       user: user,
     });
-  };
-
-  const handleHSG = () => {
-    console.log('Hoc sinh gioi');
-    Alert.alert('Qua màn hình', 'Danh sách học sinh giỏi');
-  };
-
-  const handleHSK = () => {
-    console.log('Hoc sinh kha');
-    Alert.alert('Qua màn hình', 'Danh sách học sinh khá');
-  };
-
-  const handleHSTB = () => {
-    console.log('Hoc sinh trung binh');
-
-    Alert.alert('Qua màn hình', 'Danh sách học sinh trung bình');
-  };
-
-  const handleHSY = () => {
-    console.log('Hoc sinh trung yeu');
-    Alert.alert('Qua màn hình', 'Danh sách học sinh yếu');
   };
 
   return (
@@ -270,34 +244,17 @@ export const HomeScreen = ({navigation}) => {
           }}>
           <Text
             style={{
-              fontSize: 14,
-              color: mainColor,
+              fontSize: 16,
+              color: settings.colors.colorThumblr,
+              fontWeight: 'bold',
               marginVertical: 5,
               marginLeft: 10,
+              marginTop: 10,
             }}>
             THỐNG KÊ
           </Text>
-          <View style={styleTK.pickerContainer}>
-            <ModalSelector
-              data={data}
-              style={{flex: 1}}
-              cancelStyle={styleTK.pickerCancel}
-              selectStyle={styleTK.pickerSelect}
-              optionContainerStyle={styleTK.pickerOption}
-              cancelText="CANCLE"
-              initValue="Select object"
-              onChange={option => {
-                //
-              }}
-            />
-            <Icon
-              type="MaterialIcons"
-              name="keyboard-arrow-down"
-              style={styleTK.iconPicker}
-            />
-          </View>
 
-          <View style={{flex: 1, marginTop: 10, paddingHorizontal: 10}}>
+          <View style={{flex: 1, paddingHorizontal: 10, marginTop: 5}}>
             <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
               <View
                 style={[
@@ -306,9 +263,11 @@ export const HomeScreen = ({navigation}) => {
                     backgroundColor: settings.colors.colorGreen,
                   },
                 ]}>
-                <Text style={styleTK.textTitle}>HỌC SINH GIỎI</Text>
+                <Text style={styleTK.textTitle}>BÀI KIỂM TRA HÔM NAY</Text>
                 <View style={styleTK.fakeView} />
-                <Text style={styleTK.number}>{soHocSinhGioi}</Text>
+                <Text style={styleTK.number}>
+                  {dataThongKe?.BaiKiemTra?.length}
+                </Text>
                 <View
                   style={{
                     flex: 1,
@@ -316,13 +275,25 @@ export const HomeScreen = ({navigation}) => {
                 />
                 <TouchableOpacity
                   onPress={() => {
-                    handleHSG();
+                    nav.navigate(AppRouter.LISTLHP);
                   }}
                   activeOpacity={0.5}
                   style={{flexDirection: 'row'}}>
                   <View style={{flex: 1}}>
-                    <Text style={styleTK.textDetail}>Xem</Text>
-                    <Text style={styleTK.textTitle}>chi tiết</Text>
+                    <Text
+                      style={[
+                        styleTK.textDetail,
+                        {fontFamily: 'SVN-Grocery Rounded'},
+                      ]}>
+                      Xem
+                    </Text>
+                    <Text
+                      style={[
+                        styleTK.textTitle,
+                        {fontFamily: 'SVN-Grocery Rounded'},
+                      ]}>
+                      chi tiết
+                    </Text>
                   </View>
                   <View style={styleTK.button}>
                     <Icon
@@ -341,9 +312,11 @@ export const HomeScreen = ({navigation}) => {
                     backgroundColor: settings.colors.colorBlue,
                   },
                 ]}>
-                <Text style={styleTK.textTitle}>HỌC SINH KHÁ</Text>
+                <Text style={styleTK.textTitle}>SỐ LỚP HỌC PHẦN</Text>
                 <View style={styleTK.fakeView} />
-                <Text style={styleTK.number}>{soHocSinhKha}</Text>
+                <Text style={styleTK.number}>
+                  {dataThongKe?.LopHocPhan?.length}
+                </Text>
                 <View
                   style={{
                     flex: 1,
@@ -351,13 +324,25 @@ export const HomeScreen = ({navigation}) => {
                 />
                 <TouchableOpacity
                   onPress={() => {
-                    handleHSK();
+                    nav.navigate(AppRouter.LISTLHP);
                   }}
                   activeOpacity={0.5}
                   style={{flexDirection: 'row'}}>
                   <View style={{flex: 1}}>
-                    <Text style={styleTK.textDetail}>Xem</Text>
-                    <Text style={styleTK.textTitle}>chi tiết</Text>
+                    <Text
+                      style={[
+                        styleTK.textDetail,
+                        {fontFamily: 'SVN-Grocery Rounded'},
+                      ]}>
+                      Xem
+                    </Text>
+                    <Text
+                      style={[
+                        styleTK.textTitle,
+                        {fontFamily: 'SVN-Grocery Rounded'},
+                      ]}>
+                      chi tiết
+                    </Text>
                   </View>
                   <View style={styleTK.button}>
                     <Icon
@@ -380,21 +365,33 @@ export const HomeScreen = ({navigation}) => {
                     backgroundColor: settings.colors.colorRed,
                   },
                 ]}>
-                <Text style={styleTK.textTitle}>HỌC SINH TRUNG BÌNH</Text>
+                <Text style={styleTK.textTitle}>SỐ CHỦ ĐỀ CỦA BẠN</Text>
                 <View style={styleTK.fakeView} />
                 <Text style={[styleTK.number, {marginVertical: -10}]}>
-                  {soHocSinhTrungBinh}
+                  {dataThongKe?.ChuDe?.length}
                 </Text>
                 <View style={styleTK.fakeView} />
                 <TouchableOpacity
                   onPress={() => {
-                    handleHSTB();
+                    nav.navigate(AppRouter.LISTCD);
                   }}
                   activeOpacity={0.5}
                   style={{flexDirection: 'row'}}>
                   <View style={{flex: 1}}>
-                    <Text style={styleTK.textDetail}>Xem</Text>
-                    <Text style={styleTK.textTitle}>chi tiết</Text>
+                    <Text
+                      style={[
+                        styleTK.textDetail,
+                        {fontFamily: 'SVN-Grocery Rounded'},
+                      ]}>
+                      Xem
+                    </Text>
+                    <Text
+                      style={[
+                        styleTK.textTitle,
+                        {fontFamily: 'SVN-Grocery Rounded'},
+                      ]}>
+                      chi tiết
+                    </Text>
                   </View>
                   <View style={styleTK.button}>
                     <Icon
@@ -413,9 +410,9 @@ export const HomeScreen = ({navigation}) => {
                     backgroundColor: settings.colors.colorThumblr,
                   },
                 ]}>
-                <Text style={styleTK.textTitle}>HỌC SINH YẾU</Text>
+                <Text style={styleTK.textTitle}>SỐ MÔN HỌC</Text>
                 <View style={styleTK.fakeView} />
-                <Text style={styleTK.number}>{soHocSinhYeu}</Text>
+                <Text style={styleTK.number}>{dataThongKe?.MaMH?.length}</Text>
                 <View
                   style={{
                     flex: 1,
@@ -423,13 +420,25 @@ export const HomeScreen = ({navigation}) => {
                 />
                 <TouchableOpacity
                   onPress={() => {
-                    handleHSY();
+                    nav.navigate(AppRouter.COURSE);
                   }}
                   activeOpacity={0.5}
                   style={{flexDirection: 'row'}}>
                   <View style={{flex: 1}}>
-                    <Text style={styleTK.textDetail}>Xem</Text>
-                    <Text style={styleTK.textTitle}>chi tiết</Text>
+                    <Text
+                      style={[
+                        styleTK.textDetail,
+                        {fontFamily: 'SVN-Grocery Rounded'},
+                      ]}>
+                      Xem
+                    </Text>
+                    <Text
+                      style={[
+                        styleTK.textTitle,
+                        {fontFamily: 'SVN-Grocery Rounded'},
+                      ]}>
+                      chi tiết
+                    </Text>
                   </View>
                   <View style={styleTK.button}>
                     <Icon

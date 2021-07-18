@@ -91,6 +91,8 @@ const styleTK = StyleSheet.create({
     color: '#fff',
     marginTop: 10,
     marginLeft: 10,
+    fontFamily: 'SVN-Dessert Menu Script',
+    marginRight: 20,
   },
   fakeView: {
     flex: 1,
