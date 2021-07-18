@@ -127,21 +127,21 @@ export const HeaderMenu = ({headerY, imageOpacity, imageY, Handle}) => {
         <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
           <TouchableOpacity
             onPress={() => {
-              HeaderHandle('Câu hỏi');
+              HeaderHandle('Đổi mật khẩu');
             }}
             activeOpacity={0.5}
             style={items.container}>
             <View style={items.button}>
               <Icon
-                type="Octicons"
-                name="question"
+                type="FontAwesome"
+                name="lock"
                 style={{
-                  fontSize: 24,
+                  fontSize: 22,
                   color: mainColor,
                 }}
               />
             </View>
-            <Text style={items.textTitle}>Câu hỏi</Text>
+            <Text style={items.textTitle}>Đổi mật khẩu</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {

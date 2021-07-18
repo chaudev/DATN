@@ -64,16 +64,14 @@ export const UserScreen = ({navigation, route}) => {
   };
 
   const handleUpdate = () => {
-    console.log('Update Profile');
-    navigation.navigate(AppRouter.UPDATE);
+    navigation.navigate(AppRouter.PROFILE);
   };
 
   const handleChangePassword = () => {
-    console.log('Change Password');
+    navigation.navigate(AppRouter.CHANGEPASS);
   };
 
   const handleLogOut = () => {
-    console.log('Log out');
     deleteAccount();
     dispatch(activate(false));
   };

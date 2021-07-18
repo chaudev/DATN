@@ -36,7 +36,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -58,6 +58,24 @@
 		<string>rubicon-icon-font.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>chau-font-001.otf</string>
+		<string>chau-font-002.TTF</string>
+		<string>chau-font-003.TTF</string>
+		<string>chau-font-004.TTF</string>
+		<string>chau-font-005.TTF</string>
+		<string>chau-font-006.TTF</string>
+		<string>chau-font-007.ttf</string>
+		<string>chau-font-008.ttf</string>
+		<string>Flavour.ttf</string>
+		<string>HP-Brush 03 Bold.TTF</string>
+		<string>chau-font-002.ttf</string>
+		<string>chau-font-003.ttf</string>
+		<string>chau-font-004.ttf</string>
+		<string>chau-font-006.ttf</string>
+		<string>HP-Brush 03 Bold.ttf</string>
+		<string>SVN-Dessert Menu Script.ttf</string>
+		<string>SVN-Grocery Rounded.ttf</string>
+		<string>SVN-Ready.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

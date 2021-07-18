@@ -4,6 +4,7 @@ export const AppRouter = {
   HOME: 'HOME',
   HOMENAVIGATION: 'HOMENAVIGATION',
   TAB: 'TAB',
+  MAIN: 'MAIN',
   MESSAGE: 'MESSAGE',
   NEWS: 'NEWS',
   HISTORY: 'HISTORY',
@@ -30,4 +31,6 @@ export const AppRouter = {
   SINHVIEN: 'SINHVIEN',
   ADDSINHVIEN: 'ADDSINHVIEN',
   KIEMTRA: 'KIEMTRA',
+  CHANGEPASS: 'CHANGEPASS',
+  PROFILE: 'PROFILE',
 };

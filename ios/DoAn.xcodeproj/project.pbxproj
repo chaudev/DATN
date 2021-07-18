@@ -33,6 +33,24 @@
 		E15B6EB704FC4BC398B86524 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5D7EC1E276045A9AC3BA6D5 /* Ionicons.ttf */; };
 		F0B85BEA158F4B60B21A7F45 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F077207B5AC7414FB17FA381 /* FontAwesome5_Brands.ttf */; };
 		F288C7DBADAB46EFAA13982F /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A1FF0D3B76B494A87241464 /* Fontisto.ttf */; };
+		79EB22D186A8482183331405 /* chau-font-001.otf in Resources */ = {isa = PBXBuildFile; fileRef = A117D860A34242ACB0F49A0C /* chau-font-001.otf */; };
+		3BAFBCDD91B849C7AE864B30 /* chau-font-002.TTF in Resources */ = {isa = PBXBuildFile; fileRef = B68D5719A96A41A6A4CA505B /* chau-font-002.TTF */; };
+		08F6592B81BD4602915F7F6A /* chau-font-003.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 72303642B4164C9DAAA8B67D /* chau-font-003.TTF */; };
+		2249233A53AD4C5791C2CB57 /* chau-font-004.TTF in Resources */ = {isa = PBXBuildFile; fileRef = CC2108AD4F234C79B8B56B6E /* chau-font-004.TTF */; };
+		30D8A059D9B54F78A0790F62 /* chau-font-005.TTF in Resources */ = {isa = PBXBuildFile; fileRef = F1CF1C75D22B476E9291C4B0 /* chau-font-005.TTF */; };
+		FDD21217CCE8406E9C9530D3 /* chau-font-006.TTF in Resources */ = {isa = PBXBuildFile; fileRef = AA255B66BBC342E09F56B58D /* chau-font-006.TTF */; };
+		31AF760E32744AF9AAE4548E /* chau-font-007.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69AB476466974FE19711D597 /* chau-font-007.ttf */; };
+		42CD4049B4474D489C1ABD13 /* chau-font-008.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A19241473334FDBAA1700BE /* chau-font-008.ttf */; };
+		489C257AE7F24DF580AAA51C /* Flavour.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A4A60757384DD795706C69 /* Flavour.ttf */; };
+		81AB2774FC2546C6AE10DB1C /* HP-Brush 03 Bold.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 2A48133AF8F5443F8A5FFE46 /* HP-Brush 03 Bold.TTF */; };
+		F2EE143FD7C047C5A9EF8A28 /* chau-font-002.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F20A7579D05E473898A95615 /* chau-font-002.ttf */; };
+		E6863DF29BAC49219360EEE0 /* chau-font-003.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC4111F0FCA54ACDA86255AD /* chau-font-003.ttf */; };
+		B4D3CA4C92AA47049535E39A /* chau-font-004.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 313043619C744BB0A39F2606 /* chau-font-004.ttf */; };
+		2C64842132084039A3A46E57 /* chau-font-006.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 642A891C4D924D2692E57441 /* chau-font-006.ttf */; };
+		7DE7C7DEF6EB4EF085EFE0C9 /* HP-Brush 03 Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B3E21C84B4B423F88D881F7 /* HP-Brush 03 Bold.ttf */; };
+		6B96F2C53FAA4B0CAC0518D5 /* SVN-Dessert Menu Script.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9988C7A3D8B49C7B3E639DC /* SVN-Dessert Menu Script.ttf */; };
+		3DD9BFCDAE0841BEA6E626E2 /* SVN-Grocery Rounded.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D9AA50AE01443C19344EBF5 /* SVN-Grocery Rounded.ttf */; };
+		009A6695ABF84F09B93A7834 /* SVN-Ready.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CBB30EA98F341D6A8A365DD /* SVN-Ready.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +100,24 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F077207B5AC7414FB17FA381 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		FDA05E6562E24A1F9A03CD21 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		A117D860A34242ACB0F49A0C /* chau-font-001.otf */ = {isa = PBXFileReference; name = "chau-font-001.otf"; path = "../src/app/asset/font/chau-font-001.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B68D5719A96A41A6A4CA505B /* chau-font-002.TTF */ = {isa = PBXFileReference; name = "chau-font-002.TTF"; path = "../src/app/asset/font/chau-font-002.TTF"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		72303642B4164C9DAAA8B67D /* chau-font-003.TTF */ = {isa = PBXFileReference; name = "chau-font-003.TTF"; path = "../src/app/asset/font/chau-font-003.TTF"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CC2108AD4F234C79B8B56B6E /* chau-font-004.TTF */ = {isa = PBXFileReference; name = "chau-font-004.TTF"; path = "../src/app/asset/font/chau-font-004.TTF"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F1CF1C75D22B476E9291C4B0 /* chau-font-005.TTF */ = {isa = PBXFileReference; name = "chau-font-005.TTF"; path = "../src/app/asset/font/chau-font-005.TTF"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AA255B66BBC342E09F56B58D /* chau-font-006.TTF */ = {isa = PBXFileReference; name = "chau-font-006.TTF"; path = "../src/app/asset/font/chau-font-006.TTF"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		69AB476466974FE19711D597 /* chau-font-007.ttf */ = {isa = PBXFileReference; name = "chau-font-007.ttf"; path = "../src/app/asset/font/chau-font-007.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9A19241473334FDBAA1700BE /* chau-font-008.ttf */ = {isa = PBXFileReference; name = "chau-font-008.ttf"; path = "../src/app/asset/font/chau-font-008.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		88A4A60757384DD795706C69 /* Flavour.ttf */ = {isa = PBXFileReference; name = "Flavour.ttf"; path = "../src/app/asset/font/Flavour.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2A48133AF8F5443F8A5FFE46 /* HP-Brush 03 Bold.TTF */ = {isa = PBXFileReference; name = "HP-Brush 03 Bold.TTF"; path = "../src/app/asset/font/HP-Brush 03 Bold.TTF"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F20A7579D05E473898A95615 /* chau-font-002.ttf */ = {isa = PBXFileReference; name = "chau-font-002.ttf"; path = "../src/app/asset/font/chau-font-002.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CC4111F0FCA54ACDA86255AD /* chau-font-003.ttf */ = {isa = PBXFileReference; name = "chau-font-003.ttf"; path = "../src/app/asset/font/chau-font-003.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		313043619C744BB0A39F2606 /* chau-font-004.ttf */ = {isa = PBXFileReference; name = "chau-font-004.ttf"; path = "../src/app/asset/font/chau-font-004.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		642A891C4D924D2692E57441 /* chau-font-006.ttf */ = {isa = PBXFileReference; name = "chau-font-006.ttf"; path = "../src/app/asset/font/chau-font-006.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2B3E21C84B4B423F88D881F7 /* HP-Brush 03 Bold.ttf */ = {isa = PBXFileReference; name = "HP-Brush 03 Bold.ttf"; path = "../src/app/asset/font/HP-Brush 03 Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C9988C7A3D8B49C7B3E639DC /* SVN-Dessert Menu Script.ttf */ = {isa = PBXFileReference; name = "SVN-Dessert Menu Script.ttf"; path = "../src/app/asset/font/SVN-Dessert Menu Script.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0D9AA50AE01443C19344EBF5 /* SVN-Grocery Rounded.ttf */ = {isa = PBXFileReference; name = "SVN-Grocery Rounded.ttf"; path = "../src/app/asset/font/SVN-Grocery Rounded.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8CBB30EA98F341D6A8A365DD /* SVN-Ready.ttf */ = {isa = PBXFileReference; name = "SVN-Ready.ttf"; path = "../src/app/asset/font/SVN-Ready.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +203,24 @@
 				838BC5C283C04284ADF404A5 /* rubicon-icon-font.ttf */,
 				680D4E4BC4A84C89B9CD151A /* SimpleLineIcons.ttf */,
 				A76F77D187534910A8045AB6 /* Zocial.ttf */,
+				A117D860A34242ACB0F49A0C /* chau-font-001.otf */,
+				B68D5719A96A41A6A4CA505B /* chau-font-002.TTF */,
+				72303642B4164C9DAAA8B67D /* chau-font-003.TTF */,
+				CC2108AD4F234C79B8B56B6E /* chau-font-004.TTF */,
+				F1CF1C75D22B476E9291C4B0 /* chau-font-005.TTF */,
+				AA255B66BBC342E09F56B58D /* chau-font-006.TTF */,
+				69AB476466974FE19711D597 /* chau-font-007.ttf */,
+				9A19241473334FDBAA1700BE /* chau-font-008.ttf */,
+				88A4A60757384DD795706C69 /* Flavour.ttf */,
+				2A48133AF8F5443F8A5FFE46 /* HP-Brush 03 Bold.TTF */,
+				F20A7579D05E473898A95615 /* chau-font-002.ttf */,
+				CC4111F0FCA54ACDA86255AD /* chau-font-003.ttf */,
+				313043619C744BB0A39F2606 /* chau-font-004.ttf */,
+				642A891C4D924D2692E57441 /* chau-font-006.ttf */,
+				2B3E21C84B4B423F88D881F7 /* HP-Brush 03 Bold.ttf */,
+				C9988C7A3D8B49C7B3E639DC /* SVN-Dessert Menu Script.ttf */,
+				0D9AA50AE01443C19344EBF5 /* SVN-Grocery Rounded.ttf */,
+				8CBB30EA98F341D6A8A365DD /* SVN-Ready.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -328,6 +382,24 @@
 				A79C7A306DBD4CA8B8AB34BC /* rubicon-icon-font.ttf in Resources */,
 				95CABB0CC65147639E485448 /* SimpleLineIcons.ttf in Resources */,
 				35C9178D741B49108B458CA3 /* Zocial.ttf in Resources */,
+				79EB22D186A8482183331405 /* chau-font-001.otf in Resources */,
+				3BAFBCDD91B849C7AE864B30 /* chau-font-002.TTF in Resources */,
+				08F6592B81BD4602915F7F6A /* chau-font-003.TTF in Resources */,
+				2249233A53AD4C5791C2CB57 /* chau-font-004.TTF in Resources */,
+				30D8A059D9B54F78A0790F62 /* chau-font-005.TTF in Resources */,
+				FDD21217CCE8406E9C9530D3 /* chau-font-006.TTF in Resources */,
+				31AF760E32744AF9AAE4548E /* chau-font-007.ttf in Resources */,
+				42CD4049B4474D489C1ABD13 /* chau-font-008.ttf in Resources */,
+				489C257AE7F24DF580AAA51C /* Flavour.ttf in Resources */,
+				81AB2774FC2546C6AE10DB1C /* HP-Brush 03 Bold.TTF in Resources */,
+				F2EE143FD7C047C5A9EF8A28 /* chau-font-002.ttf in Resources */,
+				E6863DF29BAC49219360EEE0 /* chau-font-003.ttf in Resources */,
+				B4D3CA4C92AA47049535E39A /* chau-font-004.ttf in Resources */,
+				2C64842132084039A3A46E57 /* chau-font-006.ttf in Resources */,
+				7DE7C7DEF6EB4EF085EFE0C9 /* HP-Brush 03 Bold.ttf in Resources */,
+				6B96F2C53FAA4B0CAC0518D5 /* SVN-Dessert Menu Script.ttf in Resources */,
+				3DD9BFCDAE0841BEA6E626E2 /* SVN-Grocery Rounded.ttf in Resources */,
+				009A6695ABF84F09B93A7834 /* SVN-Ready.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

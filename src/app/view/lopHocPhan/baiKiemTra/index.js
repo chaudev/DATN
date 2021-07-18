@@ -107,7 +107,7 @@ export const BaiKiemTra = ({params}) => {
   // Gọi api tạo mới
   const postData = async () => {
     try {
-      const res = await createBaiKT(
+      await createBaiKT(
         tenBaiKT,
         getDate(ngay),
         user[0]?.MaGV,

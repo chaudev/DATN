@@ -1,15 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import HomeNavigation from '../TabNavigation/index';
 import {Login} from '../../view/home/login';
 import {Loading} from '../../view/loading';
 import {AppRouter} from '../AppRouter';
-
+import MainNavigation from '../MainNavigation';
 import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
 import {activate} from '../../../../store/reducers/userSlice';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
@@ -67,9 +65,9 @@ function AppNavigation() {
           />
         ) : (
           <Stack.Screen
-            name={AppRouter.TAB}
-            options={{title: AppRouter.TAB, headerShown: false}}
-            component={HomeNavigation}
+            name={AppRouter.MAIN}
+            options={{title: AppRouter.MAIN, headerShown: false}}
+            component={MainNavigation}
           />
         )}
       </Stack.Navigator>

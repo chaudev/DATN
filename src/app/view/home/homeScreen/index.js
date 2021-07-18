@@ -14,7 +14,7 @@ import {settings} from '../../../config';
 import {AppRouter} from '../../../navigation/AppRouter';
 import {useNavigation} from '@react-navigation/native';
 import {HeaderMenu} from './headerMenu';
-import {Icon, Picker} from 'native-base';
+import {Icon} from 'native-base';
 import ModalSelector from 'react-native-modal-selector';
 import {mainStyles, QLMH, styleTK} from '../../home/homeScreen/styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -95,6 +95,10 @@ export const HomeScreen = ({navigation}) => {
 
     if (value === 'Lớp học phần') {
       nav.navigate(AppRouter.LISTLHP);
+    }
+
+    if (value === 'Đổi mật khẩu') {
+      nav.navigate(AppRouter.CHANGEPASS);
     }
   };
 
