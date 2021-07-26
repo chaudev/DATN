@@ -9,6 +9,7 @@ import {ChuDeNav} from '../../view/chuDe';
 import {User} from '../../view/user';
 import {LopHocPhanNav} from '../../view/lopHocPhan';
 import {KiemTraNav} from '../../view/kiemTra';
+import {TeacherControl} from '../../view/teacherControl';
 
 const Stack = createStackNavigator();
 

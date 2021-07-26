@@ -4,6 +4,7 @@ import {AppRouter} from '../AppRouter';
 import TabNavigator from '../TabNavigation/index';
 import {ChangePassword} from '../../view/profile/changePassword';
 import {UpdateProfile} from '../../view/profile/updateProfile';
+import {TeacherControl} from '../../view/teacherControl';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,11 @@ function MainNavigation() {
         name={AppRouter.PROFILE}
         options={{title: AppRouter.PROFILE, headerShown: false}}
         component={UpdateProfile}
+      />
+      <Stack.Screen
+        name={AppRouter.TEACHERCONTROLL}
+        component={TeacherControl}
+        options={{title: AppRouter.TEACHERCONTROLL, headerShown: false}}
       />
     </Stack.Navigator>
   );

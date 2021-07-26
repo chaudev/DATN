@@ -147,6 +147,7 @@ export const InfomationQuestion = () => {
 
   // Nhấn nút bắt đầu
   const handleStart = () => {
+    nav.goBack();
     console.log('handleStart');
   };
 
@@ -186,7 +187,11 @@ export const InfomationQuestion = () => {
             </Text>
             <TouchableOpacity
               onPress={() => {
-                handleStart();
+                nav.navigate(AppRouter.ADDQUEST, {
+                  MaMH: route.params.MaMH,
+                  BaiKiemTra: item,
+                  user: user,
+                });
               }}
               activeOpacity={0.7}
               style={{

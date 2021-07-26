@@ -7,6 +7,7 @@ import {
   Modal,
   StatusBar,
   TextInput,
+  Clipboard,
 } from 'react-native';
 import {useNavigation, useRoute, useIsFocused} from '@react-navigation/native';
 import {settings} from '../../../../config';
@@ -148,6 +149,11 @@ export const InfomationQuestion = () => {
   // Nhấn nút bắt đầu
   const handleStart = () => {
     console.log('handleStart');
+    nav.navigate(AppRouter.TEACHERCONTROLL, {
+      MaMH: route.params.MaMH,
+      BaiKiemTra: item,
+      user: user,
+    });
   };
 
   // Render screen
@@ -234,7 +240,20 @@ export const InfomationQuestion = () => {
               <Text style={{fontWeight: 'bold', marginRight: 5, fontSize: 16}}>
                 Key:
               </Text>
-              <Text style={{flex: 1, fontSize: 16}}>{item.KeyBaiKT}</Text>
+              <Text style={{fontSize: 16}}>{item.KeyBaiKT}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  Clipboard.setString(item?.KeyBaiKT);
+                }}
+                style={{
+                  paddingHorizontal: 6,
+                  backgroundColor: '#CFD8DC',
+                  paddingVertical: 3,
+                  marginLeft: 15,
+                  borderRadius: 10,
+                }}>
+                <Text style={{fontSize: 10}}>Copy</Text>
+              </TouchableOpacity>
             </View>
             <View
               style={{
