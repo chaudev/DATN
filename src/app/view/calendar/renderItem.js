@@ -3,14 +3,9 @@ import {View, Text, TouchableOpacity, Dimensions} from 'react-native';
 import {Icon} from 'native-base';
 import {settings} from '../../config';
 
-// Cái này nhỏ nên làm biếng tách css :v
-
-// Dòng 77 - 'item?.gio' --> Thêm ? để khi có thuộc tính sau ? thì nó hiện, không có thì thôi
-// Nếu không thêm thì không có nó sẽ lỗi
-
 export const RenderItem = ({item, data, handle}) => {
   const getMarginTop = () => {
-    if (item.id === data[0].id) {
+    if (item.MaBaiKT === data[0].MaBaiKT) {
       return 5;
     } else {
       return 0;
@@ -18,7 +13,7 @@ export const RenderItem = ({item, data, handle}) => {
   };
 
   const marginBottom = () => {
-    if (item.id === data[data.length - 1].id) {
+    if (item.MaBaiKT === data[data.length - 1].MaBaiKT) {
       return 25;
     } else {
       return 15;
@@ -27,6 +22,12 @@ export const RenderItem = ({item, data, handle}) => {
 
   const pressItem = () => {
     handle(item);
+  };
+
+  // Convert time to number
+  const timeToNumber = time => {
+    const num = parseInt(time[0] + time[1]) * 60 + parseInt(time[3] + time[4]);
+    return parseInt(num);
   };
 
   return (
@@ -48,12 +49,12 @@ export const RenderItem = ({item, data, handle}) => {
       <Text
         style={{
           flex: 10,
-          fontSize: 16,
+          fontSize: 14,
           fontWeight: 'bold',
           marginLeft: 3,
           color: '#1b4332',
         }}>
-        {item?.monHoc}
+        {item?.TenBaiKT}
       </Text>
       <View
         style={{
@@ -74,7 +75,9 @@ export const RenderItem = ({item, data, handle}) => {
             }}
           />
         </View>
-        <Text style={{flex: 10, fontSize: 14}}>Thời gian: {item?.gio}</Text>
+        <Text style={{flex: 10, fontSize: 14}}>
+          Thời gian: {timeToNumber(item?.ThoiGianLam)} phút
+        </Text>
       </View>
       <View
         style={{
@@ -95,7 +98,31 @@ export const RenderItem = ({item, data, handle}) => {
             }}
           />
         </View>
-        <Text style={{flex: 10, fontSize: 14}}>Tên bài: {item?.ten}</Text>
+        <Text style={{flex: 10, fontSize: 14}}>Key bài: {item?.KeyBaiKT}</Text>
+      </View>
+
+      <View
+        style={{
+          width: '100%',
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginTop: 5,
+          justifyContent: 'center',
+        }}>
+        <View style={{flex: 1, alignItems: 'center'}}>
+          <Icon
+            type="AntDesign"
+            name="aliwangwang-o1"
+            style={{
+              fontSize: 16,
+              color: '#1976D2',
+              marginRight: 5,
+            }}
+          />
+        </View>
+        <Text style={{flex: 10, fontSize: 14}}>
+          Trạng thái: {item?.TrangThai}
+        </Text>
       </View>
     </TouchableOpacity>
   );

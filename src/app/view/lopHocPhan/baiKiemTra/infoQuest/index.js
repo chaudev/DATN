@@ -148,7 +148,6 @@ export const InfomationQuestion = () => {
 
   // Nhấn nút bắt đầu
   const handleStart = () => {
-    console.log('handleStart');
     nav.navigate(AppRouter.TEACHERCONTROLL, {
       MaMH: route.params.MaMH,
       BaiKiemTra: item,

@@ -11,16 +11,21 @@ import {
   Alert,
 } from 'react-native';
 import {Icon} from 'native-base';
-import {useIsFocused} from '@react-navigation/native'; // Cái này trong Document của Navigation
+import {useIsFocused, useNavigation} from '@react-navigation/native'; // Cái này trong Document của Navigation
 import {settings} from '../../config';
 import {Calendar, LocaleConfig} from 'react-native-calendars';
 import {RenderItem} from './renderItem';
 import {dataFake} from './data';
 import {CalendarTheme, HeaderStyles, MainStyles, LoadingStyles} from './styles';
+import {getTestByDate} from '../../../server/calen/getTestByDate';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {AppRouter} from '../../navigation/AppRouter';
 
 const {width: dW, height: dH} = Dimensions.get('window'); // Lấy width và height của màn hình điện thoại
 
 export const CalendarScreen = ({navigation}) => {
+  const nav = useNavigation();
+
   const isFocus = useIsFocused();
   const [refreshing, setRefreshing] = React.useState(false);
   const [loading, setLoading] = useState(true);
@@ -29,6 +34,7 @@ export const CalendarScreen = ({navigation}) => {
   const [dateSelected, setDateSelected] = useState('');
   const [calendarShow, setCalendar] = useState(true);
   const [dataNull, setDataNull] = useState(false);
+  const [user, setUser] = useState('');
 
   // Định dạng lại thư viện calendar
   LocaleConfig.locales['VN'] = {
@@ -66,6 +72,23 @@ export const CalendarScreen = ({navigation}) => {
   };
   LocaleConfig.defaultLocale = 'VN';
 
+  // Khi vào màn hình thì sẽ chạy
+  useEffect(async () => {
+    if (isFocus) {
+      await setDateSelected(dateNow);
+    }
+  }, []);
+
+  useEffect(() => {
+    getAccount();
+  }, []);
+
+  useEffect(() => {
+    if (user != '') {
+      getData(user[0]?.MaGV, getStrDay(dateSelected));
+    }
+  }, [user]);
+
   // Kéo xuống để reload
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -74,13 +97,6 @@ export const CalendarScreen = ({navigation}) => {
   const wait = timeout => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   };
-
-  // Khi vào màn hình thì sẽ chạy
-  useEffect(async () => {
-    if (isFocus) {
-      await setDateSelected(dateNow);
-    }
-  }, []);
 
   // Khi data thay đổi thì sẽ chạy
   useEffect(() => {
@@ -92,27 +108,43 @@ export const CalendarScreen = ({navigation}) => {
   // Khi refreshing thay đổi thì sẽ chạy
   useEffect(() => {
     if (refreshing === true) {
-      getData();
+      getData(user[0]?.MaGV, getStrDay(dateSelected));
     }
   }, [refreshing]);
 
   // Khi dateSelected thay đổi thì sẽ chạy
   useEffect(() => {
-    getData();
+    getData(user[0]?.MaGV, getStrDay(dateSelected));
   }, [dateSelected]);
 
+  const getStrDay = date => {
+    let dax = new Date(date);
+    return (
+      dax.getFullYear() +
+      '-' +
+      getNum(parseInt(dax.getMonth()) + 1) +
+      '-' +
+      getNum(dax.getDate())
+    );
+  };
+
   // lấy api chổ này
-  const getData = async () => {
-    const a = [];
-    for (var i = 0; i < dataFake.length; i++) {
-      if (getStringDate(dataFake[i].ngay) === getStringDate(dateSelected)) {
-        setDataNull(false);
-        a.push(dataFake[i]);
-      }
+  const getData = async (MaGV, Ngay) => {
+    try {
+      const res = await getTestByDate(MaGV, Ngay);
+      console.log('res: ', res);
+      setData(res?.data);
+    } catch (error) {
+      console.log(error);
     }
-    setData(a);
-    if (a.length === 0) {
-      setDataNull(true);
+  };
+
+  const getAccount = async () => {
+    try {
+      const res = await AsyncStorage.getItem('currentUser');
+      setUser(JSON.parse(res));
+    } catch (e) {
+      // error reading value
     }
   };
 
@@ -140,7 +172,12 @@ export const CalendarScreen = ({navigation}) => {
 
   // Xử lí khi nhấn vào item
   const handlePressItem = item => {
-    Alert.alert('Bạn đã chọn', item.ten);
+    nav.navigate(AppRouter.INFO, {
+      item: item,
+      TenMH: item.TenMonHoc,
+      MaMH: item.MaMH,
+      user: user,
+    });
   };
 
   return (
