@@ -8,7 +8,7 @@ const getAllTest = async MaGV => {
   var data = new FormData();
   data.append('MaGV', MaGV);
 
-  console.log(MaGV, ' - ', MaLopHP);
+  console.log(MaGV);
 
   var requestOptions = {
     method: 'POST',
