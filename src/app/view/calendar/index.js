@@ -124,6 +124,8 @@ export const CalendarScreen = ({navigation}) => {
     if (dataAll !== '') {
       let temp = dataAll.map(x => x.Ngay);
 
+      let flag = 0;
+
       let json = {...temp};
 
       json = Object.assign({}, temp);
@@ -139,12 +141,28 @@ export const CalendarScreen = ({navigation}) => {
               endingDay: true,
               startingDay: true,
             });
+
+        if (value == dateSelected) {
+          flag = 1;
+        }
+
         return json;
       }, {});
 
       setDataMark(json);
 
-      console.log('json: ', json);
+      if (flag == 0) {
+        let test = {
+          [dateSelected]: {
+            color: '#000',
+            textColor: 'white',
+            endingDay: true,
+            startingDay: true,
+          },
+        };
+        var oxo = Object.assign({}, json, test);
+        setDataMark(oxo);
+      }
     }
   }, [dateSelected]);
 
@@ -163,10 +181,9 @@ export const CalendarScreen = ({navigation}) => {
   const getData = async (MaGV, Ngay) => {
     try {
       const res = await getTestByDate(MaGV, Ngay);
-      console.log('res: ', res);
       setData(res?.data);
     } catch (error) {
-      console.log(error);
+      //
     }
   };
 
@@ -197,20 +214,9 @@ export const CalendarScreen = ({navigation}) => {
       }, {});
 
       setDataMark(json);
-
-      console.log('json: ', json);
     } catch (error) {
-      console.log(error);
+      //
     }
-  };
-
-  const superMap = params => {
-    let temp = [];
-    for (let i = 0; i < params.length; i++) {
-      temp.push(params[i].Ngay);
-    }
-
-    console.log(temp);
   };
 
   const getAccount = async () => {
@@ -300,12 +306,11 @@ export const CalendarScreen = ({navigation}) => {
                 style={{width: dW, marginTop: -5}}
                 markingType={'period'}
                 current={dateNow}
-                monthFormat={'dd-MM-yyyy'}
+                monthFormat={'MM-yyyy'}
                 minDate={'2018-02-02'}
                 enableSwipeMonths={true}
                 theme={CalendarTheme}
                 onDayPress={day => {
-                  console.log('day.dateString: ', day.dateString);
                   setDateSelected(day.dateString);
                 }}
                 markedDates={dataMark}
